@@ -31,8 +31,9 @@ set(LIB_INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build_final)
 
 #----------------------------------------------------------------------------------------------------------------#
 set(SFML_DIR "${PROJECT_ROOT_DIR}/deps/SFML")
+set(JSON_DIR "${PROJECT_ROOT_DIR}/deps/JSON")
 
-include_directories("${SFML_DIR}/include/")
+include_directories("${SFML_DIR}/include/" ${JSON_DIR})
 set(SFML_LIBRARIES sfml-graphics sfml-window sfml-system sfml-audio)
 set(LIBS ${SFML_LIBRARIES})
 

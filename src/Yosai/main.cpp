@@ -1,24 +1,16 @@
-#include <SFML/Graphics.hpp>
+//
+// Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 12.07.18.
+//
 
-int main()
-{
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+#include <Yosai/Application.hpp>
 
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear();
-        window.draw(shape);
-        window.display();
+int main(int argc, char *argv[]) {
+    try {
+        Application::instance().run();
+    } catch (std::exception &e) {
+        std::cerr << "\n>>> EXCEPTION: " << e.what() << std::endl;
+    } catch (...) {
+        std::cerr << "Unknow excepton caught!" << std::endl;
     }
-
-    return 0;
+    return EXIT_SUCCESS;
 }

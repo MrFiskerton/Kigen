@@ -3,10 +3,18 @@ set(SRCROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Files
 set(FILES_HEADER
-        #
+        ${INCROOT}/StateControl/State.hpp
+        ${INCROOT}/StateControl/StateControl.hpp
+        ${INCROOT}/StateControl/StateIdentifiers.hpp
+
+        ${INCROOT}/Application.hpp
+        ${INCROOT}/GlobalColours.hpp
    )
 
 set(FILES_SRC
+        ${SRCROOT}/StateControl/StateControl.cpp
+
+        ${SRCROOT}/Application.cpp
         ${SRCROOT}/main.cpp
    )
 
