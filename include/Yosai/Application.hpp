@@ -11,6 +11,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Window/Event.hpp>
 #include <Yosai/StateControl/StateControl.hpp>
+#include <Yosai/Util/Util.hpp>
 
 class Application final {
 public:
@@ -20,6 +21,7 @@ public:
     static Application& instance();
     void run();
     bool is_runing();
+    void load_configuration();
 private:
     Application();
     ~Application();
@@ -29,9 +31,8 @@ private:
     void update_graphics();
 
     void render();
-
-    void init_configuration();
     void init_state_controller();
+    void init_render_things();
 private:
     static Application s_instance;
 

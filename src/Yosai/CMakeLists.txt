@@ -7,12 +7,19 @@ set(FILES_HEADER
         ${INCROOT}/StateControl/StateControl.hpp
         ${INCROOT}/StateControl/StateIdentifiers.hpp
 
+        ${INCROOT}/Util/Logger.hpp
+        ${INCROOT}/Util/ThrowAssert.hpp
+        ${INCROOT}/Util/Util.hpp
+
         ${INCROOT}/Application.hpp
+        ${INCROOT}/defines.hpp
         ${INCROOT}/GlobalColours.hpp
    )
 
 set(FILES_SRC
         ${SRCROOT}/StateControl/StateControl.cpp
+
+        ${SRCROOT}/Util/Logger.cpp
 
         ${SRCROOT}/Application.cpp
         ${SRCROOT}/main.cpp

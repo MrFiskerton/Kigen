@@ -15,7 +15,7 @@ Application::~Application() {
 }
 
 Application &Application::instance() {
-    return <#initializer#>;
+    return s_instance;
 }
 
 void Application::run() {
@@ -32,9 +32,8 @@ void Application::run() {
         while (m_time.sinceLastUpdate_ >= k_frame_per_second) {
             m_time.sinceLastUpdate_ -= k_frame_per_second;
             process_events();
-            update(k_time_per_frame);
+            update_logic(k_time_per_frame);
         }
-
         update_graphics();
         render();
     }
@@ -42,6 +41,10 @@ void Application::run() {
 
 bool Application::is_runing() {
     return m_renderWindow.isOpen() && !m_stateControl.isEmpty();
+}
+
+void Application::load_configuration() {
+
 }
 
 void Application::process_events() {
@@ -60,8 +63,6 @@ void Application::update_logic(const sf::Time &deltaTime) {
 }
 
 void Application::update_graphics() {
-    m_canvas.setTexture(m_renderTexture.getTexture());
-
     m_renderTexture.clear();
     m_stateControl.draw(m_renderTexture);
     m_renderTexture.display();
@@ -73,6 +74,15 @@ void Application::render() {
     m_renderWindow.display();
 }
 
+void Application::init_state_controller() {
+
+}
+
+void Application::init_render_things() {
+    //m_renderTexture.create(INITIAL_WINDOW_RESOLUTION_X, INITIAL_WINDOW_RESOLUTION_Y, INITIAL_COLOR_DEPTH);
+    //m_renderTexture.setSmooth(m_configuration.isSmoothing);
+    m_canvas.setTexture(m_renderTexture.getTexture());
+}
 
 
 
