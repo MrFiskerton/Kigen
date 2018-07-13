@@ -12,6 +12,7 @@
 #include <SFML/Window/Event.hpp>
 #include <Yosai/StateControl/StateControl.hpp>
 #include <Yosai/Util/Util.hpp>
+#include "ApplicationTime.hpp"
 
 class Application final {
 public:
@@ -21,7 +22,9 @@ public:
     static Application& instance();
     void run();
     bool is_runing();
+    void process_arguments(int argc, char *argv[]);
     void load_configuration();
+
 private:
     Application();
     ~Application();
@@ -36,11 +39,14 @@ private:
 private:
     static Application s_instance;
 
+    ApplicationTime m_time;
     StateControl m_stateControl;
 
     sf::RenderWindow   m_renderWindow;
     sf::RenderTexture  m_renderTexture;
     sf::Sprite         m_canvas;
+
+    sf::VideoMode      m_videoMode;
 };
 
 #endif //INCLUDED_APPLICATION_HPP

@@ -16,13 +16,12 @@ namespace sf {
 }
 
 class StateControl;
-class Configuration;
 
 class State {
 public:
-    typedef std::unique_ptr <State> Ptr;
+    typedef std::unique_ptr<State> Ptr;
 public:
-    State(StateControl &stack, Context context);
+    explicit State(StateControl &stack);
 
     virtual ~State() = default;
 
@@ -42,8 +41,6 @@ protected:
     void requestStackPop();
 
     void requestStateClear();
-
-    Context getContext() const;
 
 private:
     StateControl *m_stack;

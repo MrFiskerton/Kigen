@@ -12,16 +12,19 @@ set(FILES_HEADER
         ${INCROOT}/Util/Util.hpp
 
         ${INCROOT}/Application.hpp
+        ${INCROOT}/ApplicationTime.hpp
         ${INCROOT}/defines.hpp
         ${INCROOT}/GlobalColours.hpp
    )
 
 set(FILES_SRC
+        ${SRCROOT}/StateControl/State.cpp
         ${SRCROOT}/StateControl/StateControl.cpp
 
         ${SRCROOT}/Util/Logger.cpp
 
         ${SRCROOT}/Application.cpp
+        ${SRCROOT}/ApplicationTime.cpp
         ${SRCROOT}/main.cpp
    )
 

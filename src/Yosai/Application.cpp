@@ -21,18 +21,18 @@ Application &Application::instance() {
 void Application::run() {
     sf::Clock clock;
     sf::Time deltaTime;
-    static constexpr k_frame_per_second = 60;
-    static constexpr sf::Time k_time_per_frame = sf::seconds(1.f/ k_frame_per_second);
+    static const std::size_t FRAME_PER_SECOND = 60;
+    static const sf::Time TIME_PER_FRAME = sf::seconds(1.f/ FRAME_PER_SECOND);
 
     while (is_runing()) {
         deltaTime = clock.restart();
 
         m_time.update(deltaTime);
 
-        while (m_time.sinceLastUpdate_ >= k_frame_per_second) {
-            m_time.sinceLastUpdate_ -= k_frame_per_second;
+        while (m_time.m_sinceLastUpdate >= TIME_PER_FRAME) {
+            m_time.m_sinceLastUpdate -= TIME_PER_FRAME;
             process_events();
-            update_logic(k_time_per_frame);
+            update_logic(TIME_PER_FRAME);
         }
         update_graphics();
         render();
@@ -41,6 +41,10 @@ void Application::run() {
 
 bool Application::is_runing() {
     return m_renderWindow.isOpen() && !m_stateControl.isEmpty();
+}
+
+void Application::process_arguments(int argc, char **argv) {
+
 }
 
 void Application::load_configuration() {
@@ -83,7 +87,3 @@ void Application::init_render_things() {
     //m_renderTexture.setSmooth(m_configuration.isSmoothing);
     m_canvas.setTexture(m_renderTexture.getTexture());
 }
-
-
-
-

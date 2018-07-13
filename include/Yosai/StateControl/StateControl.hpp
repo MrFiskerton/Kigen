@@ -13,13 +13,14 @@
 #include <SFML/System/Time.hpp>
 
 #include "State.hpp"
+#include <Yosai/Util/Util.hpp>
 
 namespace sf {
     class Event;
     class RenderTarget;
 }
 
-class StateController : private sf::NonCopyable {
+class StateControl : private sf::NonCopyable {
 public:
     enum Action : int {
         Push,
@@ -27,7 +28,7 @@ public:
         Clear
     };
 public:
-    explicit StateController();
+    explicit StateControl();
 
     void update(const sf::Time& deltaTime);
 
@@ -64,17 +65,15 @@ private:
 private:
     std::vector <State::Ptr> m_stack;
     std::vector <PendingChange> m_pending_list;
-    State::Context m_context;
     std::map <state::ID, std::function<State::Ptr()>> m_state_factories;
 };
 
 //------------------------------[   Definition for template function   ]------------------------------//
 template<typename T>
-void StateController::registerState(state::ID id) {
+void StateControl::registerState(state::ID id) {
     m_state_factories[id] = [this]() {
-        return State::Ptr(new T(*this, m_context));
+        return State::Ptr(new T(*this));
     };
 }
-
 
 #endif //INCLUDED_STATEMACHINE_HPP
