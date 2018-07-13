@@ -1,0 +1,24 @@
+//
+// Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 13.07.18.
+//
+
+#ifndef INCLUDED_MENUSTATE_HPP
+#define INCLUDED_MENUSTATE_HPP
+
+#include "State.hpp"
+
+class MenuState : public State {
+
+public:
+    MenuState(StateControl &stack);
+    virtual ~MenuState();
+
+    void draw(sf::RenderTarget& renderTarget) override;
+    bool update(const sf::Time& deltaTime) override;
+    bool handleEvent(const sf::Event &event) override;
+private:
+
+};
+
+
+#endif //INCLUDED_MENUSTATE_HPP

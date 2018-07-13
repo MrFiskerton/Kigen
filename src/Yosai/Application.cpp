@@ -22,8 +22,9 @@ void Application::run() {
     sf::Clock clock;
     sf::Time deltaTime;
     static const std::size_t FRAME_PER_SECOND = 60;
-    static const sf::Time TIME_PER_FRAME = sf::seconds(1.f/ FRAME_PER_SECOND);
+    static const sf::Time TIME_PER_FRAME = sf::seconds(1.f / FRAME_PER_SECOND);
 
+    Logger::notify("Run main loop.");
     while (is_runing()) {
         deltaTime = clock.restart();
 
@@ -49,6 +50,9 @@ void Application::process_arguments(int argc, char **argv) {
 
 void Application::load_configuration() {
 
+
+    init_render_things();
+    init_state_controller();
 }
 
 void Application::process_events() {
@@ -78,12 +82,15 @@ void Application::render() {
     m_renderWindow.display();
 }
 
+#include <Yosai/StateControl/MenuState.hpp>
 void Application::init_state_controller() {
+    m_stateControl.registerState<MenuState>(state::ID::Menu);
 
+    m_stateControl.forcePushState(state::ID::Menu);
 }
 
 void Application::init_render_things() {
-    //m_renderTexture.create(INITIAL_WINDOW_RESOLUTION_X, INITIAL_WINDOW_RESOLUTION_Y, INITIAL_COLOR_DEPTH);
-    //m_renderTexture.setSmooth(m_configuration.isSmoothing);
+    m_renderWindow.create({600, 600, 32}, "Yosai", sf::Style::Close);
+    m_renderTexture.create(600, 600);
     m_canvas.setTexture(m_renderTexture.getTexture());
 }
