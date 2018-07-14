@@ -13,13 +13,10 @@
 #include <Yosai/ResourceControl/ResourceControl.hpp>
 #include <Yosai/StateControl/StateControl.hpp>
 #include <Yosai/Util/Util.hpp>
-#include "ApplicationTime.hpp"
+#include <Yosai/Time/ApplicationClock.hpp>
 
-class Application {
+class Application: public NonCopyable {
 public:
-    Application(const Application &) = delete;
-    Application &operator=(const Application &) = delete;
-
     static Application& instance();
     void run();
     bool is_runing();
@@ -39,12 +36,12 @@ private:
     void init_state_control();
     void init_render_things();
 private:
-    ApplicationTime m_time;
+    ApplicationClock m_aclock;
     StateControl m_stateControl;
 
     sf::RenderWindow   m_renderWindow;
     sf::RenderTexture  m_renderTexture;
-    sf::Sprite         m_canvas;
+    sf::Sprite         m_canvas_sprite;
 
     sf::VideoMode      m_videoMode;
 

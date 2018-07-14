@@ -8,19 +8,23 @@ set(FILES_HEADER
         ${INCROOT}/ResourceControl/ResourceHolder.hpp
         ${INCROOT}/ResourceControl/ResourceIdentifiers.hpp
         ${INCROOT}/ResourceControl/ResourceLoader.hpp
-        ${INCROOT}/ResourceControl/SFMLClassLoaderMakers.hpp
+        ${INCROOT}/ResourceControl/SFMLResourceLoaderMakers.hpp
 
         ${INCROOT}/StateControl/State.hpp
         ${INCROOT}/StateControl/MenuState.hpp
         ${INCROOT}/StateControl/StateControl.hpp
         ${INCROOT}/StateControl/StateIdentifiers.hpp
 
+        ${INCROOT}/Time/ApplicationClock.hpp
+        ${INCROOT}/Time/StopWatch.hpp
+
         ${INCROOT}/Util/Assertion.hpp
         ${INCROOT}/Util/Logger.hpp
+        ${INCROOT}/Util/NonCopyable.hpp
+        ${INCROOT}/Util/NonMovable.hpp
         ${INCROOT}/Util/Util.hpp
 
         ${INCROOT}/Application.hpp
-        ${INCROOT}/ApplicationTime.hpp
         ${INCROOT}/defines.hpp
         ${INCROOT}/GlobalColours.hpp
    )
@@ -30,10 +34,12 @@ set(FILES_SRC
         ${SRCROOT}/StateControl/MenuState.cpp
         ${SRCROOT}/StateControl/StateControl.cpp
 
+        ${SRCROOT}/Time/ApplicationClock.cpp
+        ${SRCROOT}/Time/StopWatch.cpp
+
         ${SRCROOT}/Util/Logger.cpp
 
         ${SRCROOT}/Application.cpp
-        ${SRCROOT}/ApplicationTime.cpp
         ${SRCROOT}/main.cpp
    )
 

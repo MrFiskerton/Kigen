@@ -18,19 +18,18 @@ Application &Application::instance() {
 }
 
 void Application::run() {
-    sf::Clock clock;
-    sf::Time deltaTime;
+    Logger::notify("Run main loop.");
+
     static const std::size_t FRAME_PER_SECOND = 60;
     static const sf::Time TIME_PER_FRAME = sf::seconds(1.f / FRAME_PER_SECOND);
 
-    Logger::notify("Run main loop.");
+    sf::Time time(sf::Time::Zero);
+
+    m_aclock.reset();
     while (is_runing()) {
-        deltaTime = clock.restart();
-
-        m_time.update(deltaTime);
-
-        while (m_time.m_sinceLastUpdate >= TIME_PER_FRAME) {
-            m_time.m_sinceLastUpdate -= TIME_PER_FRAME;
+        time += m_aclock.frame_time();
+        while (time >= TIME_PER_FRAME) {
+            time -= TIME_PER_FRAME;
             process_events();
             update_logic(TIME_PER_FRAME);
         }
@@ -78,7 +77,7 @@ void Application::update_graphics() {
 
 void Application::render() {
     m_renderWindow.clear();
-    m_renderWindow.draw(m_canvas);
+    m_renderWindow.draw(m_canvas_sprite);
     m_renderWindow.display();
 }
 
@@ -100,6 +99,6 @@ void Application::init_render_things() {
     const sf::Image& icon = images["icon"];
     m_renderWindow.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
-    m_canvas.setTexture(m_renderTexture.getTexture());
+    m_canvas_sprite.setTexture(m_renderTexture.getTexture());
 }
 

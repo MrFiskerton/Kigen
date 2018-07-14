@@ -7,7 +7,7 @@
 
 #include "ResourceHolder.hpp"
 #include "ResourceIdentifiers.hpp"
-#include "SFMLClassLoaderMakers.hpp"
+#include "SFMLResourceLoaderMakers.hpp"
 
 
 

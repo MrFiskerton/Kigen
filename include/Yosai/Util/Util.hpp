@@ -7,5 +7,7 @@
 
 #include "Assertion.hpp"
 #include "Logger.hpp"
+#include "NonCopyable.hpp"
+#include "NonMovable.hpp"
 
 #endif //INCLUDED_UTIL_HPP

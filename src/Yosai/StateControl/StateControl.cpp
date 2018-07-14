@@ -10,7 +10,7 @@ StateControl::StateControl() : m_stack(), m_pending_list(), m_state_factories() 
 }
 
 void StateControl::update(const sf::Time &deltaTime) {
-    // Iterate from top to bottom, stop as soon as update() returns false
+    // Iterate from top to bottom, stop as soon as frame_time() returns false
     for (auto itr = m_stack.rbegin(); itr != m_stack.rend(); ++itr) {
         if (!(*itr)->update(deltaTime)) {
             break;

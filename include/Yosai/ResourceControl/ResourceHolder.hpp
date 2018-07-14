@@ -14,7 +14,7 @@
 #include <Yosai/Util/Util.hpp>
 
 template<typename Resource, typename Identifier>
-class ResourceHolder {
+class ResourceHolder: NonCopyable {
 public:
     typedef std::unique_ptr<Resource> ResourcePtr;
     typedef ResourceLoader <Resource> Loader;
@@ -28,10 +28,6 @@ public:
     ResourceHolder() = default;
 
     ~ResourceHolder() = default;
-
-    ResourceHolder(const ResourceHolder &) = delete;
-
-    ResourceHolder &operator=(const ResourceHolder &) = delete;
 
     ResourceHolder(ResourceHolder &&source) noexcept : m_resourse_map(std::move(source.m_resourse_map)) {}
 
@@ -53,7 +49,7 @@ public:
                 erase(id);
                 return load(id, loader);
             default:
-                assertion(true, "Reached default statement");
+                assertion(false, "Reached default statement");
         }
     }
 #   pragma GCC diagnostic pop
