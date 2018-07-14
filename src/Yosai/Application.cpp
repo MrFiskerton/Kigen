@@ -4,8 +4,6 @@
 
 #include "Yosai/Application.hpp"
 
-Application Application::s_instance;
-
 Application::Application() {
 
 }
@@ -15,6 +13,7 @@ Application::~Application() {
 }
 
 Application &Application::instance() {
+    static Application s_instance;
     return s_instance;
 }
 
@@ -51,8 +50,9 @@ void Application::process_arguments(int argc, char **argv) {
 void Application::load_configuration() {
 
 
+    init_resource_control();
     init_render_things();
-    init_state_controller();
+    init_state_control();
 }
 
 void Application::process_events() {
@@ -83,14 +83,23 @@ void Application::render() {
 }
 
 #include <Yosai/StateControl/MenuState.hpp>
-void Application::init_state_controller() {
+void Application::init_state_control() {
     m_stateControl.registerState<MenuState>(state::ID::Menu);
 
     m_stateControl.forcePushState(state::ID::Menu);
 }
 
+void Application::init_resource_control() {
+    images.register_resource(std::string("icon"), loadFromFile<sf::Image>("../resource/default_icon.png"));
+}
+
 void Application::init_render_things() {
     m_renderWindow.create({600, 600, 32}, "Yosai", sf::Style::Close);
     m_renderTexture.create(600, 600);
+
+    const sf::Image& icon = images["icon"];
+    m_renderWindow.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
     m_canvas.setTexture(m_renderTexture.getTexture());
 }
+

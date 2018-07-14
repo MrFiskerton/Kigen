@@ -5,7 +5,7 @@
 #ifndef INCLUDED_UTIL_HPP
 #define INCLUDED_UTIL_HPP
 
+#include "Assertion.hpp"
 #include "Logger.hpp"
-#include "ThrowAssert.hpp"
 
 #endif //INCLUDED_UTIL_HPP

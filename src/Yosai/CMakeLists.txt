@@ -3,13 +3,20 @@ set(SRCROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Files
 set(FILES_HEADER
+        ${INCROOT}/ResourceControl/ResourceControl.hpp
+        ${INCROOT}/ResourceControl/ResourceExceptions.hpp
+        ${INCROOT}/ResourceControl/ResourceHolder.hpp
+        ${INCROOT}/ResourceControl/ResourceIdentifiers.hpp
+        ${INCROOT}/ResourceControl/ResourceLoader.hpp
+        ${INCROOT}/ResourceControl/SFMLClassLoaderMakers.hpp
+
         ${INCROOT}/StateControl/State.hpp
         ${INCROOT}/StateControl/MenuState.hpp
         ${INCROOT}/StateControl/StateControl.hpp
         ${INCROOT}/StateControl/StateIdentifiers.hpp
 
+        ${INCROOT}/Util/Assertion.hpp
         ${INCROOT}/Util/Logger.hpp
-        ${INCROOT}/Util/ThrowAssert.hpp
         ${INCROOT}/Util/Util.hpp
 
         ${INCROOT}/Application.hpp

@@ -37,7 +37,7 @@ void StateControl::handleEvent(const sf::Event &event) {
 }
 
 void StateControl::pushState(state::ID stateID) {
-    m_pending_list.push_back(PendingChange(Action::Push, stateID));
+    m_pending_list.emplace_back(Action::Push, stateID);
 }
 
 void StateControl::forcePushState(state::ID stateID) {
@@ -45,11 +45,11 @@ void StateControl::forcePushState(state::ID stateID) {
 }
 
 void StateControl::popState() {
-    m_pending_list.push_back(PendingChange(Action::Pop));
+    m_pending_list.emplace_back(Action::Pop);
 }
 
 void StateControl::clearStates() {
-    m_pending_list.push_back(PendingChange(Action::Clear));
+    m_pending_list.emplace_back(Action::Clear);
 }
 
 bool StateControl::isEmpty() const {
@@ -58,7 +58,7 @@ bool StateControl::isEmpty() const {
 
 State::Ptr StateControl::createState(state::ID stateID) {
     auto found = m_state_factories.find(stateID);
-    throw_assert(found != m_state_factories.end(), "State not found in state factory.");
+    assertion(found != m_state_factories.end(), "State not found in state factory");
     return found->second();
 }
 

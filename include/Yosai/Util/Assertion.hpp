@@ -5,7 +5,6 @@
 #ifndef INCLUDED_THROWASSERT_HPP
 #define INCLUDED_THROWASSERT_HPP
 
-
 #include <exception>
 #include <string>
 #include <sstream>
@@ -13,8 +12,7 @@
 
 #include "Logger.hpp"
 
-class AssertionFailureException : public std::exception {
-public:
+namespace {
     class StreamFormatter {
     public:
         operator std::string() const {
@@ -31,10 +29,9 @@ public:
         std::ostringstream stream;
     };
 
-public:
-    AssertionFailureException(const char *expression, const char *file, int line, const std::string &message)
-            : m_expression(expression), m_file(file), m_line(line), m_message(message) {
-
+#   pragma GCC diagnostic push
+#   pragma GCC diagnostic ignored "-Wunused-function"
+    void assertion_failure(const char *expression, const char *file, int line, const std::string &message) {
         std::ostringstream outputStream;
         if (!message.empty()) {
             outputStream << message << ": ";
@@ -48,59 +45,26 @@ public:
         }
 
         outputStream << " failed in file '" << file << "' line " << line;
-        m_report = outputStream.str();
-        log_error();
-    }
-
-    ~AssertionFailureException() override = default;
-
-    void log_error() {
+        std::string report = outputStream.str();
 #ifdef DEBUG_LOG_ENABLE
-        Logger::error() << m_report << Logger::endlF();
+        Logger::error() << report << Logger::endlF();
 #else
-        std::cerr << m_report << std::endl;
+        std::cerr << report << std::endl;
 #endif
+        abort();
     }
-
-    const char *what() const noexcept override {
-        return m_report.c_str();
-    }
-
-    const char *expression() const noexcept {
-        return m_expression;
-    }
-
-    const char *file() const noexcept {
-        return m_file;
-    }
-
-    int line() const noexcept {
-        return m_line;
-    }
-
-    const char *message() const noexcept {
-        return m_message.c_str();
-    }
-
-private:
-    const char* m_expression;
-    const char* m_file;
-    int m_line;
-    std::string m_message;
-    std::string m_report;
-
-};
+#   pragma GCC diagnostic pop
+}
 
 #ifndef NDEBUG
 /*! Assert that EXPRESSION evaluates to true, otherwise raise AssertionFailureException with associated MESSAGE
     (which may use C++ stream-style message formatting) */
-#   define throw_assert(EXPRESSION, MESSAGE)\
+#   define assertion(EXPRESSION, MESSAGE)\
         if(!(EXPRESSION)) {\
-            throw AssertionFailureException(#EXPRESSION, __FILE__, __LINE__, \
-                                                        (AssertionFailureException::StreamFormatter() << (MESSAGE)));\
+            assertion_failure(#EXPRESSION, __FILE__, __LINE__,(StreamFormatter() << (MESSAGE)));\
         }
 #else
-#   define throw_assert(EXPRESSION, MESSAGE);
+#   define assertion(EXPRESSION, MESSAGE);
 #endif //NDEBUG
 
 #endif //INCLUDED_THROWASSERT_HPP
