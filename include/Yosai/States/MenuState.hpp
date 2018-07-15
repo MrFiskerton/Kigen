@@ -5,7 +5,7 @@
 #ifndef INCLUDED_MENUSTATE_HPP
 #define INCLUDED_MENUSTATE_HPP
 
-#include "State.hpp"
+#include "Yosai/StateControl/State.hpp"
 
 class MenuState : public State {
 

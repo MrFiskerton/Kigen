@@ -17,7 +17,7 @@ void State::onDestroy() {
 
 }
 
-void State::requestStackPush(state::ID stateID) {
+void State::requestStackPush(States::ID stateID) {
     m_stack->pushState(stateID);
 }
 

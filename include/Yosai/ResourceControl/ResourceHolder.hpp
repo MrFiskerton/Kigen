@@ -72,7 +72,7 @@ public:
         auto it = m_resourse_map.find(id);
 
         if (it == m_resourse_map.end()) { /* Id does not contain */
-            throw resource_access_error("No such id in the ResourceHolder.");
+            throw resource_access_error("No such m_stateId in the ResourceHolder.");
         }
         return *(it->second);
     }
@@ -100,7 +100,7 @@ private:
         assertion(contains(id), "ID does not contain. And can't be erased");
         auto const &it = m_resourse_map.find(id);
         m_resourse_map.erase(it);
-        Logger::info("ResourceHolder::erase") << "Releasing resource by id = " << id << Logger::endl;
+        Logger::info("ResourceHolder::erase") << "Releasing resource by m_stateId = " << id << Logger::endl;
     }
 
 private:

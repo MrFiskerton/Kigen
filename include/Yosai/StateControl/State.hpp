@@ -9,7 +9,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
-#include "StateIdentifiers.hpp"
+#include "Yosai/ID/StateIdentifiers.hpp"
 
 namespace sf {
     class RenderWindow;
@@ -36,7 +36,7 @@ public:
     virtual void onDestroy();
 
 protected:
-    void requestStackPush(state::ID id);
+    void requestStackPush(States::ID id);
 
     void requestStackPop();
 

@@ -5,7 +5,7 @@
 #ifndef INCLUDED_STATEIDENTIFIERS_HPP
 #define INCLUDED_STATEIDENTIFIERS_HPP
 
-namespace state {
+namespace States {
     enum ID : int {
         None = 0,
         Title,

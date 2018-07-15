@@ -36,41 +36,42 @@ public:
 
     void handleEvent(const sf::Event &event);
 
-    void pushState(state::ID id);
+    void pushState(States::ID id);
 
-    void forcePushState(state::ID id);
+    void forcePushState(States::ID id);
 
     void popState();
 
     void clearStates();
 
     template<typename T>
-    void registerState(state::ID id);
+    void registerState(States::ID id);
 
     bool isEmpty() const;
 
 private:
-    State::Ptr createState(state::ID id);
+    State::Ptr createState(States::ID id);
 
     void applyPendingChanges();
 
 private:
     struct PendingChange {
-        explicit PendingChange(Action action, state::ID id = state::ID::None);
+        PendingChange(Action action, States::ID id = States::None) : m_action(action), m_stateId(id) {}
+        //explicit PendingChange(Action action) : m_action(action) {}
 
-        Action action;
-        state::ID id;
+        Action m_action;
+        States::ID m_stateId;
     };
 
 private:
     std::vector <State::Ptr> m_stack;
     std::vector <PendingChange> m_pending_list;
-    std::map <state::ID, std::function<State::Ptr()>> m_state_factories;
+    std::map <States::ID, std::function<State::Ptr()>> m_state_factories;
 };
 
 //------------------------------[   Definition for template function   ]------------------------------//
 template<typename T>
-void StateControl::registerState(state::ID id) {
+void StateControl::registerState(States::ID id) {
     m_state_factories[id] = [this]() {
         return State::Ptr(new T(*this));
     };

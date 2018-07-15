@@ -45,7 +45,7 @@ private:
 
     sf::VideoMode      m_videoMode;
 
-    ResourceHolder<sf::Image, std::string> images;//Temporary
+    ResourceHolder<sf::Image, Images::ID> images;//Temporary
 };
 
 #endif //INCLUDED_APPLICATION_HPP

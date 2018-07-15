@@ -81,22 +81,22 @@ void Application::render() {
     m_renderWindow.display();
 }
 
-#include <Yosai/StateControl/MenuState.hpp>
+#include <Yosai/States/MenuState.hpp>
 void Application::init_state_control() {
-    m_stateControl.registerState<MenuState>(state::ID::Menu);
+    m_stateControl.registerState<MenuState>(States::ID::Menu);
 
-    m_stateControl.forcePushState(state::ID::Menu);
+    m_stateControl.forcePushState(States::ID::Menu);
 }
 
 void Application::init_resource_control() {
-    images.register_resource(std::string("icon"), loadFromFile<sf::Image>("../resource/default_icon.png"));
+    images.register_resource(Images::icon, loadFromFile<sf::Image>("../resource/default_icon.png"));
 }
 
 void Application::init_render_things() {
     m_renderWindow.create({600, 600, 32}, "Yosai", sf::Style::Close);
     m_renderTexture.create(600, 600);
 
-    const sf::Image& icon = images["icon"];
+    const sf::Image& icon = images[Images::icon];
     m_renderWindow.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
     m_canvas_sprite.setTexture(m_renderTexture.getTexture());

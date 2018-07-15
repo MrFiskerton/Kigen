@@ -3,17 +3,19 @@ set(SRCROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Files
 set(FILES_HEADER
+        ${INCROOT}/ID/ResourceIdentifiers.hpp
+        ${INCROOT}/ID/StateIdentifiers.hpp
+
         ${INCROOT}/ResourceControl/ResourceControl.hpp
         ${INCROOT}/ResourceControl/ResourceExceptions.hpp
         ${INCROOT}/ResourceControl/ResourceHolder.hpp
-        ${INCROOT}/ResourceControl/ResourceIdentifiers.hpp
         ${INCROOT}/ResourceControl/ResourceLoader.hpp
-        ${INCROOT}/ResourceControl/SFMLResourceLoaderMakers.hpp
+        ${INCROOT}/ResourceControl/SFML_LoaderMakers.hpp
 
         ${INCROOT}/StateControl/State.hpp
-        ${INCROOT}/StateControl/MenuState.hpp
         ${INCROOT}/StateControl/StateControl.hpp
-        ${INCROOT}/StateControl/StateIdentifiers.hpp
+
+        ${INCROOT}/States/MenuState.hpp
 
         ${INCROOT}/Time/ApplicationClock.hpp
         ${INCROOT}/Time/StopWatch.hpp
@@ -31,8 +33,9 @@ set(FILES_HEADER
 
 set(FILES_SRC
         ${SRCROOT}/StateControl/State.cpp
-        ${SRCROOT}/StateControl/MenuState.cpp
         ${SRCROOT}/StateControl/StateControl.cpp
+
+        ${SRCROOT}/States/MenuState.cpp
 
         ${SRCROOT}/Time/ApplicationClock.cpp
         ${SRCROOT}/Time/StopWatch.cpp

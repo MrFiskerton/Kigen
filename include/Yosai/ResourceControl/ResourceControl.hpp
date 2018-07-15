@@ -6,9 +6,8 @@
 #define INCLUDED_RESOURCECONTROL_HPP
 
 #include "ResourceHolder.hpp"
-#include "ResourceIdentifiers.hpp"
-#include "SFMLResourceLoaderMakers.hpp"
-
+#include "SFML_LoaderMakers.hpp"
+#include "Yosai/ID/ResourceIdentifiers.hpp"
 
 
 
