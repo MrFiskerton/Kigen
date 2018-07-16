@@ -29,7 +29,7 @@ std::ostream& Logger::log(Logger::Level level, const std::string &source) {
 #ifndef DEBUG_LOG_ENABLE
     //
 #endif
-    auto where = (source =="-//-") ? " " : (":[" + source + "]: ");
+    auto where = (source.empty()) ? " " : (":[" + source + "]: ");
     return ( s_logstr << level << where);
 }
 
@@ -40,7 +40,7 @@ std::ostream& Logger::log(const std::string& colour) {
     return (s_logstr << colour);
 }
 
-const std::string& Logger::endlF() {
+const std::string& Logger::endlf() {
     s_logstr.flush();
     return endl;
 }

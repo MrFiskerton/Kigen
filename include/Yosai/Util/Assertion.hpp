@@ -2,8 +2,8 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 13.07.18.
 //
 
-#ifndef INCLUDED_THROWASSERT_HPP
-#define INCLUDED_THROWASSERT_HPP
+#ifndef INCLUDED_ASSERTION_HPP
+#define INCLUDED_ASSERTION_HPP
 
 #include <exception>
 #include <string>
@@ -47,7 +47,7 @@ namespace {
         outputStream << " failed in file '" << file << "' line " << line;
         std::string report = outputStream.str();
 #ifdef DEBUG_LOG_ENABLE
-        Logger::error() << report << Logger::endlF();
+        Logger::error() << report << Logger::endlf();
 #else
         std::cerr << report << std::endl;
 #endif
@@ -57,7 +57,7 @@ namespace {
 }
 
 #ifndef NDEBUG
-/*! Assert that EXPRESSION evaluates to true, otherwise raise AssertionFailureException with associated MESSAGE
+/*! Assert that EXPRESSION evaluates to true, otherwise abort with associated MESSAGE
     (which may use C++ stream-style message formatting) */
 #   define assertion(EXPRESSION, MESSAGE)\
         if(!(EXPRESSION)) {\
@@ -67,4 +67,4 @@ namespace {
 #   define assertion(EXPRESSION, MESSAGE);
 #endif //NDEBUG
 
-#endif //INCLUDED_THROWASSERT_HPP
+#endif //INCLUDED_ASSERTION_HPP
