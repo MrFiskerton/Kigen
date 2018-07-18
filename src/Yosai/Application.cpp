@@ -55,14 +55,18 @@ void Application::load_configuration() {
 }
 
 void Application::process_events() {
+    m_inputControl.clear_event_buffer();
+
     static sf::Event event;
     while (m_renderWindow.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
             m_renderWindow.close();
-        } else if (event.type == sf::Event::KeyPressed and event.key.code == sf::Keyboard::Escape) {//TODO: Delete this
-            m_renderWindow.close();
         }
+
+        m_inputControl.handle_event(event);
     }
+
+    if (m_inputControl.isKeyJustPressed(sf::Keyboard::Escape)) m_renderWindow.close();
 }
 
 void Application::update_logic(const sf::Time &deltaTime) {
@@ -93,8 +97,9 @@ void Application::init_resource_control() {
 }
 
 void Application::init_render_things() {
-    m_renderWindow.create({600, 600, 32}, "Yosai", sf::Style::Close);
-    m_renderTexture.create(600, 600);
+    m_renderWindow.create({300, 300, 32}, "Yosai", sf::Style::Close);
+    m_renderTexture.create(300, 300);
+    m_renderWindow.setKeyRepeatEnabled(false);
 
     const sf::Image& icon = images[Images::icon];
     m_renderWindow.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());

@@ -10,7 +10,8 @@ KeyboardController::~KeyboardController() {
 
 }
 
-void KeyboardController::update() {
+void KeyboardController::clear_event_buffer() {
+    m_last_pressed_key  = sf::Keyboard::Unknown;
     m_event_buffer.clear();
 }
 
@@ -19,11 +20,17 @@ void KeyboardController::handle_event(const sf::Event &event) {
 
     switch (event.type){
         case sf::Event::TextEntered: read_unicode(event.text.unicode); break;
-        case sf::Event::KeyPressed:  m_event_buffer.emplace(event.key.code, Pressed);  break;
+        case sf::Event::KeyPressed:  m_last_pressed_key = event.key.code;
+                                     m_event_buffer.emplace(event.key.code, Pressed);  break;
         case sf::Event::KeyReleased: m_event_buffer.emplace(event.key.code, Released); break;
 
-        default: Logger::warn("KeyboardController::handle_event", "Passed not compatible event");
+        default: Logger::warn("KeyboardController::handle_event",
+                              "Passed not compatible event sf::Event::" + Conversion::to_string(event.type));
     }
+}
+
+sf::Keyboard::Key KeyboardController::lastPressedKey() const {
+    return m_last_pressed_key;
 }
 
 bool KeyboardController::test(sf::Keyboard::Key key, unsigned char type) const {
@@ -41,6 +48,22 @@ bool KeyboardController::test(sf::Keyboard::Key key, unsigned char type) const {
         }
     }
     return false;
+}
+
+bool KeyboardController::isKeyPressed(sf::Keyboard::Key key) {
+    return test(key, RealTime | Pressed);
+}
+
+bool KeyboardController::isKeyReleased(sf::Keyboard::Key key) {
+    return test(key, RealTime | Released);
+}
+
+bool KeyboardController::isKeyJustPressed(sf::Keyboard::Key key) {
+    return test(key, Pressed);
+}
+
+bool KeyboardController::isKeyJustReleased(sf::Keyboard::Key key) {
+    return test(key, Released);
 }
 
 void KeyboardController::start_reading_text() {
@@ -75,4 +98,3 @@ void KeyboardController::setVirtualKeyboardVisible(bool visible) {
     if (is_locked()) return;
     sf::Keyboard::setVirtualKeyboardVisible(visible);
 }
-

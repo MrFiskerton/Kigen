@@ -11,8 +11,8 @@
 
 class MouseController: public AbstractDeviceController {
 public:
-    enum ActionType {
-        RealtimePressed,
+    enum MouseActionType {
+        Hold,
         Pressed,
         Clicked // Released
     };
@@ -20,21 +20,21 @@ public:
     MouseController();
     virtual ~MouseController();
 
-    void update() override;
+    void clear_event_buffer() override;
     void handle_event(const sf::Event &event) override;
-    bool test(sf::Mouse::Button button, ActionType action) const;
-    bool test(sf::Mouse::Button button, ActionType action, const sf::FloatRect& boundingBox, bool useDefaultView = false) const;
 
     void set_window(sf::RenderWindow* window);
 
     bool isMouseOver(const sf::FloatRect& boundingBox, bool useDefaultView = false) const;
     bool isMouseWheelScrolledDown() const;
     bool isMouseWheelScrolledUp() const;
+    void setMouseWheelScrollTicks(float deltaTicks);
 
     const sf::Vector2f& getMousePosition(bool useDefaultView = false) const;
 
-    void setMouseWheelScrollTicks(float deltaTicks);
-
+private:
+    bool test(sf::Mouse::Button button, MouseActionType action) const;
+    bool test(sf::Mouse::Button button, MouseActionType action, const sf::FloatRect& boundingBox, bool useDefaultView = false) const;
 private:
     //+ buffer
 

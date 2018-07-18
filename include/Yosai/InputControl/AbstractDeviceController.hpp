@@ -8,13 +8,14 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <Yosai/Util/Logger.hpp>
+#include <Yosai/Conversion/Conversion.hpp>
 
 class AbstractDeviceController {
 public:
     AbstractDeviceController();
     virtual ~AbstractDeviceController() = default;
 
-    virtual void update() = 0;
+    virtual void clear_event_buffer() = 0;
     virtual void handle_event(const sf::Event &event) = 0;
 
     void lock_action();

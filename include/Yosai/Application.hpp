@@ -14,6 +14,7 @@
 #include <Yosai/StateControl/StateControl.hpp>
 #include <Yosai/Util/Util.hpp>
 #include <Yosai/Time/ApplicationClock.hpp>
+#include <Yosai/InputControl/InputControl.hpp>
 
 class Application: public NonCopyable {
 public:
@@ -38,6 +39,7 @@ private:
 private:
     ApplicationClock m_aclock;
     StateControl m_stateControl;
+    InputControl m_inputControl;
 
     sf::RenderWindow   m_renderWindow;
     sf::RenderTexture  m_renderTexture;

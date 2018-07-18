@@ -12,20 +12,27 @@
 #include "AbstractDeviceController.hpp"
 
 class KeyboardController: public AbstractDeviceController {
-public:
-    enum ActionType : unsigned char {
+private:
+    enum KeyboardActionType : unsigned char {
         RealTime = 1u,
-        Pressed  = unsigned char(1) << 1,
-        Released = unsigned char(1) << 2
+        Pressed  = 1u << 1,
+        Released = 1u << 2
     };
 public:
     KeyboardController();
 
     virtual ~KeyboardController();
 
-    void update() override;
+    void clear_event_buffer() override;
     void handle_event(const sf::Event &event) override;
-    bool test(sf::Keyboard::Key key, unsigned char type = ActionType::RealTime | ActionType::Pressed) const;
+    sf::Keyboard::Key lastPressedKey() const;
+
+    // Realtime
+    bool isKeyPressed(sf::Keyboard::Key key);
+    bool isKeyReleased(sf::Keyboard::Key key);
+    // According to event
+    bool isKeyJustPressed (sf::Keyboard::Key key);
+    bool isKeyJustReleased(sf::Keyboard::Key key);
 
     void start_reading_text();
     void stop_reading_text();
@@ -34,11 +41,13 @@ public:
 
     void setVirtualKeyboardVisible(bool visible); // Only for mobile version
 
-protected:
-    void read_unicode(sf::Uint32 character);
-
 private:
-    std::multimap<sf::Keyboard::Key, ActionType> m_event_buffer;
+    void read_unicode(sf::Uint32 character);
+    bool test(sf::Keyboard::Key key, unsigned char type) const;
+private:
+    std::multimap<sf::Keyboard::Key, KeyboardActionType> m_event_buffer;
+
+    sf::Keyboard::Key m_last_pressed_key; // TODO: store last 3 key pressed. Usage: keybind screen
 
     bool is_reading;
     std::string m_text;

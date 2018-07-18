@@ -8,7 +8,7 @@
 
 #include "KeyboardController.hpp"
 
-class InputControl: public KeyboardController,  {
+class InputControl: public KeyboardController {
 public:
 private:
 private:

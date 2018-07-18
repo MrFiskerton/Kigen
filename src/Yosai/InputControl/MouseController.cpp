@@ -12,7 +12,7 @@ MouseController::~MouseController() {
 
 }
 
-void MouseController::update() {
+void MouseController::clear_event_buffer() {
 
 }
 
