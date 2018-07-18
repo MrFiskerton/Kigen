@@ -3,8 +3,20 @@ set(SRCROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Files
 set(FILES_HEADER
+        ${INCROOT}/ActionControl/detail/ActionControl.inl
+        ${INCROOT}/ActionControl/detail/ActionMap.inl
+
+        ${INCROOT}/ActionControl/Action.hpp
+        ${INCROOT}/ActionControl/ActionControl.hpp
+        ${INCROOT}/ActionControl/ActionMap.hpp
+
         ${INCROOT}/ID/ResourceIdentifiers.hpp
         ${INCROOT}/ID/StateIdentifiers.hpp
+
+        ${INCROOT}/InputControl/AbstractDeviceController.hpp
+        ${INCROOT}/InputControl/InputControl.hpp
+        ${INCROOT}/InputControl/KeyboardController.hpp
+        ${INCROOT}/InputControl/MouseController.hpp
 
         ${INCROOT}/ResourceControl/ResourceControl.hpp
         ${INCROOT}/ResourceControl/ResourceExceptions.hpp
@@ -32,6 +44,13 @@ set(FILES_HEADER
    )
 
 set(FILES_SRC
+        ${SRCROOT}/ActionControl/Action.cpp
+
+        ${SRCROOT}/InputControl/AbstractDeviceController.cpp
+        ${SRCROOT}/InputControl/InputControl.cpp
+        ${SRCROOT}/InputControl/KeyboardController.cpp
+        ${SRCROOT}/InputControl/MouseController.cpp
+
         ${SRCROOT}/StateControl/State.cpp
         ${SRCROOT}/StateControl/StateControl.cpp
 
