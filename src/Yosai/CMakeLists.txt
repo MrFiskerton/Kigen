@@ -17,6 +17,7 @@ set(FILES_HEADER
 
         ${INCROOT}/InputControl/AbstractDeviceController.hpp
         ${INCROOT}/InputControl/InputControl.hpp
+        ${INCROOT}/InputControl/EventBuffer.hpp
         ${INCROOT}/InputControl/KeyboardController.hpp
         ${INCROOT}/InputControl/MouseController.hpp
 
@@ -51,6 +52,7 @@ set(FILES_SRC
         ${SRCROOT}/Conversion/KeyConversion.cpp
 
         ${SRCROOT}/InputControl/AbstractDeviceController.cpp
+        ${SRCROOT}/InputControl/EventBuffer.cpp
         ${SRCROOT}/InputControl/InputControl.cpp
         ${SRCROOT}/InputControl/KeyboardController.cpp
         ${SRCROOT}/InputControl/MouseController.cpp

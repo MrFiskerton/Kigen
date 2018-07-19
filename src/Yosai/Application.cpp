@@ -55,18 +55,28 @@ void Application::load_configuration() {
 }
 
 void Application::process_events() {
-    m_inputControl.clear_event_buffer();
-
-    static sf::Event event;
-    while (m_renderWindow.pollEvent(event)) {
-        if (event.type == sf::Event::Closed) {
-            m_renderWindow.close();
-        }
-
-        m_inputControl.handle_event(event);
-    }
+    m_inputControl.poll_events(m_renderWindow);
 
     if (m_inputControl.isKeyJustPressed(sf::Keyboard::Escape)) m_renderWindow.close();
+    /*if (event.type == sf::Event::Closed) {
+        m_renderWindow.close();
+    }*/
+
+    /*for(int i = static_cast<int>(sf::Keyboard::Unknown) + 1; i < static_cast<int>(sf::Keyboard::KeyCount); i++) {
+        static sf::Keyboard::Key  key;
+
+        key = static_cast<sf::Keyboard::Key>(i);
+
+        if (m_inputControl.isKeyJustPressed(key))
+            Logger::log() << "Pressed " << Conversion::to_string(key) << Logger::endl;
+        if (m_inputControl.isKeyJustReleased(key))
+            Logger::log() << "Released " << Conversion::to_string(key) << Logger::endl;
+        if (m_inputControl.isKeyPressed(key)) {
+            Logger::log() << "Realtime pressed " << Conversion::to_string(key) << Logger::endl;
+            while (m_inputControl.isKeyPressed(key)) {}
+        }
+    }*/
+
 }
 
 void Application::update_logic(const sf::Time &deltaTime) {

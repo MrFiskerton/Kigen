@@ -7,11 +7,30 @@
 
 
 #include "KeyboardController.hpp"
+#include "EventBuffer.hpp"
 
-class InputControl: public KeyboardController {
+class InputControl final: public KeyboardController {
 public:
+    enum Device {
+        Non,
+        Keyboard,
+        Mouse,
+        All,
+        Count
+    };
+
+
+
+public:
+    void lock_action(Device device = All);
+    void unlock_action(Device device = All);
+    bool is_locked(Device device = All) const;
+
+    void clear_event_buffer() override;
+    void handle_event(const sf::Event &event) override;
+    void poll_events(sf::Window &window);
 private:
-private:
+    EventBuffer m_buffer;
 };
 
 

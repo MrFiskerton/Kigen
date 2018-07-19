@@ -40,7 +40,8 @@ public:
     void crop_read_text(std::size_t maxLength);
 
     void setVirtualKeyboardVisible(bool visible); // Only for mobile version
-
+public:
+    // to_string
 private:
     void read_unicode(sf::Uint32 character);
     bool test(sf::Keyboard::Key key, unsigned char type) const;

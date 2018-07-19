@@ -18,9 +18,11 @@ public:
     virtual void clear_event_buffer() = 0;
     virtual void handle_event(const sf::Event &event) = 0;
 
-    void lock_action();
-    void unlock_action();
-    bool is_locked() const;
+    virtual void lock_action();
+
+    virtual void unlock_action();
+
+    virtual bool is_locked() const;
 
 private:
     bool is_action_locked;
