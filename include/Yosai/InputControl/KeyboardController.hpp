@@ -23,7 +23,7 @@ public:
 
     virtual ~KeyboardController();
 
-    void clear_event_buffer() override;
+    void update() override;
     void handle_event(const sf::Event &event) override;
     sf::Keyboard::Key lastPressedKey() const;
 

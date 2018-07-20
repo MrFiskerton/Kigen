@@ -15,7 +15,7 @@ public:
     AbstractDeviceController();
     virtual ~AbstractDeviceController() = default;
 
-    virtual void clear_event_buffer() = 0;
+    virtual void update() = 0;
     virtual void handle_event(const sf::Event &event) = 0;
 
     virtual void lock_action();

@@ -2,6 +2,7 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 12.07.18.
 //
 
+#include <SFML/Graphics/CircleShape.hpp>
 #include "Yosai/Application.hpp"
 
 Application::Application() {
@@ -58,7 +59,7 @@ void Application::process_events() {
     m_inputControl.poll_events(m_renderWindow);
 
     if (m_inputControl.isKeyJustPressed(sf::Keyboard::Escape)) m_renderWindow.close();
-    /*if (event.type == sf::Event::Closed) {
+   /* if (event.type == sf::Event::Closed) {
         m_renderWindow.close();
     }*/
 
@@ -92,6 +93,13 @@ void Application::update_graphics() {
 void Application::render() {
     m_renderWindow.clear();
     m_renderWindow.draw(m_canvas_sprite);
+
+    //--
+    sf::CircleShape shape(80.f);
+    m_inputControl.isButtonPressed(sf::Mouse::Button::Left) ? shape.setFillColor(sf::Color::Blue): shape.setFillColor(sf::Color::Red);
+    m_renderWindow.draw(shape);
+    //--
+
     m_renderWindow.display();
 }
 
@@ -110,6 +118,7 @@ void Application::init_render_things() {
     m_renderWindow.create({300, 300, 32}, "Yosai", sf::Style::Close);
     m_renderTexture.create(300, 300);
     m_renderWindow.setKeyRepeatEnabled(false);
+    m_renderWindow.setFramerateLimit(60);
 
     const sf::Image& icon = images[Images::icon];
     m_renderWindow.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());

@@ -5,94 +5,63 @@
 #include "Yosai/InputControl/InputControl.hpp"
 
 void InputControl::lock_action(Device device) {
-    switch (device){
-        case Non:break;
-        case Keyboard: KeyboardController::lock_action();
+    switch (device) {
+        //case Unknown:break;
+        // TODO:
+        case Window:break;
+        case Keyboard: KeyboardController::lock_action();break;
         case Mouse:break;
+        case Joystick:break;
         case All:break;
-        case Count:break;
     }
 }
 
 void InputControl::unlock_action(Device device) {
-    switch (device){
-        case Non:break;
-        case Keyboard: KeyboardController::unlock_action();
-        case Mouse:break;
-        case All:break;
-        case Count:break;
-    }
+//TODO:
 }
 
 bool InputControl::is_locked(Device device) const {
-    switch (device){
-        case Non:break;
-        case Keyboard: return KeyboardController::is_locked();
-        case Mouse:break;
-        case All:break;
-        case Count:break;
-    }
-
+    //TODO:
     return false;
 }
 
-void InputControl::clear_event_buffer() {
+void InputControl::update() {
     m_buffer.clear();
-    KeyboardController::clear_event_buffer();
+    KeyboardController::update();
+    MouseController::update();
 }
 
 void InputControl::handle_event(const sf::Event &event) {
     m_buffer.push(event);
-    switch (event.type){
-        // Window
-        case sf::Event::Closed:
-        case sf::Event::Resized:
-        case sf::Event::LostFocus:
-        case sf::Event::GainedFocus:
-            Logger::warn("InputControl::handle_event", "Window event sf::Event::" + Conversion::to_string(event.type));
-            break;
-
-        // Keyboard
-        case sf::Event::TextEntered:
-        case sf::Event::KeyPressed:
-        case sf::Event::KeyReleased:
-            KeyboardController::handle_event(event);
-            break;
-
-        // Mouse
-        case sf::Event::MouseWheelMoved:
-        case sf::Event::MouseWheelScrolled:
-        case sf::Event::MouseButtonPressed:
-        case sf::Event::MouseButtonReleased:
-        case sf::Event::MouseMoved:
-        case sf::Event::MouseEntered:
-        case sf::Event::MouseLeft:
-            break;
-
-        // Joystick
-        case sf::Event::JoystickButtonPressed:
-        case sf::Event::JoystickButtonReleased:
-        case sf::Event::JoystickMoved:
-        case sf::Event::JoystickConnected:
-        case sf::Event::JoystickDisconnected:
-            Logger::warn("InputControl::handle_event", "Joystick event sf::Event::" + Conversion::to_string(event.type));
-            break;
-
-        /*// Sensor
-        case sf::Event::TouchBegan:break;
-        case sf::Event::TouchMoved:break;
-        case sf::Event::TouchEnded:break;
-        case sf::Event::SensorChanged:break;*/
-
-        // Meta information
-        case sf::Event::Count:break;
-        default: Logger::warn("InputControl::handle_event", "Passed not compatible event sf::Event::" + Conversion::to_string(event.type));
+    switch (get_compatible_device(event)) {
+        case Unknown: Logger::warn("InputControl::handle_event", "Passed not compatible event sf::Event::EventType::"
+                                                                 + Conversion::to_string(event.type));break;
+        case Window:break;
+        case Keyboard: KeyboardController::handle_event(event); break;
+        case Mouse:    MouseController::handle_event(event);    break;
+        case Joystick:break;
+        //case All:break;
     }
+
 }
 
 void InputControl::poll_events(sf::Window &window) {
-    clear_event_buffer();
+    update();
 
     static sf::Event event;
     while (window.pollEvent(event)) handle_event(event);
+}
+
+InputControl::Device InputControl::get_compatible_device(const sf::Event &event) {
+#   define IF_EVENT_IN_INTERVAL(L, R)\
+    if(static_cast<int>(sf::Event::EventType::L) <= static_cast<int>(event.type) && \
+                                                    static_cast<int>(event.type) <= static_cast<int>(sf::Event::EventType::R))
+
+    //IF_EVENT_IN_INTERVAL(Closed, GainedFocus) return Device::Window;
+    IF_EVENT_IN_INTERVAL(TextEntered, KeyReleased) return Device::Keyboard;
+    IF_EVENT_IN_INTERVAL(MouseWheelMoved, MouseLeft) return Device::Mouse;
+    IF_EVENT_IN_INTERVAL(JoystickButtonPressed, JoystickDisconnected) return Device::Joystick;
+    // TouchBegan, TouchMoved, TouchEnded, SensorChanged, Count
+#   undef IF_EVENT_IN_INTERVAL
+    return Device::Unknown;
 }

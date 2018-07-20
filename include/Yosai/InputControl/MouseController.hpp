@@ -7,6 +7,7 @@
 
 
 #include <SFML/Window.hpp>
+#include <map>
 #include "AbstractDeviceController.hpp"
 
 class MouseController: public AbstractDeviceController {
@@ -20,15 +21,29 @@ public:
     MouseController();
     virtual ~MouseController();
 
-    void clear_event_buffer() override;
+    void update() override;
     void handle_event(const sf::Event &event) override;
 
     void set_window(sf::RenderWindow* window);
 
+    //template<typename ... Args>
+    bool isButtonPressed(sf::Mouse::Button button/*, Args &&... args*/);
+
+    template<typename ... Args>
+    bool isButtonReleased(sf::Mouse::Button button, Args &&... args);
+
+    template<typename ... Args>
+    bool isButtonJustPressed(sf::Mouse::Button button, Args &&... args);
+
+    template<typename ... Args>
+    bool isButtonJustReleased(sf::Mouse::Button button, Args &&... args);
+
+    bool isMouseInsedeView();
+    bool isMouseMoved();
+
     bool isMouseOver(const sf::FloatRect& boundingBox, bool useDefaultView = false) const;
     bool isMouseWheelScrolledDown() const;
     bool isMouseWheelScrolledUp() const;
-    void setMouseWheelScrollTicks(float deltaTicks);
 
     const sf::Vector2f& getMousePosition(bool useDefaultView = false) const;
 
@@ -36,13 +51,15 @@ private:
     bool test(sf::Mouse::Button button, MouseActionType action) const;
     bool test(sf::Mouse::Button button, MouseActionType action, const sf::FloatRect& boundingBox, bool useDefaultView = false) const;
 private:
-    //+ buffer
-
-    float m_mouseWheelScrollTicks = 0;
+    std::multimap<sf::Mouse::Button, MouseActionType> m_event_buffer;
 
     bool m_isMouseInsideView;
+    bool m_isMouseMoved;
+
     sf::Vector2f m_mousePosition;
     sf::Vector2f m_defaultViewMousePosition;
+
+    float m_mouseWheelScrollTicks = 0;
 
     sf::RenderWindow* m_window;
 };
