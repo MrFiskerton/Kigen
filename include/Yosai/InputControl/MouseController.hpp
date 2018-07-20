@@ -26,8 +26,8 @@ public:
 
     void set_window(sf::RenderWindow* window);
 
-    //template<typename ... Args>
-    bool isButtonPressed(sf::Mouse::Button button/*, Args &&... args*/);
+    template<typename ... Args>
+    bool isButtonPressed(sf::Mouse::Button button, Args &&... args);
 
     template<typename ... Args>
     bool isButtonReleased(sf::Mouse::Button button, Args &&... args);
@@ -63,5 +63,26 @@ private:
 
     sf::RenderWindow* m_window;
 };
+
+//------------------------------[   Definition for template function   ]------------------------------//
+template<typename ... Args>
+bool MouseController::isButtonPressed(sf::Mouse::Button button, Args &&... args) {
+    return test(button, Hold, args...);
+}
+
+template<typename... Args>
+bool MouseController::isButtonReleased(sf::Mouse::Button button, Args &&... args) {
+    return !isButtonPressed(button, std::forward<Args>(args)...);
+}
+
+template<typename ... Args>
+bool MouseController::isButtonJustPressed(sf::Mouse::Button button, Args &&... args) {
+    return test(button, Pressed, std::forward<Args>(args)...);
+}
+
+template<typename ... Args>
+bool MouseController::isButtonJustReleased(sf::Mouse::Button button, Args &&... args) {
+    return test(button, Clicked, std::forward<Args>(args)...);
+}
 
 #endif //INCLUDED_MOUSECONTROLLER_HPP

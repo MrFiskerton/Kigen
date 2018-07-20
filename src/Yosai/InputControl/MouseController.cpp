@@ -48,26 +48,6 @@ void MouseController::set_window(sf::RenderWindow *window) {
     m_window = window;
 }
 
-//TODO:
-bool MouseController::isButtonPressed(sf::Mouse::Button button) {
-    return test(button, Hold);
-}
-
-template<typename... Args>
-bool MouseController::isButtonReleased(sf::Mouse::Button button, Args &&... args) {
-    return !isButtonPressed(button, std::forward<Args>(args)...);
-}
-
-template<typename ... Args>
-bool MouseController::isButtonJustPressed(sf::Mouse::Button button, Args &&... args) {
-    return test(button, Pressed, std::forward<Args>(args)...);
-}
-
-template<typename ... Args>
-bool MouseController::isButtonJustReleased(sf::Mouse::Button button, Args &&... args) {
-    return test(button, Clicked, std::forward<Args>(args)...);
-}
-
 bool MouseController::isMouseInsedeView() {
     return m_isMouseInsideView;
 }
