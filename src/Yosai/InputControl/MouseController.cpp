@@ -12,7 +12,7 @@ MouseController::~MouseController() {
 
 }
 
-void MouseController::update() {
+void MouseController::clear_events() {
     // Update mouse wheel
     m_mouseWheelScrollTicks = 0.f;
 
@@ -36,7 +36,7 @@ void MouseController::handle_event(const sf::Event &event) {
         case sf::Event::MouseButtonPressed:  m_event_buffer.emplace(event.mouseButton.button, Pressed);break;
         case sf::Event::MouseButtonReleased: m_event_buffer.emplace(event.mouseButton.button, Clicked);break;
 
-        case sf::Event::MouseMoved:   m_isMouseMoved = true;       break;
+        case sf::Event::MouseMoved:   m_isMouseMoved      = true;  break;
         case sf::Event::MouseEntered: m_isMouseInsideView = true;  break;
         case sf::Event::MouseLeft:    m_isMouseInsideView = false; break;
 

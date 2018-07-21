@@ -8,9 +8,10 @@
 
 #include "KeyboardController.hpp"
 #include "MouseController.hpp"
+#include "WindowController.hpp"
 #include "EventBuffer.hpp"
 
-class InputControl final: public KeyboardController, public MouseController {
+class InputControl final: public WindowController, public KeyboardController, public MouseController {
 public:
     enum Device {
         Unknown,
@@ -26,11 +27,12 @@ public:
     void unlock_action(Device device = All);
     bool is_locked(Device device = All) const;
 
-    void update() override;
+    void update(sf::Window &window);
+    void clear_events() override;
     void handle_event(const sf::Event &event) override;
-    void poll_events(sf::Window &window);
 private:
     Device get_compatible_device(const sf::Event &event);
+    void poll_events(sf::Window &window);
 private:
     EventBuffer m_buffer;
 };

@@ -8,6 +8,7 @@ int main(int argc, char *argv[]) {
     try {
         Application::instance().process_arguments(argc, argv);
         Application::instance().load_configuration();
+        Application::instance().initialize();
         Application::instance().run();
     } catch (std::exception &e) {
         std::cerr << "\n>>> EXCEPTION: " << e.what() << std::endl;

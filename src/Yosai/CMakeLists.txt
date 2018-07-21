@@ -20,6 +20,7 @@ set(FILES_HEADER
         ${INCROOT}/InputControl/EventBuffer.hpp
         ${INCROOT}/InputControl/KeyboardController.hpp
         ${INCROOT}/InputControl/MouseController.hpp
+        ${INCROOT}/InputControl/WindowController.hpp
 
         ${INCROOT}/ResourceControl/ResourceControl.hpp
         ${INCROOT}/ResourceControl/ResourceExceptions.hpp
@@ -31,6 +32,8 @@ set(FILES_HEADER
         ${INCROOT}/StateControl/StateControl.hpp
 
         ${INCROOT}/States/MenuState.hpp
+
+        ${INCROOT}/Structs/ConfigurationData.hpp
 
         ${INCROOT}/Time/ApplicationClock.hpp
         ${INCROOT}/Time/StopWatch.hpp
@@ -56,9 +59,12 @@ set(FILES_SRC
         ${SRCROOT}/InputControl/InputControl.cpp
         ${SRCROOT}/InputControl/KeyboardController.cpp
         ${SRCROOT}/InputControl/MouseController.cpp
+        ${SRCROOT}/InputControl/WindowController.cpp
 
         ${SRCROOT}/StateControl/State.cpp
         ${SRCROOT}/StateControl/StateControl.cpp
+
+        ${SRCROOT}/Structs/ConfigurationData.cpp
 
         ${SRCROOT}/States/MenuState.cpp
 

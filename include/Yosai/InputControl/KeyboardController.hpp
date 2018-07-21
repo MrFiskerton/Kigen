@@ -23,7 +23,7 @@ public:
 
     virtual ~KeyboardController();
 
-    void update() override;
+    void clear_events() override;
     void handle_event(const sf::Event &event) override;
     sf::Keyboard::Key lastPressedKey() const;
 
@@ -53,5 +53,21 @@ private:
     bool is_reading;
     std::string m_text;
 };
+
+
+/*for(int i = static_cast<int>(sf::Keyboard::Unknown) + 1; i < static_cast<int>(sf::Keyboard::KeyCount); i++) {
+        static sf::Keyboard::Key  key;
+
+        key = static_cast<sf::Keyboard::Key>(i);
+
+        if (m_inputControl.isKeyJustPressed(key))
+            Logger::log() << "Pressed " << Conversion::to_string(key) << Logger::endl;
+        if (m_inputControl.isKeyJustReleased(key))
+            Logger::log() << "Released " << Conversion::to_string(key) << Logger::endl;
+        if (m_inputControl.isKeyPressed(key)) {
+            Logger::log() << "Realtime pressed " << Conversion::to_string(key) << Logger::endl;
+            while (m_inputControl.isKeyPressed(key)) {}
+        }
+    }*/
 
 #endif //INCLUDED_KEYBOARDCONTROLLER_HPP

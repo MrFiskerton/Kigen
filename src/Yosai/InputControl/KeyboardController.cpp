@@ -10,7 +10,7 @@ KeyboardController::~KeyboardController() {
 
 }
 
-void KeyboardController::update() {
+void KeyboardController::clear_events() {
     m_last_pressed_key = sf::Keyboard::Unknown;
     m_event_buffer.clear();
 }

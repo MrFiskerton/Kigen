@@ -21,7 +21,7 @@ public:
     MouseController();
     virtual ~MouseController();
 
-    void update() override;
+    void clear_events() override;
     void handle_event(const sf::Event &event) override;
 
     void set_window(sf::RenderWindow* window);
