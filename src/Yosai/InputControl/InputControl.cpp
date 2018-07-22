@@ -32,15 +32,12 @@ void InputControl::update(sf::Window &window) {
 }
 
 void InputControl::clear_events() {
-    m_buffer.clear();
-
     WindowController::clear_events();
     KeyboardController::clear_events();
     MouseController::clear_events();
 }
 
 void InputControl::handle_event(const sf::Event &event) {
-    m_buffer.push(event);
     switch (get_compatible_device(event)) {
         case Unknown: Logger::warn("InputControl::handle_event", "Passed not compatible event sf::Event::EventType::"
                                                                  + Conversion::to_string(event.type));break;

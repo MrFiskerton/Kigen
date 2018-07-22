@@ -7,8 +7,9 @@
 
 
 class ActionContol {
-    ActionMap* m_action_map;
 };
 
+// Realisation
+#include "./detail/ActionControl.inl"
 
 #endif //INCLUDED_ACTIONCONTOL_HPP

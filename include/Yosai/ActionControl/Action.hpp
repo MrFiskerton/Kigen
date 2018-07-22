@@ -7,47 +7,48 @@
 
 
 #include <SFML/Window/Event.hpp>
+#include <Yosai/ActionControl/detail/ActionExpression.hpp>
 
-class InputControl;
+namespace detail {
+    class EventBuffer;
+}
 
 class Action {
 public:
-    enum ActionType {
-        Hold,
-        Pressed,
-        Released
+    enum ActionType : unsigned char {
+        RealTime = 1u,
+        Pressed  = 1u << 1,
+        Released = 1u << 2
     };
+
 public:
     // Default constructor: Required for ActionMap::operator[] - constructs an uninitialized action
     Action();
-
-    explicit Action(const sf::Keyboard::Key &key, ActionType type = Hold);
-
-    explicit Action(const sf::Mouse::Button &button, ActionType type = Hold);
-
-    explicit Action(sf::Event::EventType eventType);
+    explicit Action(const sf::Keyboard::Key &key, unsigned char type = RealTime | Pressed);
+    explicit Action(const sf::Mouse::Button &button, unsigned char type = RealTime | Pressed);
+    explicit Action(sf::Event::EventType event_type);
 
     // Tests if the {event}/{real time input} constellation in the argument is true for this action
-    bool test(InputControl& input) const;
+    bool test(detail::EventBuffer& buffer) const;
+private:
+    // Construct an Action from expression(ActionNode)
+    explicit Action(detail::ActionNode::Ptr expression);
 
 public:
-    bool operator==(const sf::Event &event) const;
-
-    bool operator==(const Action &other) const;
-
+    friend Action custom_action(std::function<bool(const sf::Event&)> trigger);
+    friend Action custom_action(std::function<bool()> trigger);
+public:
+    // bool operator==(const sf::Event &event) const;
+    // bool operator==(const Action &other) const;
     friend Action operator||(const Action &lhs, const Action &rhs);
-
     friend Action operator&&(const Action &lhs, const Action &rhs);
-
     friend Action operator!(const Action &action);
 private:
-    template<typename> friend
-    class ActionControl;
-
-private:
-    ActionType m_type;
-    ActionLogicalExpression  m_expression;
+    std::shared_ptr<detail::ActionNode> m_expression;
 };
+
+Action custom_action(std::function<bool(const sf::Event&)> trigger);
+Action custom_action(std::function<bool()> trigger);
 
 Action operator|| (const Action& lhs, const Action& rhs);
 Action operator&& (const Action& lhs, const Action& rhs);

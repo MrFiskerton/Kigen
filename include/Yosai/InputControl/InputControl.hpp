@@ -9,7 +9,6 @@
 #include "KeyboardController.hpp"
 #include "MouseController.hpp"
 #include "WindowController.hpp"
-#include "EventBuffer.hpp"
 
 class InputControl final: public WindowController, public KeyboardController, public MouseController {
 public:
@@ -33,8 +32,6 @@ public:
 private:
     Device get_compatible_device(const sf::Event &event);
     void poll_events(sf::Window &window);
-private:
-    EventBuffer m_buffer;
 };
 
 

@@ -5,6 +5,10 @@
 #ifndef INCLUDED_ACTIONMAP_HPP
 #define INCLUDED_ACTIONMAP_HPP
 
+#include <map>
+#include <Yosai/Util/NonCopyable.hpp>
+#include "Action.hpp"
+
 template<typename ActionId>
 class ActionMap : private NonCopyable {
 private:
@@ -18,11 +22,14 @@ public:
     void clear();
     bool test(const ActionId &id) const;
 
+    void invoke_callbacks();
 public:
     Action &operator[](const ActionId &id);
 private:
     Map m_action_map;
 };
 
+// Realisation
+#include "./detail/ActionMap.inl"
 
 #endif //INCLUDED_ACTIONMAP_HPP
