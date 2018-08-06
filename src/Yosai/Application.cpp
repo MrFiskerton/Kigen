@@ -60,11 +60,19 @@ void Application::load_configuration() {
 }
 
 void Application::update_input() {
-    m_inputControl.update(m_renderWindow);
+    //m_inputControl.update(m_renderWindow);
+    m_inputControl.clear_events();
+    m_action_map.clear_events();
+
+    static sf::Event event;
+    while (m_renderWindow.pollEvent(event)) {
+        m_inputControl.handle_event(event);
+        m_action_map.handle_event(event);
+    }
 }
 
 void Application::update_logic(const sf::Time &deltaTime) {
-    if (m_inputControl.isKeyJustPressed(sf::Keyboard::Escape) || m_inputControl.isClosed()) m_renderWindow.close();
+    m_action_map.invoke_callbacks(m_action_control);
     m_stateControl.update(deltaTime);
 }
 
@@ -81,7 +89,9 @@ void Application::render() {
 }
 
 void Application::init_action_control() {
+    m_action_map["exit"] = Action(sf::Event::Closed) || Action(sf::Keyboard::Escape);
 
+    m_action_control.connect("exit", [&](){ m_renderWindow.close(); });
 }
 
 void Application::init_input_control() {

@@ -32,9 +32,9 @@ Action::Action(detail::ActionNode::Ptr expression) {
     m_expression = std::move(expression);
 }
 
-Action custom_action(std::function<bool(const sf::Event &)> trigger) {
+/*Action custom_action(std::function<bool(const sf::Event &)> trigger) {
     return Action(std::make_shared<detail::CustomEventLeaf>(std::move(trigger)));
-}
+}*/
 
 Action custom_action(std::function<bool()> trigger) {
     return Action(std::make_shared<detail::CustomRealtimeLeaf>(std::move(trigger)));

@@ -8,25 +8,33 @@
 #include <map>
 #include <Yosai/Util/NonCopyable.hpp>
 #include "Action.hpp"
+#include "ActionControl.hpp"
 
 template<typename ActionId>
 class ActionMap : private NonCopyable {
 private:
     typedef std::map <ActionId, Action> Map;
+    typedef ActionContol<ActionId> ActionControl;
 public:
-    ActionMap();
-    ActionMap(ActionMap &&source);
-    ActionMap &operator=(ActionMap &&source);
+    ActionMap() = default;
+    ActionMap(ActionMap &&source) noexcept;
+    ActionMap &operator=(ActionMap &&source) noexcept;
 
-    void remove(const ActionId &id);
+    Action& at(const ActionId &id);
+    bool contains(const ActionId &id);
+    bool remove(const ActionId &id);
+    bool test(const ActionId &id);
     void clear();
-    bool test(const ActionId &id) const;
 
-    void invoke_callbacks();
+    void handle_event(const sf::Event& event);
+    void clear_events();
+
+    void invoke_callbacks(ActionControl& control);
 public:
     Action &operator[](const ActionId &id);
 private:
-    Map m_action_map;
+    Map m_actions;
+    detail::EventBuffer m_buffer;
 };
 
 // Realisation

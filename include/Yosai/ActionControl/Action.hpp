@@ -35,7 +35,7 @@ private:
     explicit Action(detail::ActionNode::Ptr expression);
 
 public:
-    friend Action custom_action(std::function<bool(const sf::Event&)> trigger);
+    //friend Action custom_action(std::function<bool(const sf::Event&)> trigger);
     friend Action custom_action(std::function<bool()> trigger);
 public:
     // bool operator==(const sf::Event &event) const;
@@ -47,7 +47,7 @@ private:
     std::shared_ptr<detail::ActionNode> m_expression;
 };
 
-Action custom_action(std::function<bool(const sf::Event&)> trigger);
+//Action custom_action(std::function<bool(const sf::Event&)> trigger);
 Action custom_action(std::function<bool()> trigger);
 
 Action operator|| (const Action& lhs, const Action& rhs);

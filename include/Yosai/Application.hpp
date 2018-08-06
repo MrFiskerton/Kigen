@@ -16,6 +16,7 @@
 #include <Yosai/Time/ApplicationClock.hpp>
 #include <Yosai/InputControl/InputControl.hpp>
 #include <Yosai/Structs/ConfigurationData.hpp>
+#include <Yosai/ActionControl/ActionMap.hpp>
 
 class Application: public NonCopyable {
 public:
@@ -54,6 +55,9 @@ private:
     sf::VideoMode      m_videoMode;
 
     ResourceHolder<sf::Image, Images::ID> images;//Temporary
+
+    ActionMap<std::string> m_action_map; // Temporary
+    ActionContol<std::string> m_action_control; // Temporary
 };
 
 #endif //INCLUDED_APPLICATION_HPP
