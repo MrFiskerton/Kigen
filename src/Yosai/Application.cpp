@@ -69,6 +69,8 @@ void Application::update_input() {
         m_inputControl.handle_event(event);
         m_action_map.handle_event(event);
     }
+
+    m_action_map.is_active("test");
 }
 
 void Application::update_logic(const sf::Time &deltaTime) {
@@ -88,9 +90,17 @@ void Application::render() {
     m_renderWindow.display();
 }
 
+void kek(int a) {
+    Logger::log("Kek") << a << Logger::endlf();
+}
+
 void Application::init_action_control() {
     m_action_map["exit"] = Action(sf::Event::Closed) || Action(sf::Keyboard::Escape);
+    m_action_map["test"] = (Action(sf::Keyboard::LShift) || Action(sf::Keyboard::RShift)) && Action(sf::Keyboard::J, Action::Released);
+    m_action_map["test_2"] = custom_action([&](){ return m_inputControl.isMouseInsedeView(); });
 
+    m_action_control.connect("test", std::bind(&kek, 5));
+    m_action_control.connect("test_2", std::bind(&kek, 10));
     m_action_control.connect("exit", [&](){ m_renderWindow.close(); });
 }
 

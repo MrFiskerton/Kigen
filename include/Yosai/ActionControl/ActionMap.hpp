@@ -23,7 +23,7 @@ public:
     Action& at(const ActionId &id);
     bool contains(const ActionId &id);
     bool remove(const ActionId &id);
-    bool test(const ActionId &id);
+    bool is_active(const ActionId &id);
     void clear();
 
     void handle_event(const sf::Event& event);

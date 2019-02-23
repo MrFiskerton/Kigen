@@ -15,7 +15,7 @@ public:
     enum MouseActionType {
         Hold,
         Pressed,
-        Clicked // Released
+        Clicked // Pressed and Released
     };
 public:
     MouseController();

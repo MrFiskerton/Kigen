@@ -41,7 +41,7 @@ Action &ActionMap<ActionId>::operator[](const ActionId &id) {
 }
 
 template<typename ActionId>
-bool ActionMap<ActionId>::test(const ActionId &id) {
+bool ActionMap<ActionId>::is_active(const ActionId &id) {
     return m_actions[id].test(m_buffer);
 }
 
