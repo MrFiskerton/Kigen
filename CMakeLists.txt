@@ -52,4 +52,5 @@ include_directories(${PROJECT_ROOT_DIR}/include)
 
 # Add the subdirectories
 add_subdirectory(${PROJECT_ROOT_DIR}/src/${CMAKE_PROJECT_NAME})
+add_subdirectory(${PROJECT_ROOT_DIR}/src/Kigen) ####
 #----------------------------------------------------------------------------------------------------------------#
