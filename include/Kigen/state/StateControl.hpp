@@ -9,6 +9,7 @@
 #include <functional>
 #include <map>
 
+#include <SFML/System/NonCopyable.hpp>
 #include <SFML/System/Time.hpp>
 
 #include "State.hpp"
@@ -19,10 +20,10 @@ namespace sf {
     class RenderTarget;
 }
 
-class StateControl : private NonCopyable {
-    using StateID = int;
+class StateControl : private sf::NonCopyable {
+    using StateID = int; // TODO: !!!!!!!!
 public:
-    enum StateAction : int {
+    enum Action : int {
         Push,
         Pop,
         Clear
@@ -30,46 +31,47 @@ public:
 public:
     explicit StateControl();
 
-    void update(const sf::Time& deltaTime);
+    void update(const sf::Time &deltaTime);
 
     void draw(sf::RenderTarget &renderTarget);
 
     void handleEvent(const sf::Event &event);
 
-    void pushState(StateID id);
+    void pushState(States::ID id);
 
-    void forcePushState(StateID id);
+    void forcePushState(States::ID id);
 
     void popState();
 
     void clearStates();
 
     template<typename T>
-    void registerState(StateID id);
+    void registerState(States::ID id);
 
     bool isEmpty() const;
 
 private:
-    State::Ptr createState(StateID id);
+    State::Ptr createState(States::ID id);
 
     void applyPendingChanges();
 
 private:
     struct PendingChange {
-        PendingChange(StateAction action, StateID id) : m_action(action), m_stateId(id) {}
-        StateAction m_action;
-        StateID m_stateId;
+        explicit PendingChange(Action action, States::ID id = States::None) : m_action(action), m_stateId(id) {}
+
+        Action m_action;
+        States::ID m_stateId;
     };
 
 private:
-    std::vector <State::Ptr> m_stack;
-    std::vector <PendingChange> m_pending_list;
-    std::map <StateID, std::function<State::Ptr()>> m_state_factories;
+    std::vector<State::Ptr> m_stack;
+    std::vector<PendingChange> m_pending_list;
+    std::map<StateID, std::function<State::Ptr()>> m_state_factories;
 };
 
 //------------------------------[   Definition for template function   ]------------------------------//
 template<typename T>
-void StateControl::registerState(StateID id) {
+void StateControl::registerState(States::ID id) {
     m_state_factories[id] = [this]() {
         return State::Ptr(new T(*this));
     };

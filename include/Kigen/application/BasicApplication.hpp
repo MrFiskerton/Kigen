@@ -7,6 +7,7 @@
 
 #include <Kigen/state/StateControl.hpp>
 #include <Kigen/render/Window.hpp>
+#include "DefaultApplicationLoop.hpp"
 #include "IApplication.hpp"
 
 namespace kigen {

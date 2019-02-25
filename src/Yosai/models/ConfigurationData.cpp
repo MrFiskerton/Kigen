@@ -2,7 +2,7 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 21.07.18.
 //
 
-#include <Yosai/structs/ConfigurationData.hpp>
+#include <Yosai/models/ConfigurationData.hpp>
 
 ConfigurationData::ConfigurationData() {
     reset_to_default();

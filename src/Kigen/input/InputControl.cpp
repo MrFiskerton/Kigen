@@ -4,7 +4,7 @@
 
 #include <Kigen/input/InputControl.hpp>
 
-void InputControl::lock_action(Device device) {
+void InputControl::lock_device(Device device) {
     switch (device) {
         //case Unknown:break;
         // TODO:
@@ -17,7 +17,7 @@ void InputControl::lock_action(Device device) {
     }
 }
 
-void InputControl::unlock_action(Device device) {
+void InputControl::unlock_device(Device device) {
 //TODO:
 }
 

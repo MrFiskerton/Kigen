@@ -2,7 +2,7 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 13.07.18.
 //
 
-#include "Yosai/States/MenuState.hpp"
+#include "Yosai/states/MenuState.hpp"
 
 
 MenuState::MenuState(StateControl &stack) : State(stack) {}

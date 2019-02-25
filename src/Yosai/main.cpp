@@ -3,13 +3,11 @@
 //
 
 #include <Yosai/Yosai.hpp>
-#include <iostream>
-#include <Kigen/application/DefaultApplicationLoop.hpp>
 
 int main(int argc, char *argv[]) {
     try {
         Yosai instance;
-        kigen::DefaultApplicationLoop::run(instance);
+        kigen::default_loop(instance);
     } catch (std::exception &e) {
         std::cerr << "\n>>> EXCEPTION: " << e.what() << std::endl;
     } catch (...) {

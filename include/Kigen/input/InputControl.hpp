@@ -22,8 +22,8 @@ public:
     };
 
 public:
-    void lock_action(Device device = All);
-    void unlock_action(Device device = All);
+    void lock_device(Device device = All);
+    void unlock_device(Device device = All);
     bool is_locked(Device device = All) const;
 
     void update(sf::Window &window);

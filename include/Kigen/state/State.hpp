@@ -6,10 +6,10 @@
 #define INCLUDED_STATE_HPP
 
 #include <memory>
-
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
+#include "Yosai/id/StateIdentifiers.hpp"
 
 namespace sf {
     class RenderWindow;
@@ -19,10 +19,9 @@ class StateControl;
 
 class State {
 public:
-    using Identifier = int;
     typedef std::unique_ptr<State> Ptr;
 public:
-    explicit State(StateControl &stack): m_stack(&stack) {};
+    explicit State(StateControl &stack);
 
     virtual ~State() = default;
 
@@ -32,12 +31,12 @@ public:
 
     virtual bool handleEvent(const sf::Event &event) = 0;
 
-    virtual void onActivate(){};
+    virtual void onActivate();
 
-    virtual void onDestroy(){};
+    virtual void onDestroy();
 
 protected:
-    void requestStackPush(Identifier id);
+    void requestStackPush(States::ID id);
 
     void requestStackPop();
 

@@ -5,19 +5,16 @@
 #ifndef INCLUDED_LOGGER_HPP
 #define INCLUDED_LOGGER_HPP
 
-#if KIGEN_LINUX_PLATFORM
-#   define COLOR_SUPPORT
-#endif
+#include "Kigen/defines.hpp"
 
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <utility>
-#include "Kigen/defines.hpp"
 #include "NonCopyable.hpp"
 
 namespace LogColour {
-#ifdef COLOR_SUPPORT
+#ifdef LOG_COLOR_SUPPORT
     const std::string Black   = "\e[30m";
     const std::string Red     = "\e[31m";
     const std::string Green   = "\e[32m";

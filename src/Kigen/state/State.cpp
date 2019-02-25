@@ -5,7 +5,19 @@
 #include <Kigen/state/State.hpp>
 #include <Kigen/state/StateControl.hpp>
 
-void State::requestStackPush(Identifier stateID) {
+State::State(StateControl &stack) : m_stack(&stack) {
+
+}
+
+void State::onActivate() {
+
+}
+
+void State::onDestroy() {
+
+}
+
+void State::requestStackPush(States::ID stateID) {
     m_stack->pushState(stateID);
 }
 
