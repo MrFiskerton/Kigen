@@ -31,15 +31,15 @@ public:
     // Tests if the {event}/{real time input} constellation in the argument is true for this action
     bool test(detail::EventBuffer& buffer) const;
 private:
-    // Construct an StateAction from expression(ActionNode)
+    // Construct an Action from expression(ActionNode)
     explicit Action(detail::ActionNode::Ptr expression);
 
 public:
-    //friend StateAction custom_action(std::function<bool(const sf::Event&)> trigger);
+    //friend Action custom_action(std::function<bool(const sf::Event&)> trigger);
     friend Action custom_action(std::function<bool()> trigger);
 public:
     // bool operator==(const sf::Event &event) const;
-    // bool operator==(const StateAction &other) const;
+    // bool operator==(const Action &other) const;
     friend Action operator||(const Action &lhs, const Action &rhs);
     friend Action operator&&(const Action &lhs, const Action &rhs);
     friend Action operator!(const Action &action);
@@ -47,7 +47,7 @@ private:
     std::shared_ptr<detail::ActionNode> m_expression;
 };
 
-//StateAction custom_action(std::function<bool(const sf::Event&)> trigger);
+//Action custom_action(std::function<bool(const sf::Event&)> trigger);
 Action custom_action(std::function<bool()> trigger);
 
 Action operator|| (const Action& lhs, const Action& rhs);

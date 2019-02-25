@@ -8,9 +8,9 @@
 #include <map>
 #include <SFML/Window.hpp>
 
-#include "AbstractDeviceController.hpp"
+#include "AbstractDevice.hpp"
 
-class MouseController: public AbstractDeviceController {
+class MouseController: public AbstractDevice {
 public:
     enum MouseActionType {
         Hold,

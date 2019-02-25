@@ -14,7 +14,7 @@ namespace kigen {
         IApplication() = default;
         virtual ~IApplication() = default;
 
-        virtual bool is_runing() = 0;
+        virtual bool is_runing() const = 0;
 
     protected:
         virtual void update_input() = 0;

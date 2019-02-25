@@ -10,9 +10,9 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
-#include "AbstractDeviceController.hpp"
+#include "AbstractDevice.hpp"
 
-class KeyboardController: public AbstractDeviceController {
+class KeyboardController: public AbstractDevice {
 private:
     enum KeyboardActionType : unsigned char {
         RealTime = 1u,

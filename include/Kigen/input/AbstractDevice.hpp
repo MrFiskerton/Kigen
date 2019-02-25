@@ -10,17 +10,19 @@
 #include <Kigen/utils/Logger.hpp>
 #include <Kigen/conversion/Conversion.hpp>
 
-class AbstractDeviceController {
+class AbstractDevice {
 public:
-    AbstractDeviceController();
-    virtual ~AbstractDeviceController() = default;
+    AbstractDevice();
+
+    virtual ~AbstractDevice() = default;
 
     virtual void clear_events() = 0;
+
     virtual void handle_event(const sf::Event &event) = 0;
 
-    virtual void lock_action();
+    virtual void lock();
 
-    virtual void unlock_action();
+    virtual void unlock();
 
     virtual bool is_locked() const;
 

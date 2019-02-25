@@ -19,6 +19,7 @@ class StateControl;
 
 class State {
 public:
+    using Identifier = int;
     typedef std::unique_ptr<State> Ptr;
 public:
     explicit State(StateControl &stack): m_stack(&stack) {};
@@ -36,7 +37,7 @@ public:
     virtual void onDestroy(){};
 
 protected:
-    void requestStackPush(States::ID id);
+    void requestStackPush(Identifier id);
 
     void requestStackPop();
 

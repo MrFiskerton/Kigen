@@ -11,17 +11,14 @@
 
 namespace kigen {
     struct DefaultApplicationLoop {
-        static void run(IApplication *app) { run(*app); }
-
-        static void run(IApplication &app) {
-            Logger::notify("Run default main loop.");
-
+        void operator()(IApplication &app) const {
             static const std::size_t FRAME_PER_SECOND = 60;
             static const sf::Time TIME_PER_FRAME = sf::seconds(1.f / FRAME_PER_SECOND);
 
             sf::Time time(sf::Time::Zero);
             ApplicationClock clock;
 
+            Logger::notify("Run default main loop.");
             clock.reset();
             while (app.is_runing()) {
                 time += clock.frame_time();
@@ -33,6 +30,11 @@ namespace kigen {
                 app.update_graphics();
                 app.render();
             }
+            Logger::notify("Finish default main loop.");
+        }
+
+        static void run(IApplication &app) const {
+            return operator()(app);
         }
     };
 }

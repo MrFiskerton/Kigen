@@ -3,24 +3,29 @@ set(SRCROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Files
 set(FILES_HEADER
+        #[[
         ${INCROOT}/action/detail/ActionControl.inl
         ${INCROOT}/action/detail/ActionExpression.hpp
         ${INCROOT}/action/detail/ActionMap.inl
         ${INCROOT}/action/Action.hpp
         ${INCROOT}/action/ActionControl.hpp
         ${INCROOT}/action/ActionMap.hpp
+        #]]
 
         ${INCROOT}/application/DefaultApplicationLoop.hpp
+        ${INCROOT}/application/BasicApplication.hpp
         ${INCROOT}/application/ApplicationClock.hpp
         ${INCROOT}/application/IApplication.hpp
 
         ${INCROOT}/conversion/Conversion.hpp
 
-        ${INCROOT}/input/AbstractDeviceController.hpp
+        ${INCROOT}/input/AbstractDevice.hpp
         ${INCROOT}/input/InputControl.hpp
         ${INCROOT}/input/KeyboardController.hpp
         ${INCROOT}/input/MouseController.hpp
         ${INCROOT}/input/WindowController.hpp
+
+        ${INCROOT}/render/Window.hpp
 
         ${INCROOT}/resource/ResourceControl.hpp
         ${INCROOT}/resource/ResourceExceptions.hpp
@@ -30,6 +35,7 @@ set(FILES_HEADER
 
         ${INCROOT}/service/ServiceLocator.hpp
 
+        #${INCROOT}/state/detail/StateControl.inl
         ${INCROOT}/state/State.hpp
         ${INCROOT}/state/StateControl.hpp
 
@@ -44,18 +50,23 @@ set(FILES_HEADER
    )
 
 set(FILES_SRC
+        #[[
         ${SRCROOT}/action/detail/ActionExpression.cpp
         ${SRCROOT}/action/Action.cpp
+        #]]
 
         ${SRCROOT}/application/ApplicationClock.cpp
+        ${SRCROOT}/application/BasicApplication.cpp
 
         ${SRCROOT}/conversion/KeyConversion.cpp
 
-        ${SRCROOT}/input/AbstractDeviceController.cpp
+        ${SRCROOT}/input/AbstractDevice.cpp
         ${SRCROOT}/input/InputControl.cpp
         ${SRCROOT}/input/KeyboardController.cpp
         ${SRCROOT}/input/MouseController.cpp
         ${SRCROOT}/input/WindowController.cpp
+
+        ${SRCROOT}/render/Window.cpp
 
         ${SRCROOT}/service/ServiceLocator.cpp
 

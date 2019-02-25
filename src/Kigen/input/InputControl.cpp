@@ -9,7 +9,8 @@ void InputControl::lock_action(Device device) {
         //case Unknown:break;
         // TODO:
         case Window:break;
-        case Keyboard: KeyboardController::lock_action();break;
+        case Keyboard:
+            KeyboardController::lock();break;
         case Mouse:break;
         case Joystick:break;
         case All:break;

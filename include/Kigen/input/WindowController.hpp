@@ -5,9 +5,9 @@
 #ifndef INCLUDED_WINDOWCONTROLLER_HPP
 #define INCLUDED_WINDOWCONTROLLER_HPP
 
-#include "AbstractDeviceController.hpp"
+#include "AbstractDevice.hpp"
 
-class WindowController : public AbstractDeviceController {
+class WindowController : public AbstractDevice {
 public:
     WindowController();
 

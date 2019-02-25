@@ -35,12 +35,12 @@ void StateControl::handleEvent(const sf::Event &event) {
     applyPendingChanges();
 }
 
-void StateControl::pushState(States::ID stateID) {
-    m_pending_list.emplace_back(StateAction::Push, stateID);
+void StateControl::pushState(StateID id) {
+    m_pending_list.emplace_back(StateAction::Push, id);
 }
 
-void StateControl::forcePushState(States::ID stateID) {
-    m_stack.push_back(createState(stateID));
+void StateControl::forcePushState(StateID id) {
+    m_stack.push_back(createState(id));
 }
 
 void StateControl::popState() {
@@ -55,8 +55,8 @@ bool StateControl::isEmpty() const {
     return m_stack.empty();
 }
 
-State::Ptr StateControl::createState(States::ID stateID) {
-    auto found = m_state_factories.find(stateID);
+State::Ptr StateControl::createState(StateID id) {
+    auto found = m_state_factories.find(id);
     assertion(found != m_state_factories.end(), "State not found in states factory");
     return found->second();
 }

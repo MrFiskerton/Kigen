@@ -2,10 +2,16 @@
 <project version="4">
   <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$" />
   <component name="CidrRootsConfiguration">
+    <sourceRoots>
+      <file path="$PROJECT_DIR$/include" />
+      <file path="$PROJECT_DIR$/src" />
+    </sourceRoots>
+    <libraryRoots>
+      <file path="$PROJECT_DIR$/deps/JSON" />
+      <file path="$PROJECT_DIR$/deps/SFML" />
+    </libraryRoots>
     <excludeRoots>
       <file path="$PROJECT_DIR$/bin" />
-      <file path="$PROJECT_DIR$/deps" />
-      <file path="$PROJECT_DIR$/deps/SFML" />
     </excludeRoots>
   </component>
   <component name="JavaScriptSettings">

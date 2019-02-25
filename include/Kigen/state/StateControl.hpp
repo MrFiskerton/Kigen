@@ -12,15 +12,15 @@
 #include <SFML/System/Time.hpp>
 
 #include "State.hpp"
-#include <Kigen/utils/NonCopyable.hpp>
+#include <Kigen/utils/Utils.hpp>
 
 namespace sf {
     class Event;
     class RenderTarget;
 }
 
-template <typename Identifier>
 class StateControl : private NonCopyable {
+    using StateID = int;
 public:
     enum StateAction : int {
         Push,
@@ -36,40 +36,40 @@ public:
 
     void handleEvent(const sf::Event &event);
 
-    void pushState(Identifier id);
+    void pushState(StateID id);
 
-    void forcePushState(Identifier id);
+    void forcePushState(StateID id);
 
     void popState();
 
     void clearStates();
 
     template<typename T>
-    void registerState(Identifier id);
+    void registerState(StateID id);
 
     bool isEmpty() const;
 
 private:
-    State::Ptr createState(Identifier id);
+    State::Ptr createState(StateID id);
 
     void applyPendingChanges();
 
 private:
     struct PendingChange {
-        PendingChange(StateAction action, Identifier id) : m_action(action), m_stateId(id) {}
+        PendingChange(StateAction action, StateID id) : m_action(action), m_stateId(id) {}
         StateAction m_action;
-        Identifier m_stateId;
+        StateID m_stateId;
     };
 
 private:
     std::vector <State::Ptr> m_stack;
     std::vector <PendingChange> m_pending_list;
-    std::map <Identifier, std::function<State::Ptr()>> m_state_factories;
+    std::map <StateID, std::function<State::Ptr()>> m_state_factories;
 };
 
 //------------------------------[   Definition for template function   ]------------------------------//
-template<typename T, typename Identifier>
-void StateControl::registerState(Identifier id) {
+template<typename T>
+void StateControl::registerState(StateID id) {
     m_state_factories[id] = [this]() {
         return State::Ptr(new T(*this));
     };

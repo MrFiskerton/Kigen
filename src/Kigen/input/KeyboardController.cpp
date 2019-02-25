@@ -16,7 +16,7 @@ void KeyboardController::clear_events() {
 }
 
 void KeyboardController::handle_event(const sf::Event &event) {
-    if (AbstractDeviceController::is_locked()) return;
+    if (AbstractDevice::is_locked()) return;
 
     switch (event.type){
         case sf::Event::TextEntered: read_unicode(event.text.unicode); break;
