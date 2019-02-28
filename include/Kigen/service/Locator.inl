@@ -6,6 +6,8 @@ namespace kigen {
         if (is_registered<T>()) return;
         m_services.push_back(null_service<T>());
         assertion((service_registrator::id<T>() + 1) == m_services.size(), "Incorrect service registration");
+        Logger::info("Locator::registrate") << "Registration complite. id:= " << service_registrator::id<T>()
+                                            << " typeid:= \"" << typeid(T).name() << "\"" << Logger::endl;
     }
 
     template<class T>
@@ -26,8 +28,8 @@ namespace kigen {
 
         }
         m_services[id]->start_up();
-        Logger::info() << action << "service with typeid:= " << typeid(T).name()
-                       << " and registration:= " << id << Logger::endlf();
+        Logger::info("Locator::provide") << action << "service with typeid:= " << typeid(T).name()
+                                         << " and registration:= " << id << Logger::endlf();
     }
 
     template<class T>

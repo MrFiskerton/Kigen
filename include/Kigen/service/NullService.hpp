@@ -9,14 +9,14 @@
 
 namespace kigen {
     template<class T>
-    IService* null_service() {
-        Logger::warn() << "Service with typeid = " << typeid(T).name()
-                       << " hasn't null object implimentation." << Logger::endl;
+    IService *null_service() {
+        Logger::warn("null_service") << "Service with typeid = " << typeid(T).name()
+                                     << " hasn't null object implimentation." << Logger::endl;
         return nullptr;
     }
 
     template<>
-    IService* null_service<ICamera>();
+    IService *null_service<ICamera>();
 }
 
 #endif //YOSAI_NULLSERVICE_HPP 
