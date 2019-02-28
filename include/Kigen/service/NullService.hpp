@@ -15,8 +15,7 @@ namespace kigen {
         return nullptr;
     }
 
-    template<>
-    IService *null_service<ICamera>();
+    template<> IService *null_service<ICamera>();
 }
 
 #endif //YOSAI_NULLSERVICE_HPP 

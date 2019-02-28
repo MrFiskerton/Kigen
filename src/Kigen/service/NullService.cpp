@@ -4,13 +4,11 @@
 
 #include <Kigen/service/NullService.hpp>
 
+namespace {
+    kigen::NullCamera camera;
+}
+
 namespace kigen {
     // Specialization
-    template<>
-    IService* null_service<ICamera>() {
-        static NullCamera null_object;
-        return &null_object;
-//        static IService* null_object = new NullCamera;
-//        return null_object;
-    }
+    template<> IService *null_service<ICamera>() { return &camera; }
 }

@@ -5,6 +5,7 @@ namespace kigen {
     void Locator::registrate() {
         if (is_registered<T>()) return;
         m_services.push_back(null_service<T>());
+        if (m_services.back()) m_services.back()->start_up();
         assertion((service_registrator::id<T>() + 1) == m_services.size(), "Incorrect service registration");
         Logger::info("Locator::registrate") << "Registration complite. id:= " << service_registrator::id<T>()
                                             << " typeid:= \"" << typeid(T).name() << "\"" << Logger::endl;
@@ -39,7 +40,7 @@ namespace kigen {
         assertion(m_services[id] != nullptr,
                   "Would be a SIGSEGV. Attempt to provide null service without an implementation. So will return nullptr.");
         auto ref = dynamic_cast<T *>(m_services[id]);
-        assertion(ref != nullptr, "Dynamic cast failed");
+        assertion(ref != nullptr, "Dynamic cast (typeid:= \"" << typeid(T).name() << "\", id:= " << id << ") FAILED");
         return *ref;
     }
 
