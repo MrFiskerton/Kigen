@@ -5,8 +5,12 @@
 #include "Kigen/application/BasicApplication.hpp"
 
 namespace kigen {
+    BasicApplication::BasicApplication() {
+        init_services();
+    }
+
     bool kigen::BasicApplication::is_runing() const {
-        return m_window->isOpen() && !m_state_control.isEmpty();
+        return m_window.isOpen() && !m_state_control.isEmpty();
     }
 
     void kigen::BasicApplication::update_input() {
@@ -23,5 +27,18 @@ namespace kigen {
 
     void kigen::BasicApplication::render() {
 
+    }
+
+    void BasicApplication::init_services() {
+        Locator::registrate<ICamera>();
+
+        Locator::locate<ICamera>().test();
+        
+        Camera camera;
+        Locator::provide<ICamera>(&camera);
+        Locator::locate<ICamera>().test();
+
+        Locator::provide<ICamera>(nullptr);
+        Locator::locate<ICamera>().test();
     }
 } // namespace kigen

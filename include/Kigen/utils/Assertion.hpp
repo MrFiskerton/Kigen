@@ -34,7 +34,7 @@ namespace {
     void assertion_failure(const char *expression, const char *file, int line, const std::string &message) {
         std::ostringstream outputStream;
         if (!message.empty()) {
-            outputStream << message << ": ";
+            outputStream << message << " : \n";
         }
 
         std::string expressionString(expression);

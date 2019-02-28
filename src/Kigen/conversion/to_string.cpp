@@ -2,9 +2,9 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 19.07.18.
 //
 
-#include <Kigen/conversion/Conversion.hpp>
+#include <Kigen/conversion/to_string.hpp>
 
-namespace Conversion {
+namespace conversion {
     namespace {
         template<typename T>
         struct Type {

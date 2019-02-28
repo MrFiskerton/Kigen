@@ -12,7 +12,7 @@
 #include <SFML/Window.hpp>
 #include <Kigen/utils/Utils.hpp>
 
-namespace Conversion {
+namespace conversion {
 
     std::string to_string(sf::Keyboard::Key key);
     std::string to_string(sf::Mouse::Button button);

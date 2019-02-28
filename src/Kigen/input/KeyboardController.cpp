@@ -25,7 +25,7 @@ void KeyboardController::handle_event(const sf::Event &event) {
         case sf::Event::KeyReleased: m_event_buffer.emplace(event.key.code, Released); break;
 
         default: Logger::warn("KeyboardController::handle_event",
-                              "Passed not compatible event sf::Event::" + Conversion::to_string(event.type));
+                              "Passed not compatible event sf::Event::" + conversion::to_string(event.type));
     }
 }
 

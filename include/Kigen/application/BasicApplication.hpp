@@ -7,12 +7,15 @@
 
 #include <Kigen/state/StateControl.hpp>
 #include <Kigen/render/Window.hpp>
+#include <Kigen/service/Locator.hpp>
 #include "DefaultApplicationLoop.hpp"
 #include "IApplication.hpp"
 
 namespace kigen {
     class BasicApplication : public IApplication {
     public:
+        BasicApplication();
+
         bool is_runing() const override;
 
     private:
@@ -30,7 +33,7 @@ namespace kigen {
         virtual void init_state_control() = 0;
 
     protected:
-        Window* m_window;
+        Window m_window;
         StateControl m_state_control;
     };
 } //namespace kigen

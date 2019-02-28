@@ -8,7 +8,7 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <Kigen/utils/Logger.hpp>
-#include <Kigen/conversion/Conversion.hpp>
+#include <Kigen/conversion/to_string.hpp>
 
 class AbstractDevice {
 public:

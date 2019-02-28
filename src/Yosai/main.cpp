@@ -4,7 +4,7 @@
 
 #include <Yosai/Yosai.hpp>
 
-int main(int argc, char *argv[]) {
+int main(/*int argc, char *argv[]*/) {
     try {
         Yosai instance;
         kigen::default_loop(instance);

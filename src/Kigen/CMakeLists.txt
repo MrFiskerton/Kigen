@@ -17,7 +17,7 @@ set(FILES_HEADER
         ${INCROOT}/application/ApplicationClock.hpp
         ${INCROOT}/application/IApplication.hpp
 
-        ${INCROOT}/conversion/Conversion.hpp
+        ${INCROOT}/conversion/to_string.hpp
 
         ${INCROOT}/input/AbstractDevice.hpp
         ${INCROOT}/input/InputControl.hpp
@@ -33,7 +33,16 @@ set(FILES_HEADER
         ${INCROOT}/resource/ResourceLoader.hpp
         ${INCROOT}/resource/SFML_LoaderMakers.hpp
 
-        ${INCROOT}/service/ServiceLocator.hpp
+        ${INCROOT}/service/impl/ServiceCamera.hpp
+        ${INCROOT}/service/interface/ICamera.hpp
+        ${INCROOT}/service/interface/IService.hpp
+
+        ${INCROOT}/service/Locator.hpp
+        ${INCROOT}/service/Locator.inl
+        ${INCROOT}/service/NullService.hpp
+        ${INCROOT}/service/Services.hpp
+
+        ${INCROOT}/service/Services.hpp
 
         #${INCROOT}/state/detail/StateControl.inl
         ${INCROOT}/state/State.hpp
@@ -44,6 +53,7 @@ set(FILES_HEADER
         ${INCROOT}/utils/NonCopyable.hpp
         ${INCROOT}/utils/NonMovable.hpp
         ${INCROOT}/utils/StopWatch.hpp
+        ${INCROOT}/utils/Type.hpp
         ${INCROOT}/utils/Utils.hpp
 
         ${INCROOT}/defines.hpp
@@ -58,7 +68,7 @@ set(FILES_SRC
         ${SRCROOT}/application/ApplicationClock.cpp
         ${SRCROOT}/application/BasicApplication.cpp
 
-        ${SRCROOT}/conversion/KeyConversion.cpp
+        ${SRCROOT}/conversion/to_string.cpp
 
         ${SRCROOT}/input/AbstractDevice.cpp
         ${SRCROOT}/input/InputControl.cpp
@@ -68,7 +78,9 @@ set(FILES_SRC
 
         ${SRCROOT}/render/Window.cpp
 
-        ${SRCROOT}/service/ServiceLocator.cpp
+        ${SRCROOT}/service/Locator.cpp
+        ${SRCROOT}/service/NullService.cpp
+        ${SRCROOT}/service/ServiceCamera.cpp
 
         ${SRCROOT}/state/State.cpp
         ${SRCROOT}/state/StateControl.cpp
