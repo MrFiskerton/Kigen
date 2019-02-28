@@ -61,7 +61,7 @@ namespace {
     (which may use C++ stream-style message formatting) */
 #   define assertion(EXPRESSION, MESSAGE)\
         if(!(EXPRESSION)) {\
-            assertion_failure(#EXPRESSION, __FILE__, __LINE__,(StreamFormatter() << (MESSAGE)));\
+            assertion_failure(#EXPRESSION, __FILE__, __LINE__,(StreamFormatter() << MESSAGE));\
         }
 #else
 #   define assertion(EXPRESSION, MESSAGE);
