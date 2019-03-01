@@ -6,32 +6,66 @@
 
 namespace kigen {
 
-void EventBuffer::lock_device(Device device) {
+void EventBuffer::enable_device(Device device) {
     switch (device) {
-        //case Unknown:break;
-        // TODO:
-        case Window: break;
-        case Keyboard: Keyboard::disable();
+        case Window: device::Window::enable();
             break;
-        case Mouse:break;
+        case Keyboard: device::Keyboard::enable();
+            break;
+        case Mouse: device::Mouse::enable();
+            break; //TODO:
         case Joystick:break;
-        case All:break;
+        case All:device::Window::enable();
+            device::Keyboard::enable();
+            device::Mouse::enable();
+            break;
+        case Unknown:break;
     }
 }
 
-void EventBuffer::unlock_device(Device device) {
-//TODO:
+void EventBuffer::disable_device(Device device) {
+    switch (device) {
+        case Window: device::Window::disable();
+            break;
+        case Keyboard: device::Keyboard::disable();
+            break;
+        case Mouse: device::Mouse::disable();
+            break;
+        case Joystick:break;
+        case All:
+            device::Window::disable();
+            device::Keyboard::disable();
+            device::Mouse::disable();
+            break;
+        case Unknown:break;
+    }
 }
 
-bool EventBuffer::is_locked(Device device) const {
-    //TODO:
+bool EventBuffer::is_disabled(Device device) const {
+    return !is_enabled(device);
+}
+
+bool EventBuffer::is_enabled(Device device) const {
+    switch (device) {
+        case Window: return device::Window::is_enabled();
+        case Keyboard: return device::Keyboard::is_enabled();
+        case Mouse: return device::Mouse::is_enabled();
+        case Joystick:break;
+        case All:
+            return device::Window::is_enabled() &&
+                   device::Keyboard::is_enabled() &&
+                   device::Mouse::is_enabled();
+
+        case Unknown:break;
+    }
     return false;
 }
 
 void EventBuffer::update(sf::Window &window) {
-    if (is_locked(All)) return;
+    if (is_disabled(All)) return;
     clear_events();
     poll_events(window);
+    device::Mouse::update_position(window);
 }
 
 void EventBuffer::clear_events() {
@@ -54,6 +88,8 @@ void EventBuffer::handle_event(const sf::Event &event) {
             break;
             //case Joystick:break;
             //case All:break;
+        case Joystick:break;
+        case All:break;
     }
 
 }

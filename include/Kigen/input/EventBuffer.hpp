@@ -23,11 +23,13 @@ public:
     };
 
 public:
-    void lock_device(Device device = All);
+    void enable_device(Device device = All);
 
-    void unlock_device(Device device = All);
+    void disable_device(Device device = All);
 
-    bool is_locked(Device device = All) const;
+    bool is_disabled(Device device = All) const;
+
+    bool is_enabled(Device device = All) const;
 
     void update(sf::Window &window);
 
