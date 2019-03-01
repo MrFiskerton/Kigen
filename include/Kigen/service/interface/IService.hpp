@@ -9,12 +9,16 @@
 #include <Kigen/utils/Utils.hpp>
 
 namespace kigen {
-    class IService {
-    public:
-        virtual ~IService() = default;
-        virtual void start_up() {}
-        virtual void shut_down() {}
-    };
+
+class IService {
+public:
+    virtual ~IService() = default;
+
+    virtual void start_up() {}
+
+    virtual void shut_down() {}
+};
+
 } // namespace kigen
 
 

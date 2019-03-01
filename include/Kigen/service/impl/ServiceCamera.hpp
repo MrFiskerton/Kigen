@@ -8,10 +8,11 @@
 #include "../interface/ICamera.hpp"
 
 namespace kigen {
-    class Camera : public ICamera {
-    public:
-        void test() override { Logger::info() << "Camera Work" << Logger::endl;}
-    };
+
+class Camera : public ICamera {
+public:
+    void test() override { Logger::info() << "Camera Work" << Logger::endl; }
+};
 
 
 }

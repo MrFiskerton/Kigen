@@ -8,14 +8,16 @@
 #include "IService.hpp"
 
 namespace kigen {
-    class ICamera : public IService {
-    public:
-        virtual void test() = 0;
-    };
 
-    class NullCamera : public ICamera {
-    public:
-        void test() override { Logger::info() << "NULL camera Work" << Logger::endl; }
-    };
+class ICamera : public IService {
+public:
+    virtual void test() = 0;
+};
+
+class NullCamera : public ICamera {
+public:
+    void test() override { Logger::info() << "NULL camera Work" << Logger::endl; }
+};
+
 } // namespace kigen
 #endif //YOSAI_ICAMERA_HPP 

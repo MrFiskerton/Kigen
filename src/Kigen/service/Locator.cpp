@@ -5,6 +5,8 @@
 #include <Kigen/service/Locator.hpp>
 
 namespace kigen {
-    std::vector<IService *> Locator::m_services;
-    std::size_t Locator::service_registrator::counter = 0;
+
+std::vector<IService *> Locator::m_services;
+std::size_t Locator::service_registrator::counter = 0;
+
 } // namespace kigen
