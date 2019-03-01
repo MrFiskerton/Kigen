@@ -5,7 +5,7 @@
 #ifndef INCLUDED_ACTIONEXPRESSION_HPP
 #define INCLUDED_ACTIONEXPRESSION_HPP
 
-#include <Kigen/input/InputControl.hpp>
+#include <Kigen/input/EventBuffer.hpp>
 
 #include <vector>
 #include <functional>

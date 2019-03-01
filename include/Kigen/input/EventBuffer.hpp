@@ -5,12 +5,13 @@
 #ifndef INCLUDED_INPUTCONTROL_HPP
 #define INCLUDED_INPUTCONTROL_HPP
 
+#include "Keyboard.hpp"
+#include "Mouse.hpp"
+#include "Window.hpp"
 
-#include "KeyboardController.hpp"
-#include "MouseController.hpp"
-#include "WindowController.hpp"
+namespace kigen {
 
-class InputControl final: public WindowController, public KeyboardController, public MouseController {
+class EventBuffer final : public device::Window, public device::Keyboard, public device::Mouse {
 public:
     enum Device {
         Unknown,
@@ -23,16 +24,23 @@ public:
 
 public:
     void lock_device(Device device = All);
+
     void unlock_device(Device device = All);
+
     bool is_locked(Device device = All) const;
 
     void update(sf::Window &window);
+
     void clear_events() override;
+
     void handle_event(const sf::Event &event) override;
+
 private:
     Device get_compatible_device(const sf::Event &event);
+
     void poll_events(sf::Window &window);
 };
 
+} // namespace kigen
 
 #endif //INCLUDED_INPUTCONTROL_HPP

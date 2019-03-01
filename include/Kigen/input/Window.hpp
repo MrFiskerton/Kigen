@@ -5,26 +5,30 @@
 #ifndef INCLUDED_WINDOWCONTROLLER_HPP
 #define INCLUDED_WINDOWCONTROLLER_HPP
 
-#include "AbstractDevice.hpp"
+#include "DeviceBuffer.hpp"
 
-class WindowController : public AbstractDevice {
+namespace kigen {
+namespace device {
+
+class Window : public DeviceBuffer {
 public:
-    WindowController();
-
-    virtual ~WindowController();
-
     void clear_events() override;
 
     void handle_event(const sf::Event &event) override;
 
     bool isClosed();
+
     bool isResized();
+
     bool isGainedFocus();
+
     bool isLostFocus();
 
 private:
     bool m_closed, m_resized, m_lostFocus, m_gainedFocus;
 };
 
+} //namespace device
+} //namespace kigen
 
 #endif //INCLUDED_WINDOWCONTROLLER_HPP

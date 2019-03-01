@@ -31,7 +31,7 @@ public:
     bool           isSmoothing;
     //DisplayMode displayMode;
 
-    // Input
+    // EventBuffer
     //std::map<Key, sf::Keyboard::Key> mainKeyMap;
 
     // Debug
