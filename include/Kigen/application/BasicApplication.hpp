@@ -8,6 +8,7 @@
 #include <Kigen/state/StateControl.hpp>
 #include <Kigen/graphics/Window.hpp>
 #include <Kigen/service/Locator.hpp>
+#include <Kigen/action/ActionControl.hpp>
 #include "DefaultApplicationLoop.hpp"
 #include "IApplication.hpp"
 
@@ -30,12 +31,16 @@ private:
 
     void init_services();
 
+    void init_action();
+
 protected:
     virtual void init_state_control() = 0;
 
 protected:
     Window m_window;
     StateControl m_state_control;
+    ActionControl<std::string> m_action;
+    CallbackMap<std::string> m_callbaks;
 };
 
 } //namespace kigen

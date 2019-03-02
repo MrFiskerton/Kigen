@@ -5,42 +5,44 @@
 #ifndef INCLUDED_INPUTCONTROL_HPP
 #define INCLUDED_INPUTCONTROL_HPP
 
+#include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/Event.hpp>
 #include "Keyboard.hpp"
 #include "Mouse.hpp"
 #include "Window.hpp"
 
 namespace kigen {
+namespace action {
+    class EventNode;
+}
 
-class EventBuffer final : public device::Window, public device::Keyboard, public device::Mouse {
+class EventBuffer final : public device::DeviceBuffer {
 public:
-    enum Device {
-        Unknown,
-        Window,
-        Keyboard,
-        Mouse,
-        Joystick,
-        All
-    };
+    device::Window &window();
 
-public:
-    void enable_device(Device device = All);
+    device::Keyboard &keyboard();
 
-    void disable_device(Device device = All);
-
-    bool is_disabled(Device device = All) const;
-
-    bool is_enabled(Device device = All) const;
+    device::Mouse &mouse();
 
     void update(sf::Window &window);
 
-    void clear_events() override;
+    void clear() override;
 
-    void handle_event(const sf::Event &event) override;
+    void push(const sf::Event &event) override;
 
+    bool contains(const action::EventNode& node) const;
 private:
-    Device get_compatible_device(const sf::Event &event);
+    device::DeviceBuffer &get_compatible_device(const sf::Event &event);
 
     void poll_events(sf::Window &window);
+
+private:
+    device::Window m_window;
+    device::Keyboard m_keyboard;
+    device::Mouse m_mouse;
+    device::NullDevice m_null;
+
+    std::vector<sf::Event> m_buffer;
 };
 
 } // namespace kigen

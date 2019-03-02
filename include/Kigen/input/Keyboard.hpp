@@ -19,9 +19,9 @@ class Keyboard : public DeviceBuffer {
 public:
     Keyboard();
 
-    void clear_events() override;
+    void clear() override;
 
-    void handle_event(const sf::Event &event) override;
+    void push(const sf::Event &event) override;
 
     sf::Keyboard::Key lastPressedKey() const;
 

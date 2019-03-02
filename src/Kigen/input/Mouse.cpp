@@ -7,7 +7,7 @@
 namespace kigen {
 namespace device {
 
-void Mouse::clear_events() {
+void Mouse::clear() {
     // Update mouse wheel
     m_mouseWheelScrollTicks = 0.f;
 
@@ -21,7 +21,7 @@ void Mouse::clear_events() {
     m_isMouseMoved = false;
 }
 
-void Mouse::handle_event(const sf::Event &event) {
+void Mouse::push(const sf::Event &event) {
     if (is_disabled()) return;
 
     switch (event.type) {
@@ -41,7 +41,7 @@ void Mouse::handle_event(const sf::Event &event) {
         case sf::Event::MouseLeft:m_isMouseInsideView = false;
             break;
 
-        default:Logger::warn("Mouse::handle_event", "Passed not compatible event");
+        default:Logger::warn("Mouse::push", "Passed not compatible event");
     }
 }
 

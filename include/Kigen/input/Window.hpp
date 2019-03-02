@@ -12,9 +12,9 @@ namespace device {
 
 class Window : public DeviceBuffer {
 public:
-    void clear_events() override;
+    void clear() override;
 
-    void handle_event(const sf::Event &event) override;
+    void push(const sf::Event &event) override;
 
     bool isClosed();
 

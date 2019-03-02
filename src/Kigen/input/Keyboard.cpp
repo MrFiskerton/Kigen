@@ -9,12 +9,12 @@ namespace device {
 
 Keyboard::Keyboard() : m_event_buffer(), is_reading(false), m_text(), m_last_pressed_key(sf::Keyboard::Key::Unknown) {}
 
-void Keyboard::clear_events() {
+void Keyboard::clear() {
     m_last_pressed_key = sf::Keyboard::Unknown;
     m_event_buffer.clear();
 }
 
-void Keyboard::handle_event(const sf::Event &event) {
+void Keyboard::push(const sf::Event &event) {
     if (DeviceBuffer::is_disabled()) return;
 
     switch (event.type) {
@@ -27,7 +27,7 @@ void Keyboard::handle_event(const sf::Event &event) {
             break;
 
         default:
-            Logger::warn("Keyboard::handle_event",
+            Logger::warn("Keyboard::push",
                          "Passed not compatible event sf::Event::" + conversion::to_string(event.type));
     }
 }

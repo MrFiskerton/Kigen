@@ -15,15 +15,15 @@ namespace device {
 
 class Mouse : public DeviceBuffer {
 public:
-    enum MouseActionType {
+    enum MouseActionType { //TODO: Exchange to KeyActionType
         Hold,
         Pressed,
         Clicked // Pressed and Released
     };
 public:
-    void clear_events() override;
+    void clear() override;
 
-    void handle_event(const sf::Event &event) override;
+    void push(const sf::Event &event) override;
 
     void update_position(const sf::Window& window);
 

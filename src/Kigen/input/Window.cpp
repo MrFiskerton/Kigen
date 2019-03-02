@@ -7,11 +7,11 @@
 namespace kigen {
 namespace device {
 
-void Window::clear_events() {
+void Window::clear() {
     m_closed = m_resized = m_lostFocus = m_gainedFocus = false;
 }
 
-void Window::handle_event(const sf::Event &event) {
+void Window::push(const sf::Event &event) {
     if (is_disabled()) return;
 
     switch (event.type) {
@@ -20,7 +20,7 @@ void Window::handle_event(const sf::Event &event) {
         case sf::Event::LostFocus:   m_lostFocus = true;   break;
         case sf::Event::GainedFocus: m_gainedFocus = true; break;
         default:
-            Logger::warn("Window::handle_event", "Passed not compatible event");
+            Logger::warn("Window::push", "Passed not compatible event");
     }
 }
 

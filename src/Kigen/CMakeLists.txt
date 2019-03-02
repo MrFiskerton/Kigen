@@ -3,13 +3,14 @@ set(SRCROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Files
 set(FILES_HEADER
-    #[[
-    ${INCROOT}/action/detail/ActionControl.inl
-    ${INCROOT}/action/detail/ActionExpression.hpp
-    ${INCROOT}/action/detail/ActionMap.inl
+    ##[[
+    ${INCROOT}/action/detail/ActionNode.hpp
+    ${INCROOT}/action/detail/EventNode.hpp
+    ${INCROOT}/action/detail/LogicNode.hpp
+    ${INCROOT}/action/detail/RealtimeNode.hpp
     ${INCROOT}/action/Action.hpp
     ${INCROOT}/action/ActionControl.hpp
-    ${INCROOT}/action/ActionMap.hpp
+    ${INCROOT}/action/CallbackMap.hpp
     #]]
 
     ${INCROOT}/application/DefaultApplicationLoop.hpp
@@ -60,8 +61,7 @@ set(FILES_HEADER
     )
 
 set(FILES_SRC
-    #[[
-    ${SRCROOT}/action/detail/ActionExpression.cpp
+    ##[[
     ${SRCROOT}/action/Action.cpp
     #]]
 

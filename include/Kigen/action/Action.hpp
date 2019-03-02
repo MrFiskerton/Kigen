@@ -5,53 +5,55 @@
 #ifndef INCLUDED_ACTION_HPP
 #define INCLUDED_ACTION_HPP
 
+#include <Kigen/input/KeyActionType.hpp>
+#include <Kigen/action/detail/ActionNode.hpp>
+#include <Kigen/action/detail/EventNode.hpp>
+#include <Kigen/action/detail/LogicNode.hpp>
+#include <Kigen/action/detail/RealtimeNode.hpp>
 
-#include <SFML/Window/Event.hpp>
-#include "./detail/ActionExpression.hpp"
+namespace kigen {
 
-namespace detail {
-    class EventBuffer;
-}
+class EventBuffer;
 
 class Action {
 public:
-    enum ActionType : unsigned char {
-        RealTime = 1u,
-        Pressed  = 1u << 1,
-        Released = 1u << 2
-    };
+    // Default constructor: Required for ActionControl::operator[] - constructs an uninitialized action
+    Action() = default;
 
-public:
-    // Default constructor: Required for ActionMap::operator[] - constructs an uninitialized action
-    Action();
     explicit Action(const sf::Keyboard::Key &key, unsigned char type = RealTime | Pressed);
+
     explicit Action(const sf::Mouse::Button &button, unsigned char type = RealTime | Pressed);
+
     explicit Action(sf::Event::EventType event_type);
 
+    explicit Action(std::function<bool()> &trigger);
+
+    explicit Action(std::function<bool(const sf::Event &)> &trigger);
+
     // Tests if the {event}/{real time input} constellation in the argument is true for this action
-    bool test(detail::EventBuffer& buffer) const;
+    bool test(EventBuffer &buffer) const;
+
 private:
     // Construct an Action from expression(ActionNode)
-    explicit Action(detail::ActionNode::Ptr expression);
+    explicit Action(action::ActionNode::Ptr expression);
 
 public:
-    //friend Action custom_action(std::function<bool(const sf::Event&)> trigger);
-    friend Action custom_action(std::function<bool()> trigger);
-public:
-    // bool operator==(const sf::Event &event) const;
-    // bool operator==(const Action &other) const;
     friend Action operator||(const Action &lhs, const Action &rhs);
+
     friend Action operator&&(const Action &lhs, const Action &rhs);
+
     friend Action operator!(const Action &action);
+
 private:
-    std::shared_ptr<detail::ActionNode> m_expression;
+    std::shared_ptr<action::ActionNode> m_expression;
 };
 
-//Action custom_action(std::function<bool(const sf::Event&)> trigger);
-Action custom_action(std::function<bool()> trigger);
+Action operator||(const Action &lhs, const Action &rhs);
 
-Action operator|| (const Action& lhs, const Action& rhs);
-Action operator&& (const Action& lhs, const Action& rhs);
+Action operator&&(const Action &lhs, const Action &rhs);
+
 Action operator!(const Action &action);
+
+} //namespace kigen
 
 #endif //INCLUDED_ACTION_HPP
