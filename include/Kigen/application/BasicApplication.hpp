@@ -39,8 +39,7 @@ protected:
 protected:
     Window m_window;
     StateControl m_state_control;
-    ActionControl<std::string> m_action;
-    CallbackMap<std::string> m_callbaks;
+    ActionControl<std::string> m_actions;
 };
 
 } //namespace kigen

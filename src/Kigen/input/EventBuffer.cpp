@@ -8,7 +8,7 @@
 namespace kigen {
 
 void EventBuffer::update(sf::Window &window) {
-    if (is_disabled()) return;
+    if (!is_enabled()) return;
     clear();
     poll_events(window);
     m_mouse.update_position(window);

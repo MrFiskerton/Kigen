@@ -7,98 +7,50 @@
 
 #include <map>
 #include "Action.hpp"
-#include "CallbackMap.hpp"
+#include "ActionRegistry.hpp"
 
 namespace kigen {
 
 template<typename ActionID>
 class ActionControl : private NonCopyable {
-private:
-    typedef std::unordered_map<ActionID, Action> Map;
-    typedef CallbackMap<ActionID> CallbackMap;
 public:
-    ActionControl(ActionControl &&source) noexcept;
+    typedef std::function<void()> callback_t;
+public:
+    void connect(const ActionID &id, callback_t callback);
 
-    ActionControl &operator=(ActionControl &&source) noexcept;
+    bool is_activated(const ActionID &id);
 
-    Action &at(const ActionID &id);
+    void invoke_callbacks();
 
-    bool contains(const ActionID &id);
-
-    bool remove(const ActionID &id);
-
-    void clear();
-
-    void update(sf::Window &window);
-
-    bool is_active(const ActionID &id);
-
-    void invoke_callbacks(CallbackMap &callback_map);
-
-    EventBuffer &get_buffer();
-
+    ActionRegistry<ActionID>& get_registry();
 private:
-    EventBuffer m_buffer;
-    Map m_actions;
+    ActionRegistry<ActionID> m_registry;
+    std::unordered_map<ActionID, callback_t> m_callbacks;
 };
 
 template<typename ActionID>
-void ActionControl<ActionID>::update(sf::Window &window) {
-    m_buffer.update(window);
+bool ActionControl<ActionID>::is_activated(const ActionID &id) {
+    return m_registry.test(id);
 }
 
 template<typename ActionID>
-bool ActionControl<ActionID>::is_active(const ActionID &id) {
-    if (!contains(id)) return false;
-    return at(id).test(m_buffer);
+void ActionControl<ActionID>::invoke_callbacks() {
+    std::for_each(m_callbacks.begin(), m_callbacks.end(), [&](auto &element) {
+        if (is_activated(element.first)) element.second(); // trigger
+    });
 }
 
 template<typename ActionID>
-void ActionControl<ActionID>::invoke_callbacks(CallbackMap &callback_map) {
-    for (auto &element: callback_map.m_callbacks) {
-        auto id = element.first;
-        auto callback = element.second;
-        if (is_active(id)) callback();
+void ActionControl<ActionID>::connect(const ActionID &id, ActionControl::callback_t callback) {
+    if (!m_registry.contains(id)) {
+        Logger::warn("ActionControl<ActionID>::connect", "id doesn't contain in registry");
     }
-
-//    std::for_each(callback_map.begin(), callback_map.end(),
-//                  [](auto &element) { if (is_active(element.first)) element.second(); }
-//    );
+    m_callbacks[id] = std::move(callback);
 }
 
 template<typename ActionID>
-EventBuffer &ActionControl<ActionID>::get_buffer() {
-    return m_buffer;
-}
-
-template<typename ActionID>
-bool ActionControl<ActionID>::contains(const ActionID &id) {
-    return m_actions.find(id) != m_actions.end();
-}
-
-template<typename ActionID>
-ActionControl<ActionID>::ActionControl(ActionControl &&source) noexcept {
-
-}
-
-template<typename ActionID>
-ActionControl &ActionControl<ActionID>::operator=(ActionControl &&source) noexcept {
-    return <#initializer#>;
-}
-
-template<typename ActionID>
-Action &ActionControl<ActionID>::at(const ActionID &id) {
-    return <#initializer#>;
-}
-
-template<typename ActionID>
-bool ActionControl<ActionID>::remove(const ActionID &id) {
-    return false;
-}
-
-template<typename ActionID>
-void ActionControl<ActionID>::clear() {
-
+ActionRegistry<ActionID> &ActionControl<ActionID>::get_registry() {
+    return m_registry;
 }
 
 } //namespace kigen

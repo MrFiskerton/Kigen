@@ -15,7 +15,7 @@ void Keyboard::clear() {
 }
 
 void Keyboard::push(const sf::Event &event) {
-    if (DeviceBuffer::is_disabled()) return;
+    if (!DeviceBuffer::is_enabled()) return;
 
     switch (event.type) {
         case sf::Event::TextEntered:read_unicode(event.text.unicode);
@@ -37,7 +37,7 @@ sf::Keyboard::Key Keyboard::lastPressedKey() const {
 }
 
 bool Keyboard::test(sf::Keyboard::Key key, unsigned char type) const {
-    if (is_disabled()) return false;
+    if (!is_enabled()) return false;
 
     if (type & RealTime) {
         bool is_pressed = sf::Keyboard::isKeyPressed(key);
@@ -98,7 +98,7 @@ void Keyboard::read_unicode(sf::Uint32 character) {
 }
 
 void Keyboard::setVirtualKeyboardVisible(bool visibility) {
-    if (is_disabled()) return;
+    if (!is_enabled()) return;
     sf::Keyboard::setVirtualKeyboardVisible(visibility);
 }
 

@@ -16,12 +16,12 @@ bool kigen::BasicApplication::is_runing() const {
 }
 
 void kigen::BasicApplication::update_input() {
-    m_action.update(m_window);
+
 }
 
 void kigen::BasicApplication::update_logic(const sf::Time &deltaTime) {
+    m_actions.invoke_callbacks();
     m_state_control.update(deltaTime);
-    m_action.invoke_callbacks(m_callbaks);
 }
 
 void kigen::BasicApplication::update_graphics() {
@@ -46,15 +46,14 @@ void BasicApplication::init_services() {
 }
 
 void BasicApplication::init_action() {
-    m_action["Up"] = Action(sf::Keyboard::W, RealTime | Pressed);
-    m_action["Down"] = Action(sf::Keyboard::S, RealTime | Pressed);
-    m_action["Left"] = Action(sf::Keyboard::A, RealTime | Pressed);
-    m_action["Right"] = Action(sf::Keyboard::D, RealTime | Pressed);
+    auto &registry = m_actions.get_registry();
 
-    m_callbaks["Up"] = []() { Logger::notify("Up"); };
-    m_callbaks["Down"] = []() { Logger::notify("Down"); };
-    m_callbaks["Left"] = []() { Logger::notify("Left"); };
-    m_callbaks["Right"] = []() { Logger::notify("Right"); };
+    registry["Up"] = Action(sf::Keyboard::W, RealTime | Pressed);
+    registry["Down"] = Action(sf::Keyboard::S, RealTime | Pressed);
+    registry["Left"] = Action(sf::Keyboard::A, RealTime | Pressed);
+    registry["Right"] = Action(sf::Keyboard::D, RealTime | Pressed);
+
+    m_actions.connect("Up", []() { Logger::notify("Up"); });
 }
 
 } // namespace kigen

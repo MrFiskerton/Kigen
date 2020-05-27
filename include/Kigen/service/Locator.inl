@@ -30,7 +30,7 @@ void Locator::provide(T *service) {
 
     }
     m_services[id]->start_up();
-    Logger::info("Locator::provide") << action << "service with typeid:= " << typeid(T).name()
+    Logger::info("Locator::insert") << action << "service with typeid:= " << typeid(T).name()
                                      << " and registration:= " << id << Logger::endlf();
 }
 
@@ -39,7 +39,7 @@ T &Locator::locate() {
     assertion(is_registered<T>(), "Unregistered service! Please use \"registrate\" it.");
     std::size_t id = service_registrator::id<T>();
     assertion(m_services[id] != nullptr,
-              "Would be a SIGSEGV. Attempt to provide null service without an implementation. So will return nullptr.");
+              "Would be a SIGSEGV. Attempt to insert null service without an implementation. So will return nullptr.");
     auto ref = dynamic_cast<T *>(m_services[id]);
     assertion(ref != nullptr, "Dynamic cast (typeid:= \"" << typeid(T).name() << "\", id:= " << id << ") FAILED");
     return *ref;

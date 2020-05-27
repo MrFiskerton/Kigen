@@ -29,8 +29,6 @@ public:
 
     void enable() { m_enabled = true; }
 
-    bool is_disabled() const { return !is_enabled(); }
-
     bool is_enabled() const { return m_enabled; }
 
 private:

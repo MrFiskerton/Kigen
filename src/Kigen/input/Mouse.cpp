@@ -22,7 +22,7 @@ void Mouse::clear() {
 }
 
 void Mouse::push(const sf::Event &event) {
-    if (is_disabled()) return;
+    if (!is_enabled()) return;
 
     switch (event.type) {
         //case sf::Event::MouseWheelMoved:break; (deprecated)
@@ -75,7 +75,7 @@ const sf::Vector2f &Mouse::getMousePosition(bool useDefaultView) const {
 }
 
 bool Mouse::test(sf::Mouse::Button button, MouseActionType action) const {
-    if (is_disabled()) return false;
+    if (!is_enabled()) return false;
 
     if (action == Hold) {
         return sf::Mouse::isButtonPressed(button);

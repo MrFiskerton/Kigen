@@ -12,7 +12,7 @@ void Window::clear() {
 }
 
 void Window::push(const sf::Event &event) {
-    if (is_disabled()) return;
+    if (is_enabled()) return;
 
     switch (event.type) {
         case sf::Event::Closed:      m_closed = true;      break;

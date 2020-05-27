@@ -33,6 +33,8 @@ public:
     // Tests if the {event}/{real time input} constellation in the argument is true for this action
     bool test(EventBuffer &buffer) const;
 
+    bool test() const {};
+
 private:
     // Construct an Action from expression(ActionNode)
     explicit Action(action::ActionNode::Ptr expression);
