@@ -5,7 +5,7 @@
 #ifndef YOSAI_ICAMERA_HPP
 #define YOSAI_ICAMERA_HPP
 
-#include "IService.hpp"
+#include <Kigen/utils/locator/IService.hpp>
 
 namespace kigen {
 

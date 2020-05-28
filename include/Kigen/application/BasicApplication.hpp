@@ -7,8 +7,10 @@
 
 #include <Kigen/state/StateControl.hpp>
 #include <Kigen/graphics/Window.hpp>
-#include <Kigen/service/Locator.hpp>
+#include <Kigen/utils/locator/Locator.hpp>
 #include <Kigen/action/ActionControl.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/RenderTexture.hpp>
 #include "DefaultApplicationLoop.hpp"
 #include "IApplication.hpp"
 
@@ -37,8 +39,12 @@ protected:
     virtual void init_state_control() = 0;
 
 protected:
-    Window m_window;
+    sf::RenderWindow   m_window;
+    sf::RenderTexture  m_renderTexture;
+    sf::Sprite         m_canvas;
+
     StateControl m_state_control;
+    InputControl m_input;
     ActionControl<std::string> m_actions;
 };
 

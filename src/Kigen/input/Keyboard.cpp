@@ -15,7 +15,7 @@ void Keyboard::clear() {
 }
 
 void Keyboard::push(const sf::Event &event) {
-    if (!DeviceBuffer::is_enabled()) return;
+    if (!AbstractDevice::is_enabled()) return;
 
     switch (event.type) {
         case sf::Event::TextEntered:read_unicode(event.text.unicode);

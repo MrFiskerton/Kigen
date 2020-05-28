@@ -2,17 +2,17 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 21.07.18.
 //
 
-#include <Kigen/input/Window.hpp>
+#include <Kigen/input/WindowStatus.hpp>
 
 namespace kigen {
 namespace device {
 
-void Window::clear() {
+void WindowStatus::clear() {
     m_closed = m_resized = m_lostFocus = m_gainedFocus = false;
 }
 
-void Window::push(const sf::Event &event) {
-    if (is_enabled()) return;
+void WindowStatus::push(const sf::Event &event) {
+    if (!is_enabled()) return;
 
     switch (event.type) {
         case sf::Event::Closed:      m_closed = true;      break;
@@ -20,17 +20,17 @@ void Window::push(const sf::Event &event) {
         case sf::Event::LostFocus:   m_lostFocus = true;   break;
         case sf::Event::GainedFocus: m_gainedFocus = true; break;
         default:
-            Logger::warn("Window::push", "Passed not compatible event");
+            Logger::warn("WindowStatus::push", "Passed not compatible event");
     }
 }
 
-bool Window::isClosed() { return m_closed; }
+bool WindowStatus::isClosed() { return m_closed; }
 
-bool Window::isResized() { return m_resized; }
+bool WindowStatus::isResized() { return m_resized; }
 
-bool Window::isGainedFocus() { return m_gainedFocus; }
+bool WindowStatus::isGainedFocus() { return m_gainedFocus; }
 
-bool Window::isLostFocus() { return m_lostFocus; }
+bool WindowStatus::isLostFocus() { return m_lostFocus; }
 
 } //namespace device
 } //namespace kigen

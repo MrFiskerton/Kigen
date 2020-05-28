@@ -44,6 +44,7 @@ template<typename ActionID>
 void ActionControl<ActionID>::connect(const ActionID &id, ActionControl::callback_t callback) {
     if (!m_registry.contains(id)) {
         Logger::warn("ActionControl<ActionID>::connect", "id doesn't contain in registry");
+        return;
     }
     m_callbacks[id] = std::move(callback);
 }

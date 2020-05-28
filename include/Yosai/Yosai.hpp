@@ -9,6 +9,8 @@
 #include <Kigen/application/BasicApplication.hpp>
 
 class Yosai final: public kigen::BasicApplication {
+public:
+    Yosai ();
 private:
     void init_state_control() override;
 };

@@ -12,7 +12,9 @@ namespace action {
 
 class RealtimeActionNode : public ActionNode {
 public:
-    bool test(const EventBuffer &buffer) const override { return isRealtimeActive(); }
+    bool test(const InputControl &buffer) const override { return isRealtimeActive(); }
+
+    bool test() const override { return isRealtimeActive(); }
 
     virtual bool isRealtimeActive() const = 0;
 };

@@ -11,15 +11,16 @@
 #include <Kigen/conversion/to_string.hpp>
 #include "KeyActionType.hpp"
 #include <SFML/Window/Event.hpp>
+#include <Kigen/utils/locator/IService.hpp>
 
 namespace kigen {
 namespace device {
 
-class DeviceBuffer {
+class AbstractDevice: public IService {
 public:
-    DeviceBuffer() : m_enabled(true) {}
+    AbstractDevice() : m_enabled(true) {}
 
-    virtual ~DeviceBuffer() = default;
+    virtual ~AbstractDevice() = default;
 
     virtual void clear() = 0;
 
@@ -35,7 +36,7 @@ private:
     bool m_enabled;
 };
 
-class NullDevice : public DeviceBuffer {
+class NullDevice : public AbstractDevice {
 public:
     void clear() override {}
 

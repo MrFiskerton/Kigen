@@ -24,14 +24,19 @@ Action::Action(const sf::Mouse::Button &button, unsigned char type) {
 
 Action::Action(sf::Event::EventType eventType) : m_expression(std::make_shared<action::MiscEventLeaf>(eventType)) {}
 
-Action::Action(std::function<bool()> &trigger)
+Action::Action(std::function<bool()> trigger)
         : m_expression(std::make_shared<action::CustomRealtimeLeaf>(std::move(trigger))) {}
 
-Action::Action(std::function<bool(const sf::Event &)> &trigger)
+Action::Action(std::function<bool(const sf::Event &)> trigger)
         : m_expression(std::make_shared<action::CustomEventLeaf>(std::move(trigger))) {}
 
-bool Action::test(EventBuffer &buffer) const {
+bool Action::test(InputControl &buffer) const {
     return m_expression->test(buffer);
+}
+
+
+bool Action::test() const {
+    return m_expression->test();
 }
 
 Action::Action(action::ActionNode::Ptr expression) {

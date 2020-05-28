@@ -13,7 +13,7 @@
 
 namespace kigen {
 
-class EventBuffer;
+class InputControl;
 
 class Action {
 public:
@@ -26,14 +26,14 @@ public:
 
     explicit Action(sf::Event::EventType event_type);
 
-    explicit Action(std::function<bool()> &trigger);
+    explicit Action(std::function<bool()> trigger);
 
-    explicit Action(std::function<bool(const sf::Event &)> &trigger);
+    explicit Action(std::function<bool(const sf::Event &)> trigger);
 
     // Tests if the {event}/{real time input} constellation in the argument is true for this action
-    bool test(EventBuffer &buffer) const;
+    bool test(InputControl &buffer) const;
 
-    bool test() const {};
+    bool test() const;
 
 private:
     // Construct an Action from expression(ActionNode)

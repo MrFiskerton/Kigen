@@ -9,7 +9,7 @@
 #include <functional>
 
 namespace kigen {
-    class EventBuffer;
+    class InputControl;
 namespace action {
 
 // Operation base class for event actions. The operations are organized in a tree structure.
@@ -19,7 +19,9 @@ public:
 public:
     virtual ~ActionNode() = default;
 
-    virtual bool test(const EventBuffer &buffer) const = 0;
+    virtual bool test(const InputControl &buffer) const = 0;
+
+    virtual bool test() const {}
 };
 
 } //namespace action

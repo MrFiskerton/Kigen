@@ -5,7 +5,7 @@
 #ifndef YOSAI_SERVICECAMERA_HPP
 #define YOSAI_SERVICECAMERA_HPP
 
-#include "../interface/ICamera.hpp"
+#include "Kigen/utils/locator/interface/ICamera.hpp"
 
 namespace kigen {
 

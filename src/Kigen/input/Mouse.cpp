@@ -46,11 +46,11 @@ void Mouse::push(const sf::Event &event) {
 }
 
 void Mouse::update_position(const sf::Window &window) {
-    //TODO:
-    Logger::warn("Mouse::update_position") << "Doesn inplement" << Logger::endl;
+    //sf::Mouse::getPosition(); //Absolute coordinates
+    //m_mousePosition = sf::Mouse::getPosition(window); //Relative to window //TODO
 }
 
-bool Mouse::isMouseInsedeView() {
+bool Mouse::isMouseInsideView() {
     return m_isMouseInsideView;
 }
 

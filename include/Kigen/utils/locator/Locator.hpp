@@ -6,7 +6,6 @@
 #define INCLUDED_KIGEN_SERVICELOCATOR_HPP
 
 #include <vector>
-#include "Services.hpp"
 #include "NullService.hpp"
 
 namespace kigen {

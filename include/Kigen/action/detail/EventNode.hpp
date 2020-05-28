@@ -6,7 +6,7 @@
 #define YOSAI_EVENTNODE_HPP
 
 #include "ActionNode.hpp"
-#include <Kigen/input/EventBuffer.hpp>
+#include <Kigen/input/InputControl.hpp>
 
 namespace kigen {
 namespace action {
@@ -14,7 +14,7 @@ namespace action {
 // Class between ActionNode and concrete Event classes
 class EventNode : public ActionNode {
 public:
-    bool test(const EventBuffer &buffer) const override {
+    bool test(const InputControl &buffer) const override {
         return buffer.contains(*this);
     }
 

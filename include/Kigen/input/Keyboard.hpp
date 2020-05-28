@@ -10,12 +10,12 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
-#include "DeviceBuffer.hpp"
+#include "AbstractDevice.hpp"
 
 namespace kigen {
 namespace device {
 
-class Keyboard : public DeviceBuffer {
+class Keyboard : public AbstractDevice {
 public:
     Keyboard();
 

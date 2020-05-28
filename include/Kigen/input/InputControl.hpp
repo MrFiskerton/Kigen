@@ -9,16 +9,16 @@
 #include <SFML/Window/Event.hpp>
 #include "Keyboard.hpp"
 #include "Mouse.hpp"
-#include "Window.hpp"
+#include "WindowStatus.hpp"
 
 namespace kigen {
 namespace action {
     class EventNode;
 }
 
-class EventBuffer final : public device::DeviceBuffer {
+class InputControl final : public device::AbstractDevice {
 public:
-    device::Window &window();
+    device::WindowStatus &window();
 
     device::Keyboard &keyboard();
 
@@ -32,12 +32,12 @@ public:
 
     bool contains(const action::EventNode& node) const;
 private:
-    device::DeviceBuffer &get_compatible_device(const sf::Event &event);
+    device::AbstractDevice &get_compatible_device(const sf::Event &event);
 
     void poll_events(sf::Window &window);
 
 private:
-    device::Window m_window;
+    device::WindowStatus m_window;
     device::Keyboard m_keyboard;
     device::Mouse m_mouse;
     device::NullDevice m_null;

@@ -2,7 +2,7 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 27.02.19.
 //
 
-#include <Kigen/service/Locator.hpp>
+#include <Kigen/utils/locator/Locator.hpp>
 
 namespace kigen {
 

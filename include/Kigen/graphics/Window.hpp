@@ -7,12 +7,12 @@
 
 
 #include <SFML/Window.hpp>
-//#include <Kigen/input/EventBuffer.hpp>
+//#include <Kigen/input/InputControl.hpp>
 
 namespace kigen {
     class Window : public sf::Window {
 //    public:
-//        EventBuffer input;
+//        InputControl input;
     };
 }
 

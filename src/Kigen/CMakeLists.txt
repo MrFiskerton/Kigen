@@ -10,7 +10,7 @@ set(FILES_HEADER
     ${INCROOT}/action/detail/RealtimeNode.hpp
     ${INCROOT}/action/Action.hpp
     ${INCROOT}/action/ActionControl.hpp
-    ${INCROOT}/action/CallbackMap.hpp
+    ${INCROOT}/action/ActionRegistry.hpp
     #]]
 
     ${INCROOT}/application/DefaultApplicationLoop.hpp
@@ -22,11 +22,12 @@ set(FILES_HEADER
 
     ${INCROOT}/graphics/Window.hpp
 
-    ${INCROOT}/input/DeviceBuffer.hpp
-    ${INCROOT}/input/EventBuffer.hpp
+    ${INCROOT}/input/AbstractDevice.hpp
+    ${INCROOT}/input/InputControl.hpp
+    ${INCROOT}/input/KeyActionType.hpp
     ${INCROOT}/input/Keyboard.hpp
     ${INCROOT}/input/Mouse.hpp
-    ${INCROOT}/input/Window.hpp
+    ${INCROOT}/input/WindowStatus.hpp
 
     ${INCROOT}/resource/ResourceControl.hpp
     ${INCROOT}/resource/ResourceExceptions.hpp
@@ -34,21 +35,16 @@ set(FILES_HEADER
     ${INCROOT}/resource/ResourceLoader.hpp
     ${INCROOT}/resource/SFML_LoaderMakers.hpp
 
-    ${INCROOT}/service/impl/ServiceCamera.hpp
-    ${INCROOT}/service/interface/ICamera.hpp
-    ${INCROOT}/service/interface/IService.hpp
-
-    ${INCROOT}/service/Locator.hpp
-    ${INCROOT}/service/Locator.inl
-    ${INCROOT}/service/NullService.hpp
-    ${INCROOT}/service/Services.hpp
-
-    ${INCROOT}/service/Services.hpp
-
-    #${INCROOT}/state/detail/StateControl.inl
     ${INCROOT}/state/State.hpp
     ${INCROOT}/state/StateControl.hpp
 
+    ${INCROOT}/utils/locator/impl/ServiceCamera.hpp
+    ${INCROOT}/utils/locator/interface/ICamera.hpp
+    ${INCROOT}/utils/locator/IService.hpp
+    ${INCROOT}/utils/locator/Locator.hpp
+    ${INCROOT}/utils/locator/Locator.inl
+    ${INCROOT}/utils/locator/NullService.hpp
+    ${INCROOT}/utils/locator/ListOfServices.hpp
     ${INCROOT}/utils/Assertion.hpp
     ${INCROOT}/utils/Logger.hpp
     ${INCROOT}/utils/NonCopyable.hpp
@@ -72,18 +68,16 @@ set(FILES_SRC
 
     ${SRCROOT}/graphics/Window.cpp
 
-    ${SRCROOT}/input/EventBuffer.cpp
+    ${SRCROOT}/input/InputControl.cpp
     ${SRCROOT}/input/Keyboard.cpp
     ${SRCROOT}/input/Mouse.cpp
-    ${SRCROOT}/input/Window.cpp
-
-    ${SRCROOT}/service/Locator.cpp
-    ${SRCROOT}/service/NullService.cpp
-    ${SRCROOT}/service/ServiceCamera.cpp
+    ${SRCROOT}/input/WindowStatus.cpp
 
     ${SRCROOT}/state/State.cpp
     ${SRCROOT}/state/StateControl.cpp
 
+    ${SRCROOT}/utils/locator/Locator.cpp
+    ${SRCROOT}/utils/locator/NullService.cpp
     ${SRCROOT}/utils/Logger.cpp
     ${SRCROOT}/utils/StopWatch.cpp
     )

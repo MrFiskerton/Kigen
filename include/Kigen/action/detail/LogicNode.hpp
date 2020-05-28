@@ -15,7 +15,7 @@ class LogicNode : public ActionNode {
 public:
     LogicNode(ActionNode::Ptr lhs, ActionNode::Ptr rhs) : m_left(std::move(lhs)), m_right(std::move(rhs)) {};
 
-    bool test(const EventBuffer &buffer) const override = 0;
+    bool test(const InputControl &buffer) const override = 0;
 
 protected:
     ActionNode::Ptr m_left;
@@ -27,9 +27,13 @@ class OrNode : public LogicNode {
 public:
     OrNode(ActionNode::Ptr lhs, ActionNode::Ptr rhs) : LogicNode(std::move(lhs), std::move(rhs)) {};
 
-    bool test(const EventBuffer &buffer) const override {
+    bool test(const InputControl &buffer) const override {
         return m_left->test(buffer) || m_right->test(buffer);
     };
+
+    bool test() const override {
+        return m_left->test() || m_right->test();
+    }
 };
 
 // Logical AND operator
@@ -37,7 +41,7 @@ class AndNode : public LogicNode {
 public:
     AndNode(ActionNode::Ptr lhs, ActionNode::Ptr rhs) : LogicNode(std::move(lhs), std::move(rhs)) {};
 
-    bool test(const EventBuffer &buffer) const override {
+    bool test(const InputControl &buffer) const override {
         return m_left->test(buffer) && m_right->test(buffer);
     };
 };
@@ -47,7 +51,7 @@ class NotNode : public ActionNode {
 public:
     explicit NotNode(ActionNode::Ptr action) : m_action(std::move(action)) {}
 
-    bool test(const EventBuffer &buffer) const override {
+    bool test(const InputControl &buffer) const override {
         return !m_action->test(buffer);
     };
 private:

@@ -5,12 +5,12 @@
 #ifndef INCLUDED_WINDOWCONTROLLER_HPP
 #define INCLUDED_WINDOWCONTROLLER_HPP
 
-#include "DeviceBuffer.hpp"
+#include "AbstractDevice.hpp"
 
 namespace kigen {
 namespace device {
 
-class Window : public DeviceBuffer {
+class WindowStatus : public AbstractDevice {
 public:
     void clear() override;
 

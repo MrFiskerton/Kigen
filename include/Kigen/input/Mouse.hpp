@@ -8,12 +8,12 @@
 #include <map>
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "DeviceBuffer.hpp"
+#include "AbstractDevice.hpp"
 
 namespace kigen {
 namespace device {
 
-class Mouse : public DeviceBuffer {
+class Mouse : public AbstractDevice {
 public:
     enum MouseActionType { //TODO: Exchange to KeyActionType
         Hold,
@@ -39,7 +39,7 @@ public:
     template<typename ... Args>
     bool isButtonJustReleased(sf::Mouse::Button button, Args &&... args);
 
-    bool isMouseInsedeView();
+    bool isMouseInsideView();
 
     bool isMouseMoved();
 

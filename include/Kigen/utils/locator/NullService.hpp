@@ -5,9 +5,11 @@
 #ifndef YOSAI_NULLSERVICE_HPP
 #define YOSAI_NULLSERVICE_HPP
 
-#include "Services.hpp"
+#include "ListOfServices.hpp"
 
 namespace kigen {
+namespace locator {
+
     template<class T>
     IService *null_service() {
         Logger::warn("null_service") << "Service with typeid = " << typeid(T).name()
@@ -15,7 +17,11 @@ namespace kigen {
         return nullptr;
     }
 
-    template<> IService *null_service<ICamera>();
-}
+    template<>
+    IService *null_service<ICamera>();
+
+} // namespace locator
+} // namespace kigen
+
 
 #endif //YOSAI_NULLSERVICE_HPP 

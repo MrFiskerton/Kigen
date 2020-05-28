@@ -21,7 +21,7 @@ public:
     std::string    screenshotsPath;
     std::string    screenShotFormat;
 
-    // Window
+    // WindowStatus
     unsigned int   resolution_X;
     unsigned int   resolution_Y;
     unsigned int   colorDepth;
@@ -31,7 +31,7 @@ public:
     bool           isSmoothing;
     //DisplayMode displayMode;
 
-    // EventBuffer
+    // InputControl
     //std::map<Key, sf::Keyboard::Key> mainKeyMap;
 
     // Debug
