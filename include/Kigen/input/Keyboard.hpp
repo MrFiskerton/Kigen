@@ -52,10 +52,10 @@ private:
 private:
     std::multimap<sf::Keyboard::Key, KeyActionType> m_event_buffer;
 
+    std::string m_text;
     sf::Keyboard::Key m_last_pressed_key; // TODO: ???
 
     bool is_reading;
-    std::string m_text;
 };
 
 } // namespace device

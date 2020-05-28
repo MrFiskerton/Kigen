@@ -20,6 +20,7 @@ void MenuState::draw(sf::RenderTarget &renderTarget) {
 }
 
 bool MenuState::update(const sf::Time &deltaTime) {
+    requestStackPush(States::ID::Game);
     return false;
 }
 

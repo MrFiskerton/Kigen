@@ -8,6 +8,10 @@
 namespace Actions {
     enum ID : int {
         close_window,
+        up,
+        left,
+        right,
+        down,
         SIZE
     };
 }

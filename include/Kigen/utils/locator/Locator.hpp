@@ -6,6 +6,7 @@
 #define INCLUDED_KIGEN_SERVICELOCATOR_HPP
 
 #include <vector>
+#include <Kigen/input/InputControl.hpp>
 #include "NullService.hpp"
 
 namespace kigen {

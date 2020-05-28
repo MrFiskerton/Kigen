@@ -22,7 +22,7 @@ public:
 
     bool is_runing() const override;
 
-private:
+protected:
     void update_input() override;
 
     void update_logic(const sf::Time &deltaTime) override;
@@ -32,8 +32,6 @@ private:
     void render() override;
 
     void init_services();
-
-    void init_action();
 
 protected:
     virtual void init_state_control() = 0;
@@ -45,7 +43,6 @@ protected:
 
     StateControl m_state_control;
     InputControl m_input;
-    ActionControl<std::string> m_actions;
 };
 
 } //namespace kigen

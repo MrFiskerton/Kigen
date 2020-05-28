@@ -5,14 +5,14 @@
 #include <Kigen/utils/locator/NullService.hpp>
 
 namespace {
-    kigen::NullCamera camera;
+    //kigen::NullCamera camera;
 }
 
 namespace kigen {
 namespace locator {
     // Specialization
-    template<>
-    IService *null_service<ICamera>() { return &camera; }
+//    template<>
+//    IService *null_service<ICamera>() { return &camera; }
 
 
 } // namespace locator

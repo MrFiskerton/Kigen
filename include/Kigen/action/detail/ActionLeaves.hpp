@@ -7,21 +7,22 @@
 
 #include "ActionNode.hpp"
 #include <Kigen/utils/locator/Locator.hpp>
-#include <Kigen/input/InputControl.hpp>
+
 
 namespace kigen {
 namespace action {
 
 class KeyboardLeaf : public ActionNode {
 public:
-    KeyboardLeaf(sf::Keyboard::Key key, unsigned char type): m_key(key), m_type(type){}
+    KeyboardLeaf(sf::Keyboard::Key key, unsigned char type): m_key(key), m_type(type) {}
 
     bool test() const override {
-        Locator::locate<InputControl>().keyboard().test(m_key, m_type);
+        return Locator::locate<InputControl>().keyboard().test(m_key, m_type);
     }
 
 private:
-    sf::Keyboard::Key m_key; unsigned char m_type;
+    sf::Keyboard::Key m_key;
+    unsigned char m_type;
 };
 
 

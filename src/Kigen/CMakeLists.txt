@@ -37,13 +37,10 @@ set(FILES_HEADER
     ${INCROOT}/state/State.hpp
     ${INCROOT}/state/StateControl.hpp
 
-    ${INCROOT}/utils/locator/impl/ServiceCamera.hpp
-    ${INCROOT}/utils/locator/interface/ICamera.hpp
     ${INCROOT}/utils/locator/IService.hpp
     ${INCROOT}/utils/locator/Locator.hpp
     ${INCROOT}/utils/locator/Locator.inl
     ${INCROOT}/utils/locator/NullService.hpp
-    ${INCROOT}/utils/locator/ListOfServices.hpp
     ${INCROOT}/utils/Assertion.hpp
     ${INCROOT}/utils/Logger.hpp
     ${INCROOT}/utils/NonCopyable.hpp

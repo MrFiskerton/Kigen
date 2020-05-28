@@ -5,7 +5,7 @@
 #ifndef YOSAI_NULLSERVICE_HPP
 #define YOSAI_NULLSERVICE_HPP
 
-#include "ListOfServices.hpp"
+#include "IService.hpp"
 
 namespace kigen {
 namespace locator {
@@ -17,8 +17,8 @@ namespace locator {
         return nullptr;
     }
 
-    template<>
-    IService *null_service<ICamera>();
+//    template<>
+//    IService *null_service<SInputControl>();
 
 } // namespace locator
 } // namespace kigen
