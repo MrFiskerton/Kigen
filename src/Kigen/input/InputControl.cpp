@@ -3,7 +3,7 @@
 //
 
 #include <Kigen/input/InputControl.hpp>
-#include <Kigen/action/detail/EventNode.hpp>
+#include <Kigen/action/detail/ActionLeaves.hpp>
 
 namespace kigen {
 
@@ -53,14 +53,5 @@ device::WindowStatus &InputControl::window() { return m_window; }
 device::Keyboard &InputControl::keyboard() { return m_keyboard; }
 
 device::Mouse &InputControl::mouse() { return m_mouse; }
-
-bool InputControl::contains(const action::EventNode &node) const {
-    /*
-     * Note: Since there are at most a few dozens of events per frame (at a decent framerate not even that), 
-     * std::vector and linear search is fine.
-     */
-    for (auto &event: m_buffer) if (node.isEventActive(event)) return true;
-    return false;
-}
 
 } //namespace kigen

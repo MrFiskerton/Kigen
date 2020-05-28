@@ -45,11 +45,10 @@ public:
 
     void setVirtualKeyboardVisible(bool visibility); // Only for mobile version
 
-private:
-    void read_unicode(sf::Uint32 character);
-
     bool test(sf::Keyboard::Key key, unsigned char type) const;
 
+private:
+    void read_unicode(sf::Uint32 character);
 private:
     std::multimap<sf::Keyboard::Key, KeyActionType> m_event_buffer;
 

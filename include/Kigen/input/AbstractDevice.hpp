@@ -16,7 +16,7 @@
 namespace kigen {
 namespace device {
 
-class AbstractDevice: public IService {
+class AbstractDevice : public IService {
 public:
     AbstractDevice() : m_enabled(true) {}
 

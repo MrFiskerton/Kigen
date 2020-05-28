@@ -19,9 +19,7 @@ public:
 public:
     virtual ~ActionNode() = default;
 
-    virtual bool test(const InputControl &buffer) const = 0;
-
-    virtual bool test() const {}
+    virtual bool test() const = 0;
 };
 
 } //namespace action

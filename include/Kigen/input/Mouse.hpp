@@ -51,7 +51,6 @@ public:
 
     const sf::Vector2f &getMousePosition(bool useDefaultView = false) const;
 
-private:
     bool test(sf::Mouse::Button button, MouseActionType action) const;
 
     bool test(sf::Mouse::Button button, MouseActionType action, const sf::FloatRect &boundingBox,

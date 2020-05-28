@@ -11,11 +11,12 @@
 namespace kigen {
 
 class IService {
+    friend class Locator;
 public:
     virtual ~IService() = default;
 
+protected:
     virtual void start_up() {}
-
     virtual void shut_down() {}
 };
 

@@ -16,7 +16,7 @@ namespace action {
     class EventNode;
 }
 
-class InputControl final : public device::AbstractDevice {
+class InputControl : public device::AbstractDevice {
 public:
     device::WindowStatus &window();
 
@@ -30,7 +30,6 @@ public:
 
     void push(const sf::Event &event) override;
 
-    bool contains(const action::EventNode& node) const;
 private:
     device::AbstractDevice &get_compatible_device(const sf::Event &event);
 

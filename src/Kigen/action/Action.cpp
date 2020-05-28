@@ -6,34 +6,15 @@
 
 namespace kigen {
 
-Action::Action(const sf::Keyboard::Key &key, unsigned char type) {
-    if (type & RealTime) {
-        m_expression = std::make_shared<action::KeyboardRealtimeLeaf>(key, bool(type & Pressed));
-    } else {
-        m_expression = std::make_shared<action::KeyboardEventLeaf>(key, bool(type & Pressed));
-    }
-}
+Action::Action(sf::Keyboard::Key key, unsigned char type)
+         : m_expression(std::make_shared<action::KeyboardLeaf>(key, type)) {}
 
-Action::Action(const sf::Mouse::Button &button, unsigned char type) {
-    if (type & RealTime) {
-        m_expression = std::make_shared<action::MouseRealtimeLeaf>(button, bool(type & Pressed));
-    } else {
-        m_expression = std::make_shared<action::MouseEventLeaf>(button, bool(type & Pressed));
-    }
-}
+//Action::Action(sf::Mouse::Button button, unsigned char type) {   //}
 
-Action::Action(sf::Event::EventType eventType) : m_expression(std::make_shared<action::MiscEventLeaf>(eventType)) {}
+//Action::Action(sf::Event::EventType eventType) : m_expression(std::make_shared<action::MiscEventLeaf>(eventType)) {}
 
 Action::Action(std::function<bool()> trigger)
         : m_expression(std::make_shared<action::CustomRealtimeLeaf>(std::move(trigger))) {}
-
-Action::Action(std::function<bool(const sf::Event &)> trigger)
-        : m_expression(std::make_shared<action::CustomEventLeaf>(std::move(trigger))) {}
-
-bool Action::test(InputControl &buffer) const {
-    return m_expression->test(buffer);
-}
-
 
 bool Action::test() const {
     return m_expression->test();
