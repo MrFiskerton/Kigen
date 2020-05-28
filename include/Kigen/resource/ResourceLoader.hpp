@@ -17,14 +17,9 @@ public:
 public:
     ResourceLoader(Loader loader, std::string info) : m_loader(std::move(loader)), m_info(std::move(info)) {}
 
-    ResourcePtr load() const {
-        return m_loader();
-    }
+    ResourcePtr load() const { return m_loader();  }
 
-
-    std::string info() const {
-        return m_info;
-    }
+    const std::string& info() const { return m_info; }
 
 private:
     Loader m_loader;

@@ -9,6 +9,7 @@ using namespace Actions;
 
 Yosai::Yosai() {
     init_services();
+    init_resources();
     init_actions();
     init_state_control();
 }
@@ -37,4 +38,9 @@ void Yosai::init_services() {
 void Yosai::update_logic(const sf::Time &delta) {
     m_actions.invoke_callbacks();
     BasicApplication::update_logic(delta);
+}
+
+void Yosai::init_resources() {
+//    m_resources.texture().register_resource(Textures::ID::Menu_background,
+//            loadFromFile("./resource/default_icon.png"), "Menu_background")
 }

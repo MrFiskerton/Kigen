@@ -11,6 +11,7 @@
 #include <Kigen/action/ActionControl.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
+#include <Kigen/resource/ResourceControl.hpp>
 #include "DefaultApplicationLoop.hpp"
 #include "IApplication.hpp"
 
@@ -42,6 +43,7 @@ protected:
     sf::Sprite         m_canvas;
 
     StateControl m_state_control;
+    ResourceControl m_resources;
     InputControl m_input;
 };
 

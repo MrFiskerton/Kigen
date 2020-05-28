@@ -39,6 +39,9 @@ void kigen::BasicApplication::render() {
 void BasicApplication::init_services() {
     Locator::registrate<InputControl>();
     Locator::provide<InputControl>(&m_input);
+
+    Locator::registrate<ResourceControl>();
+    Locator::provide<ResourceControl>(&m_resources);
 }
 
 } // namespace kigen

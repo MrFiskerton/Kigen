@@ -15,6 +15,7 @@ private:
     void init_state_control() override;
     void init_actions();
     void init_services();
+    void init_resources();
 
 protected:
     void update_logic(const sf::Time &delta) override;
