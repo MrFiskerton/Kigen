@@ -7,6 +7,7 @@
 
 #include <functional>
 #include <unordered_map>
+#include "Action.hpp"
 
 namespace kigen {
 

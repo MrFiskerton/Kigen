@@ -12,7 +12,7 @@
 namespace kigen {
 
 template<typename ActionID>
-class ActionControl : private NonCopyable {
+class ActionControl : private NonCopyable, public IService {
 public:
     typedef std::function<void()> callback_t;
 public:

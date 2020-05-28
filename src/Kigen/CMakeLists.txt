@@ -38,6 +38,7 @@ set(FILES_HEADER
     ${INCROOT}/state/StateControl.hpp
 
     ${INCROOT}/utils/locator/IService.hpp
+    ${INCROOT}/utils/locator/ListOfServices.hpp
     ${INCROOT}/utils/locator/Locator.hpp
     ${INCROOT}/utils/locator/Locator.inl
     ${INCROOT}/utils/locator/NullService.hpp

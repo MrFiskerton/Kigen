@@ -8,7 +8,7 @@ using namespace kigen;
 using namespace Actions;
 
 Yosai::Yosai() {
-    //init_services();
+    init_services();
     init_actions();
     init_state_control();
 }
@@ -29,10 +29,10 @@ void Yosai::init_actions() {
     m_actions.connect(close_window, [&]() { m_window.close(); });
 }
 
-//void Yosai::init_services() {
-//    Locator::registrate<ActionControl<ID>>();
-//    Locator::provide<ActionControl<ID>>(&m_actions);
-//}
+void Yosai::init_services() {
+    Locator::registrate<ActionControl<ID>>();
+    Locator::provide<ActionControl<ID>>(&m_actions);
+}
 
 void Yosai::update_logic(const sf::Time &delta) {
     m_actions.invoke_callbacks();
