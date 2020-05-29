@@ -29,9 +29,9 @@ public:
 
     virtual ~State() = default;
 
-    virtual void draw(sf::RenderTarget &renderTarget) = 0;
+    virtual void draw(sf::RenderTarget &target) = 0;
 
-    virtual bool update(const sf::Time &deltaTime) = 0;
+    virtual bool update(const sf::Time &delta) = 0;
 
     virtual bool handleEvent(const sf::Event &event) = 0;
 

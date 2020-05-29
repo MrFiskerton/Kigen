@@ -6,6 +6,7 @@
 #define YOSAI_YOSAI_HPP
 
 #include <Yosai/states/States.hpp>
+#include <Yosai/models/ConfigurationData.hpp>
 #include <Kigen/application/BasicApplication.hpp>
 
 class Yosai final: public kigen::BasicApplication {
@@ -18,7 +19,12 @@ private:
     void init_resources();
 
 protected:
+    void update_input() override;
+
+protected:
     void update_logic(const sf::Time &delta) override;
+
+    void update_graphics() override;
 
 private:
     kigen::ActionControl<Actions::ID> m_actions;

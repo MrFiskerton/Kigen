@@ -7,5 +7,6 @@
 
 #include <Kigen/input/InputControl.hpp>
 //#include <Kigen/action/ActionControl.hpp>  // !!! Зависит от Locator !!!
+#include <Kigen/resource/ResourceControl.hpp>
 
 #endif //YOSAI_LISTOFSERVICES_HPP

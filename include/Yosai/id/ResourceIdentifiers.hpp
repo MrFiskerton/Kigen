@@ -25,6 +25,7 @@ namespace Textures {
     enum ID : int {
         Title_background = 0,
         Menu_background,
+        water,
         SIZE
     };
 }

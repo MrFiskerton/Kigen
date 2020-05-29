@@ -6,6 +6,7 @@
 
 using namespace kigen;
 using namespace Actions;
+using sf::Texture;
 
 Yosai::Yosai() {
     init_services();
@@ -31,7 +32,12 @@ void Yosai::init_actions() {
 }
 
 void Yosai::init_services() {
+    Locator::registrate<InputControl>();
+    Locator::registrate<ResourceControl>();
     Locator::registrate<ActionControl<ID>>();
+
+    Locator::provide<InputControl>(&m_input);
+    Locator::provide<ResourceControl>(&m_resources);
     Locator::provide<ActionControl<ID>>(&m_actions);
 }
 
@@ -40,7 +46,14 @@ void Yosai::update_logic(const sf::Time &delta) {
     BasicApplication::update_logic(delta);
 }
 
+void Yosai::update_graphics() {
+    BasicApplication::update_graphics();
+}
+
 void Yosai::init_resources() {
-//    m_resources.texture().register_resource(Textures::ID::Menu_background,
-//            loadFromFile("./resource/default_icon.png"), "Menu_background")
+    m_resources.texture().register_resource(Textures::water, loadFromFile<Texture>(textures_path() + "water.jpg"));
+}
+
+void Yosai::update_input() {
+    BasicApplication::update_input();
 }
