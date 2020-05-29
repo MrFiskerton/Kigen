@@ -9,7 +9,11 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
-#include "Yosai/id/StateIdentifiers.hpp"
+#include <Yosai/id/StateIdentifiers.hpp>
+#include <Yosai/id/ActionsIdentifiers.hpp>
+#include <Yosai/id/ResourceIdentifiers.hpp>
+#include <Kigen/utils/locator/Locator.hpp>
+#include <Kigen/action/ActionControl.hpp>
 
 namespace sf {
     class RenderWindow;

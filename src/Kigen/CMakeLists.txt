@@ -3,91 +3,81 @@ set(SRCROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Files
 set(FILES_HEADER
-        #[[
-        ${INCROOT}/action/detail/ActionControl.inl
-        ${INCROOT}/action/detail/ActionExpression.hpp
-        ${INCROOT}/action/detail/ActionMap.inl
-        ${INCROOT}/action/Action.hpp
-        ${INCROOT}/action/ActionControl.hpp
-        ${INCROOT}/action/ActionMap.hpp
-        #]]
+    ##[[
+    ${INCROOT}/action/detail/ActionLeaves.hpp
+    ${INCROOT}/action/detail/ActionNode.hpp
+    ${INCROOT}/action/detail/LogicNode.hpp
+    ${INCROOT}/action/Action.hpp
+    ${INCROOT}/action/ActionControl.hpp
+    ${INCROOT}/action/ActionRegistry.hpp
+    #]]
 
-        ${INCROOT}/application/DefaultApplicationLoop.hpp
-        ${INCROOT}/application/BasicApplication.hpp
-        ${INCROOT}/application/ApplicationClock.hpp
-        ${INCROOT}/application/IApplication.hpp
+    ${INCROOT}/application/DefaultApplicationLoop.hpp
+    ${INCROOT}/application/BasicApplication.hpp
+    ${INCROOT}/application/ApplicationClock.hpp
+    ${INCROOT}/application/IApplication.hpp
 
-        ${INCROOT}/conversion/to_string.hpp
+    ${INCROOT}/conversion/to_string.hpp
 
-        ${INCROOT}/input/AbstractDevice.hpp
-        ${INCROOT}/input/InputControl.hpp
-        ${INCROOT}/input/KeyboardController.hpp
-        ${INCROOT}/input/MouseController.hpp
-        ${INCROOT}/input/WindowController.hpp
+    ${INCROOT}/graphics/Window.hpp
 
-        ${INCROOT}/render/Window.hpp
+    ${INCROOT}/input/AbstractDevice.hpp
+    ${INCROOT}/input/InputControl.hpp
+    ${INCROOT}/input/KeyActionType.hpp
+    ${INCROOT}/input/Keyboard.hpp
+    ${INCROOT}/input/Mouse.hpp
+    ${INCROOT}/input/WindowStatus.hpp
 
-        ${INCROOT}/resource/ResourceControl.hpp
-        ${INCROOT}/resource/ResourceExceptions.hpp
-        ${INCROOT}/resource/ResourceHolder.hpp
-        ${INCROOT}/resource/ResourceLoader.hpp
-        ${INCROOT}/resource/SFML_LoaderMakers.hpp
+    ${INCROOT}/resource/ResourceControl.hpp
+    ${INCROOT}/resource/ResourceExceptions.hpp
+    ${INCROOT}/resource/ResourceHolder.hpp
+    ${INCROOT}/resource/ResourceLoader.hpp
+    ${INCROOT}/resource/SFML_LoaderMakers.hpp
 
-        ${INCROOT}/service/impl/ServiceCamera.hpp
-        ${INCROOT}/service/interface/ICamera.hpp
-        ${INCROOT}/service/interface/IService.hpp
+    ${INCROOT}/state/State.hpp
+    ${INCROOT}/state/StateControl.hpp
 
-        ${INCROOT}/service/Locator.hpp
-        ${INCROOT}/service/Locator.inl
-        ${INCROOT}/service/NullService.hpp
-        ${INCROOT}/service/Services.hpp
+    ${INCROOT}/utils/locator/IService.hpp
+    ${INCROOT}/utils/locator/ListOfServices.hpp
+    ${INCROOT}/utils/locator/Locator.hpp
+    ${INCROOT}/utils/locator/Locator.inl
+    ${INCROOT}/utils/locator/NullService.hpp
+    ${INCROOT}/utils/Assertion.hpp
+    ${INCROOT}/utils/Logger.hpp
+    ${INCROOT}/utils/NonCopyable.hpp
+    ${INCROOT}/utils/NonMovable.hpp
+    ${INCROOT}/utils/StopWatch.hpp
+    ${INCROOT}/utils/Type.hpp
+    ${INCROOT}/utils/Utils.hpp
 
-        ${INCROOT}/service/Services.hpp
-
-        #${INCROOT}/state/detail/StateControl.inl
-        ${INCROOT}/state/State.hpp
-        ${INCROOT}/state/StateControl.hpp
-
-        ${INCROOT}/utils/Assertion.hpp
-        ${INCROOT}/utils/Logger.hpp
-        ${INCROOT}/utils/NonCopyable.hpp
-        ${INCROOT}/utils/NonMovable.hpp
-        ${INCROOT}/utils/StopWatch.hpp
-        ${INCROOT}/utils/Type.hpp
-        ${INCROOT}/utils/Utils.hpp
-
-        ${INCROOT}/defines.hpp
-   )
+    ${INCROOT}/defines.hpp
+    )
 
 set(FILES_SRC
-        #[[
-        ${SRCROOT}/action/detail/ActionExpression.cpp
-        ${SRCROOT}/action/Action.cpp
-        #]]
+    ##[[
+    ${SRCROOT}/action/Action.cpp
+    #]]
 
-        ${SRCROOT}/application/ApplicationClock.cpp
-        ${SRCROOT}/application/BasicApplication.cpp
+    ${SRCROOT}/application/ApplicationClock.cpp
+    ${SRCROOT}/application/BasicApplication.cpp
 
-        ${SRCROOT}/conversion/to_string.cpp
+    ${SRCROOT}/conversion/to_string.cpp
 
-        ${SRCROOT}/input/AbstractDevice.cpp
-        ${SRCROOT}/input/InputControl.cpp
-        ${SRCROOT}/input/KeyboardController.cpp
-        ${SRCROOT}/input/MouseController.cpp
-        ${SRCROOT}/input/WindowController.cpp
+    ${SRCROOT}/graphics/Window.cpp
 
-        ${SRCROOT}/render/Window.cpp
+    ${SRCROOT}/input/InputControl.cpp
+    ${SRCROOT}/input/Keyboard.cpp
+    ${SRCROOT}/input/Mouse.cpp
+    ${SRCROOT}/input/WindowStatus.cpp
 
-        ${SRCROOT}/service/Locator.cpp
-        ${SRCROOT}/service/NullService.cpp
-        ${SRCROOT}/service/ServiceCamera.cpp
+    ${SRCROOT}/state/State.cpp
+    ${SRCROOT}/state/StateControl.cpp
 
-        ${SRCROOT}/state/State.cpp
-        ${SRCROOT}/state/StateControl.cpp
-
-        ${SRCROOT}/utils/Logger.cpp
-        ${SRCROOT}/utils/StopWatch.cpp
-   )
+    ${SRCROOT}/utils/locator/Locator.cpp
+    ${SRCROOT}/utils/locator/NullService.cpp
+    ${SRCROOT}/utils/Logger.cpp
+    ${SRCROOT}/utils/StopWatch.cpp
+    )
 
 add_library(kigen STATIC ${FILES_HEADER} ${FILES_SRC})
 

@@ -11,6 +11,7 @@ namespace States {
         Title,
         SplashScreen,
         Menu,
+        Game,
         SingleplayerGame,
         MultiplayerGame,
         Loading,

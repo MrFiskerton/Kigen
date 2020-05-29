@@ -6,29 +6,44 @@
 #define INCLUDED_ABSTRACTDEVICECONTROLLER_HPP
 
 
-#include <SFML/Graphics/RenderWindow.hpp>
+#include <Kigen/graphics/Window.hpp>
 #include <Kigen/utils/Logger.hpp>
 #include <Kigen/conversion/to_string.hpp>
+#include "KeyActionType.hpp"
+#include <SFML/Window/Event.hpp>
+#include <Kigen/utils/locator/IService.hpp>
 
-class AbstractDevice {
+namespace kigen {
+namespace device {
+
+class AbstractDevice : public IService {
 public:
-    AbstractDevice();
+    AbstractDevice() : m_enabled(true) {}
 
     virtual ~AbstractDevice() = default;
 
-    virtual void clear_events() = 0;
+    virtual void clear() = 0;
 
-    virtual void handle_event(const sf::Event &event) = 0;
+    virtual void push(const sf::Event &event) = 0;
 
-    virtual void lock();
+    void disable() { m_enabled = false; }
 
-    virtual void unlock();
+    void enable() { m_enabled = true; }
 
-    virtual bool is_locked() const;
+    bool is_enabled() const { return m_enabled; }
 
 private:
-    bool is_action_locked;
+    bool m_enabled;
 };
 
+class NullDevice : public AbstractDevice {
+public:
+    void clear() override {}
+
+    void push(const sf::Event &event) override {}
+};
+
+} //namespace device
+} //namespace kigen
 
 #endif //INCLUDED_ABSTRACTDEVICECONTROLLER_HPP

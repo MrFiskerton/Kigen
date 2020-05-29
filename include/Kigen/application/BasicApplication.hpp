@@ -6,36 +6,47 @@
 #define YOSAI_BASICAPPLICATION_HPP
 
 #include <Kigen/state/StateControl.hpp>
-#include <Kigen/render/Window.hpp>
-#include <Kigen/service/Locator.hpp>
+#include <Kigen/graphics/Window.hpp>
+#include <Kigen/utils/locator/Locator.hpp>
+#include <Kigen/action/ActionControl.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/RenderTexture.hpp>
+#include <Kigen/resource/ResourceControl.hpp>
 #include "DefaultApplicationLoop.hpp"
 #include "IApplication.hpp"
 
 namespace kigen {
-    class BasicApplication : public IApplication {
-    public:
-        BasicApplication();
 
-        bool is_runing() const override;
+class BasicApplication : public IApplication {
+public:
+    BasicApplication();
 
-    private:
-        void update_input() override;
+    bool is_runing() const override;
 
-        void update_logic(const sf::Time &deltaTime) override;
+protected:
+    void update_input() override;
 
-        void update_graphics() override;
+    void update_logic(const sf::Time &deltaTime) override;
 
-        void render() override;
+    void update_graphics() override;
 
-        void init_services();
+    void render() override;
 
-    protected:
-        virtual void init_state_control() = 0;
+    void init_services();
 
-    protected:
-        Window m_window;
-        StateControl m_state_control;
-    };
+protected:
+    virtual void init_state_control() = 0;
+
+protected:
+    sf::RenderWindow   m_window;
+    sf::RenderTexture  m_renderTexture;
+    sf::Sprite         m_canvas;
+
+    StateControl m_state_control;
+    ResourceControl m_resources;
+    InputControl m_input;
+};
+
 } //namespace kigen
 
 #endif //YOSAI_BASICAPPLICATION_HPP

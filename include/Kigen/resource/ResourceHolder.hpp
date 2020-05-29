@@ -14,7 +14,7 @@
 #include <Kigen/utils/Utils.hpp>
 
 template<typename Resource, typename Identifier>
-class ResourceHolder: NonCopyable {
+class ResourceHolder: private NonCopyable {
 public:
     typedef std::unique_ptr<Resource> ResourcePtr;
     typedef ResourceLoader <Resource> Loader;
@@ -44,7 +44,7 @@ public:
             case New:
                 throw resource_access_error("Failed to load resource, id have already been reserved.");
             case Reuse:
-                return at(id);
+                return at(id);//TODO
             case Rewrite:
                 erase(id);
                 return load(id, loader);
