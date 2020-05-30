@@ -20,6 +20,8 @@ set(FILES_HEADER
    )
 
 set(FILES_SRC
+        ${SRCROOT}/id/ResourceIdentifiers.cpp
+
         ${SRCROOT}/models/ConfigurationData.cpp
 
         ${SRCROOT}/states/GameState.cpp

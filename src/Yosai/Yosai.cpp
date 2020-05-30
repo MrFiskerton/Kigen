@@ -5,7 +5,6 @@
 #include "Yosai/Yosai.hpp"
 
 using namespace kigen;
-using namespace Actions;
 using sf::Texture;
 
 Yosai::Yosai() {
@@ -23,6 +22,7 @@ void Yosai::init_state_control() {
 }
 
 void Yosai::init_actions() {
+    using namespace Actions;
     auto &registry = m_actions.get_registry();
 
     registry[close_window] = Action(sf::Keyboard::Escape, Released)
@@ -34,11 +34,11 @@ void Yosai::init_actions() {
 void Yosai::init_services() {
     Locator::registrate<InputControl>();
     Locator::registrate<ResourceControl>();
-    Locator::registrate<ActionControl<ID>>();
+    Locator::registrate<ActionControl<Actions::ID>>();
 
     Locator::provide<InputControl>(&m_input);
     Locator::provide<ResourceControl>(&m_resources);
-    Locator::provide<ActionControl<ID>>(&m_actions);
+    Locator::provide<ActionControl<Actions::ID>>(&m_actions);
 }
 
 void Yosai::update_logic(const sf::Time &delta) {
@@ -50,8 +50,15 @@ void Yosai::update_graphics() {
     BasicApplication::update_graphics();
 }
 
+namespace {
+    void load_textures(TextureHolder& holder) {
+        using namespace Textures;
+        holder.register_resource(ID::water, loadFromFile<Texture>(path(ID::water)));
+    }
+}
+
 void Yosai::init_resources() {
-    m_resources.texture().register_resource(Textures::water, loadFromFile<Texture>(textures_path() + "water.jpg"));
+    load_textures(m_resources.texture());
 }
 
 void Yosai::update_input() {

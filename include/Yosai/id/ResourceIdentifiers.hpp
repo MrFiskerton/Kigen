@@ -5,6 +5,8 @@
 #ifndef INCLUDED_RESOURCEIDENTIFIERS_HPP
 #define INCLUDED_RESOURCEIDENTIFIERS_HPP
 
+#include <string>
+
 namespace sf {
     class Font;
     class Image;
@@ -28,6 +30,8 @@ namespace Textures {
         water,
         SIZE
     };
+
+    const std::string& path(ID id);
 }
 
 namespace Images {
