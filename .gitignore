@@ -1,7 +1,7 @@
 ### Additional directories ###
 cmake-build-debug/*
 bin/*
-
+assets/*
 ### Dolphin ###
 *.directory
 
