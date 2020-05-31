@@ -2,3 +2,6 @@
 	path = deps/SFML
 	url = https://github.com/SFML/SFML
 
+[submodule "assets"]
+	path = assets
+	url = https://github.com/MrFiskerton/Kigen_assets
