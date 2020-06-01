@@ -2,6 +2,7 @@ set(INCROOT ${CMAKE_CURRENT_SOURCE_DIR}/../../include/${CMAKE_PROJECT_NAME})
 set(SRCROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
 set(LIBS ${LIBS} kigen)
+set(LIBS ${LIBS} ImGui-SFML::ImGui-SFML)
 
 # Files
 set(FILES_HEADER

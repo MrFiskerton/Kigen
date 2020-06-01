@@ -4,14 +4,21 @@
 
 #include "Yosai/Yosai.hpp"
 
+
 using namespace kigen;
 using sf::Texture;
 
 Yosai::Yosai() {
+    ImGui::SFML::Init(m_window);
+
     init_services();
     init_resources();
     init_actions();
     init_state_control();
+}
+
+Yosai::~Yosai() {
+    ImGui::SFML::Shutdown();
 }
 
 void Yosai::init_state_control() {
@@ -44,10 +51,27 @@ void Yosai::init_services() {
 void Yosai::update_logic(const sf::Time &delta) {
     m_actions.invoke_callbacks();
     BasicApplication::update_logic(delta);
+//    ImGui::SFML::Update(m_window, delta); // Не работает, а должно
+//    ImGui::EndFrame();
 }
 
 void Yosai::update_graphics() {
-    BasicApplication::update_graphics();
+    ImGui::SFML::Update(m_window, sf::seconds(1.f / 60));
+
+    ImGui::Begin("Hello, world!");
+    ImGui::Button("Look at this pretty button");
+    ImGui::End();
+    //ImGui::ShowTestWindow();
+
+
+    //BasicApplication::update_graphics();
+
+    m_canvas.setTexture(m_rtexture.getTexture());
+
+    m_rtexture.clear();
+    m_state_control.draw(m_rtexture);
+    ImGui::SFML::Render(m_rtexture);
+    m_rtexture.display();
 }
 
 namespace {
@@ -64,5 +88,9 @@ void Yosai::init_resources() {
 }
 
 void Yosai::update_input() {
-    BasicApplication::update_input();
+    static sf::Event event;
+    while (m_window.pollEvent(event)) {
+        m_input.push(event);
+        ImGui::SFML::ProcessEvent(event);
+    }
 }

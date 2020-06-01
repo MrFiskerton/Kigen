@@ -9,9 +9,13 @@
 #include <Yosai/models/ConfigurationData.hpp>
 #include <Kigen/application/BasicApplication.hpp>
 
+#include "imgui-SFML.h"
+#include "imgui.h"
+
 class Yosai final: public kigen::BasicApplication {
 public:
     Yosai ();
+    ~Yosai() override;
 private:
     void init_state_control() override;
     void init_actions();
