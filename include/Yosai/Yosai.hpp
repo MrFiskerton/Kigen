@@ -11,6 +11,7 @@
 
 #include "imgui-SFML.h"
 #include "imgui.h"
+#include <Yosai/ui/Helper_UI.hpp>
 
 class Yosai final: public kigen::BasicApplication {
 public:
@@ -21,6 +22,8 @@ private:
     void init_actions();
     void init_services();
     void init_resources();
+
+    static void invoke_immediate_GUI();
 
 protected:
     void update_input() override;

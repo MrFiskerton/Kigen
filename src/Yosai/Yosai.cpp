@@ -4,7 +4,6 @@
 
 #include "Yosai/Yosai.hpp"
 
-
 using namespace kigen;
 using sf::Texture;
 
@@ -51,27 +50,25 @@ void Yosai::init_services() {
 void Yosai::update_logic(const sf::Time &delta) {
     m_actions.invoke_callbacks();
     BasicApplication::update_logic(delta);
-//    ImGui::SFML::Update(m_window, delta); // Не работает, а должно
-//    ImGui::EndFrame();
+    //ImGui::SFML::Update(m_window, delta);
+    //ImGui::EndFrame();
+}
+
+//#include "../../cmake-build-debug/_deps/imgui-src/imgui_demo.cpp"
+void Yosai::invoke_immediate_GUI() {
+    UI::helper(&UI::status::is_open_helper);
+    UI::simple_overlay(&UI::status::is_open_simple_overlay);
+    //ImGui::ShowDemoWindow();
 }
 
 void Yosai::update_graphics() {
-    ImGui::SFML::Update(m_window, sf::seconds(1.f / 60));
+    ImGui::SFML::Update(m_window, sf::seconds(1.f/60)); //TODO
+    //ImGui::NewFrame();  // Нужно так как в update_logic его закрыли
 
-    ImGui::Begin("Hello, world!");
-    ImGui::Button("Look at this pretty button");
-    ImGui::End();
-    //ImGui::ShowTestWindow();
+    invoke_immediate_GUI();
 
-
-    //BasicApplication::update_graphics();
-
-    m_canvas.setTexture(m_rtexture.getTexture());
-
-    m_rtexture.clear();
-    m_state_control.draw(m_rtexture);
+    BasicApplication::update_graphics();
     ImGui::SFML::Render(m_rtexture);
-    m_rtexture.display();
 }
 
 namespace {

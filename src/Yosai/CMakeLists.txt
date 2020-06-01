@@ -16,6 +16,8 @@ set(FILES_HEADER
         ${INCROOT}/states/MenuState.hpp
         ${INCROOT}/states/States.hpp
 
+        ${INCROOT}/ui/Helper_UI.hpp
+
         ${INCROOT}/GlobalColours.hpp
         ${INCROOT}/Yosai.hpp
    )

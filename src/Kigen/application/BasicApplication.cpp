@@ -6,10 +6,10 @@
 
 namespace kigen {
 
-BasicApplication::BasicApplication(): m_window(sf::VideoMode(500, 500), "TEST") {
+BasicApplication::BasicApplication(): m_window(sf::VideoMode(1280, 720), "TEST") {
     m_window.setFramerateLimit(60);
 
-    m_rtexture.create(500, 500);
+    m_rtexture.create(1280, 720);
     m_rtexture.setSmooth(true);
 }
 
@@ -30,10 +30,11 @@ void kigen::BasicApplication::update_graphics() {
 
     m_rtexture.clear();
     m_state_control.draw(m_rtexture);
-    m_rtexture.display();
 }
 
 void kigen::BasicApplication::render() {
+    m_rtexture.display();
+
     m_window.clear();
     m_window.draw(m_canvas);
     m_window.display();
