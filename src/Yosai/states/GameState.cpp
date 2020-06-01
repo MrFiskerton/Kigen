@@ -14,9 +14,9 @@ GameState::GameState(StateControl &stack) : State(stack) {
 GameState::~GameState() {}
 
 void GameState::draw(sf::RenderTarget &target) {
-    sf::CircleShape shape(100.f);
+    static sf::CircleShape shape(100.f);
 
-    shape.setTexture(&Locator::locate<ResourceControl>().texture()[Textures::water]);
+    shape.setTexture(&Locator::locate<ResourceControl>().texture()[Textures::blue_star]);
     //shape.setFillColor(sf::Color::Green);
 
     target.draw(shape);

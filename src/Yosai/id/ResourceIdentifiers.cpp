@@ -33,8 +33,17 @@ namespace {
     NameHolder<Textures::ID> init(Type<Textures::ID>) {
         NameHolder<Textures::ID> holder(Textures::ID::SIZE);
         const std::string root = "../assets/textures/";
-        const std::string file_extension = ".jpg";
-#define INSERT_ID(identifier) holder.insert(Textures::ID::identifier, make_path(root, #identifier, file_extension))
+        const std::string png = ".png";
+        const std::string jpg = ".jpg";
+#define INSERT_ID(identifier) holder.insert(Textures::ID::identifier, make_path(root, #identifier, png))
+        INSERT_ID(blue_star);
+        INSERT_ID(circle_air);
+        INSERT_ID(circle_earth);
+        INSERT_ID(circle_fire);
+        INSERT_ID(circle_water);
+#undef INSERT_ID
+
+#define INSERT_ID(identifier) holder.insert(Textures::ID::identifier, make_path(root, #identifier, jpg))
         INSERT_ID(water);
 #undef INSERT_ID
         return holder;

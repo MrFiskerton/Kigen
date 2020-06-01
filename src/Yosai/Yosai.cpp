@@ -53,7 +53,9 @@ void Yosai::update_graphics() {
 namespace {
     void load_textures(TextureHolder& holder) {
         using namespace Textures;
-        holder.register_resource(ID::water, loadFromFile<Texture>(path(ID::water)));
+        for(std::size_t id = ID::blue_star; id < ID::SIZE; id++) {
+            holder.register_resource(id, loadFromFile<Texture>(path(static_cast<ID>(id))));
+        }
     }
 }
 

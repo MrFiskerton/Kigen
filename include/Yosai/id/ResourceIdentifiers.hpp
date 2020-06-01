@@ -25,8 +25,11 @@ namespace Fonts {
 
 namespace Textures {
     enum ID : int {
-        Title_background = 0,
-        Menu_background,
+        blue_star = 0,
+        circle_air,
+        circle_earth,
+        circle_fire,
+        circle_water,
         water,
         SIZE
     };
