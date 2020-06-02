@@ -28,6 +28,8 @@ set(FILES_HEADER
     ${INCROOT}/input/Mouse.hpp
     ${INCROOT}/input/WindowStatus.hpp
 
+    ${INCROOT}/physics/PhysicsScene.hpp
+
     ${INCROOT}/resource/ResourceControl.hpp
     ${INCROOT}/resource/ResourceExceptions.hpp
     ${INCROOT}/resource/ResourceHolder.hpp
@@ -69,6 +71,8 @@ set(FILES_SRC
     ${SRCROOT}/input/Keyboard.cpp
     ${SRCROOT}/input/Mouse.cpp
     ${SRCROOT}/input/WindowStatus.cpp
+
+    #${SRCROOT}/physics/PhysicsScene.cpp
 
     ${SRCROOT}/state/State.cpp
     ${SRCROOT}/state/StateControl.cpp
