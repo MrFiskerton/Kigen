@@ -9,9 +9,12 @@
 
 namespace kigen {
     class RigidBody {
+        friend  class PhysicsScene;
+        friend  class Manifold;
     public:
         RigidBody(Shape::Ptr shape, Material material, sf::Vector2f position);
-
+        bool isPendingDestruction() const { return m_is_pending_destruction;}
+        void destroy() { m_is_pending_destruction = true; }
     protected:
         void apply_force(const sf::Vector2f& force);
         void apply_impulse(const sf::Vector2f& impulse, const sf::Vector2f& contact_vector);
@@ -25,6 +28,8 @@ namespace kigen {
         LinearComponent m_lin;
         AngularComponent m_ang;
         Material m_material;
+    private:
+        bool m_is_pending_destruction {false};
     };
 }
 

@@ -28,7 +28,12 @@ set(FILES_HEADER
     ${INCROOT}/input/Mouse.hpp
     ${INCROOT}/input/WindowStatus.hpp
 
+    ${INCROOT}/physics/Manifold.hpp
+    ${INCROOT}/physics/Math.hpp
+    ${INCROOT}/physics/Models.hpp
     ${INCROOT}/physics/PhysicsScene.hpp
+    ${INCROOT}/physics/RigidBody.hpp
+    ${INCROOT}/physics/Shape.hpp
 
     ${INCROOT}/resource/ResourceControl.hpp
     ${INCROOT}/resource/ResourceExceptions.hpp
@@ -72,7 +77,9 @@ set(FILES_SRC
     ${SRCROOT}/input/Mouse.cpp
     ${SRCROOT}/input/WindowStatus.cpp
 
-    #${SRCROOT}/physics/PhysicsScene.cpp
+    ${SRCROOT}/physics/Manifold.cpp
+    ${SRCROOT}/physics/PhysicsScene.cpp
+    ${SRCROOT}/physics/RigidBody.cpp
 
     ${SRCROOT}/state/State.cpp
     ${SRCROOT}/state/StateControl.cpp

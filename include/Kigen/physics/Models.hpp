@@ -10,12 +10,14 @@
 namespace kigen {
 
     struct MassDependedComponent {
-        float mass;
+        float mass;          // == 0 is inf mass
         float inverse_mass;
 
         // For rotations
         float inertia;
         float inverse_inertia;
+
+        bool is_infinite() { return inverse_mass == 0.f; }
     };
 
     struct Material {
