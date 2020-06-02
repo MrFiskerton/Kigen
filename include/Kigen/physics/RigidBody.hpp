@@ -15,6 +15,7 @@ namespace kigen {
         RigidBody(Shape::Ptr shape, Material material, sf::Vector2f position);
         bool isPendingDestruction() const { return m_is_pending_destruction;}
         void destroy() { m_is_pending_destruction = true; }
+        const sf::Vector2f& get_position() { return m_lin.position; }
     protected:
         void apply_force(const sf::Vector2f& force);
         void apply_impulse(const sf::Vector2f& impulse, const sf::Vector2f& contact_vector);

@@ -23,6 +23,8 @@ namespace kigen {
         void update(float dt);
 
     private:
+        void make_contacts();
+        void law_of_gravitation();
         void intergate_force(RigidBody& body, float dt);
         void integrate_velocity(RigidBody& body, float dt);
         void for_body_pairs(const std::function<void(RigidBody& A, RigidBody& B)>& f);

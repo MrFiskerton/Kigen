@@ -54,8 +54,8 @@ static float distance(const sf::Vector2f &a, const sf::Vector2f &b) {
     return std::sqrt(squared_distance(a, b));
 }
 
-static void normalize(sf::Vector2f &a) {
-    a /= length(a);
+static sf::Vector2f& normalize(sf::Vector2f &a) {
+    return a /= length(a);
 }
 
 static float dot(const sf::Vector2f &a, const sf::Vector2f &b) {
