@@ -56,6 +56,7 @@ set(FILES_HEADER
     ${INCROOT}/utils/StopWatch.hpp
     ${INCROOT}/utils/Type.hpp
     ${INCROOT}/utils/Utils.hpp
+    ${INCROOT}/utils/Yield.hpp
 
     ${INCROOT}/defines.hpp
     )
