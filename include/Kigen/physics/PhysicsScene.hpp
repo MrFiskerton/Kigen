@@ -16,12 +16,8 @@ namespace kigen {
 
     class PhysicsScene final {
     public:
-        enum Layer : unsigned {
-            L1 = 0, L2
-        };
-
         void update(float dt);
-
+        void add_body(RigidBody::Ptr& body);
     private:
         void make_contacts();
         void law_of_gravitation();
@@ -30,7 +26,7 @@ namespace kigen {
         void for_body_pairs(const std::function<void(RigidBody& A, RigidBody& B)>& f);
         void clear_state();
     private:
-        std::list<RigidBody> m_bodies;
+        std::list<RigidBody::Ptr> m_bodies;
         std::vector<Manifold> m_contacts;
     };
 

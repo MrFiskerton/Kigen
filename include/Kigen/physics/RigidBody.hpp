@@ -5,16 +5,16 @@
 #ifndef YOSAI_RIGIDBODY_HPP
 #define YOSAI_RIGIDBODY_HPP
 
+#include <Kigen/world/Destructible.hpp>
 #include "Shape.hpp"
 
 namespace kigen {
-    class RigidBody {
+    class RigidBody: public Destructible {
         friend  class PhysicsScene;
         friend  class Manifold;
     public:
+        using Ptr = std::unique_ptr<RigidBody>;
         RigidBody(Shape::Ptr shape, Material material, sf::Vector2f position);
-        bool isPendingDestruction() const { return m_is_pending_destruction;}
-        void destroy() { m_is_pending_destruction = true; }
         const sf::Vector2f& get_position() { return m_lin.position; }
     protected:
         void apply_force(const sf::Vector2f& force);
@@ -29,8 +29,6 @@ namespace kigen {
         LinearComponent m_lin;
         AngularComponent m_ang;
         Material m_material;
-    private:
-        bool m_is_pending_destruction {false};
     };
 }
 

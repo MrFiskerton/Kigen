@@ -8,7 +8,7 @@ namespace kigen {
     void PhysicsScene::for_body_pairs(const std::function<void(RigidBody &A, RigidBody &B)>& f) {
         for (auto it_A = m_bodies.begin(); it_A != m_bodies.end(); it_A++) {
             for (auto it_B = std::next(it_A); it_B != m_bodies.end(); it_B++) {
-                f(*it_A, *it_B);
+                f(*(*it_A), *(*it_B));
             }
         }
     }
@@ -20,11 +20,11 @@ namespace kigen {
 
         // Why is dt/2  ?
         // See https://web.archive.org/web/20120624003417/http://www.niksula.hut.fi/~hkankaan/Homepages/gravity.html
-        for(auto& body: m_bodies) intergate_force(body, dt * 0.5f);
+        for(auto& body: m_bodies) intergate_force(*body, dt * 0.5f);
         for(auto& contact: m_contacts) contact.apply_impulse();
         for(auto& body: m_bodies) {
-            integrate_velocity(body, dt);
-            intergate_force(body, dt * 0.5f);
+            integrate_velocity(*body, dt);
+            intergate_force(*body, dt * 0.5f);
         }
         for(auto& contact: m_contacts) contact.positional_correction();
         clear_state();
@@ -69,13 +69,17 @@ namespace kigen {
     void PhysicsScene::clear_state() {
         //Remove any destroyed bodies
 //        m_bodies.erase(std::remove_if(m_bodies.begin(), m_bodies.end(),
-//                [](const RigidBody* p) {  return p->isPendingDestruction(); }), m_bodies.end());
+//                [](const RigidBody* p) {  return p->is_destroyed(); }), m_bodies.end());
 
         for(auto& body: m_bodies) {
-            body.m_force = {0.f, 0.f};
-            body.m_ang.torque = 0.f;
+            body->m_force = {0.f, 0.f};
+            body->m_ang.torque = 0.f;
         }
         m_contacts.clear();
+    }
+
+    void PhysicsScene::add_body(RigidBody::Ptr &body) {
+        m_bodies.push_back(std::move(body));
     }
 }
 
