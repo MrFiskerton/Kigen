@@ -2,7 +2,12 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 03.06.2020.
 //
 
+#include <Kigen/world/component/Component.hpp>
 #include <Kigen/world/Entity.hpp>
+
+
+#include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/RenderStates.hpp>
 
 namespace {
     sf::Uint64 vacant_uid = 1u; //use 0 for no entity
@@ -91,21 +96,12 @@ namespace kigen {
         for (const auto &dc : dead_children) remove_child(*dc);
     }
 
-    void Entity::add_component(Component::Ptr &component) {
-        Component::Ptr c(static_cast<Component *>(component.release()));
-        if (c->type() == Component::Type::Drawable) {
-            m_drawables.push_back(dynamic_cast<sf::Drawable *>(c.get()));
-        }
-        c->set_parent_UID(m_uid);
-        c->on_start(*this);
-        m_pending_components.push_back(std::move(c));
-    }
-
     sf::Uint64 Entity::get_UID() const { return m_uid; }
 
     void Entity::destroy() {
         Destructible::destroy();
-        for (auto& c : m_components) c->destroy();
+        for (auto& component : m_components) component->destroy();
+        for (auto& child : m_children) child->m_parent = nullptr; //TODO children
     }
 
     void Entity::set_world(World *p_world) {

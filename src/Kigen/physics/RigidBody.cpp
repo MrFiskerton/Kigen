@@ -6,8 +6,8 @@
 #include "Kigen/physics/RigidBody.hpp"
 
 namespace kigen {
-    RigidBody::RigidBody(Shape::Ptr shape, Material material, sf::Vector2f position) {
-        assert( shape );
+    RigidBody::RigidBody(Shape::Ptr shape, sf::Vector2f position, Material material) {
+        assert(shape);
         m_mass = shape->compute_mass(material.density);
     }
 

@@ -12,13 +12,16 @@ namespace kigen {
         }
     }
 
-    void World::create_entity() {
-        Entity::Ptr entity = std::make_unique<Entity>();
-
-        PhysicsComponent::Ptr physic_c = m_physics.add_body(std::make_unique<RigidBody>());
-        physic_c->set_name("physic");
-        entity->add_component(physic_c);
-
-        return std::move(e);
+    void World::update(float dt) {
+        for (auto& layer : m_layers) layer->update(dt); // Must be the first !!! Here apply players input as a force
+        m_physics.update(dt); // After update clear state ( applied forces and torque )
     }
+
+    void World::add_entity(Entity::Ptr &entity, World::Layer layer) {
+        m_layers[layer]->add_child(entity);
+    }
+
+    PhysicsScene &World::physics() { return m_physics; }
+
+    Entity &World::get_layer(World::Layer layer) { return *m_layers[layer]; }
 }

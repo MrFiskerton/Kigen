@@ -11,6 +11,7 @@ set(FILES_HEADER
         ${INCROOT}/id/StateIdentifiers.hpp
 
         ${INCROOT}/models/ConfigurationData.hpp
+        ${INCROOT}/models/Materials.hpp
 
         ${INCROOT}/states/GameState.hpp
         ${INCROOT}/states/MenuState.hpp

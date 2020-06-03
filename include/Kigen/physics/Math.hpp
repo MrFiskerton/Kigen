@@ -11,7 +11,7 @@
 
 inline const float PI = 3.14159265358979f;
 
-bool AlmostEqual2sComplement(float A, float B, unsigned int maxULPs) {
+static bool AlmostEqual2sComplement(float A, float B, unsigned int maxULPs) {
     //ULP (Units in the Last Place)
     //See  https://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/
     //     https://habr.com/ru/post/112953/
@@ -69,11 +69,11 @@ static float cross(const sf::Vector2f &a, const sf::Vector2f &b) {
 
 // Более экзотичные (но необходимые) виды векторных произведений
 // с вектором a и скаляром s, оба возвращают вектор
-sf::Vector2f cross(const sf::Vector2f &a, float s) {
+static sf::Vector2f cross(const sf::Vector2f &a, float s) {
     return {s * a.y, -s * a.x};
 }
 
-sf::Vector2f cross(float s, const sf::Vector2f &a) {
+static sf::Vector2f cross(float s, const sf::Vector2f &a) {
     return {-s * a.y, s * a.x};
 }
 

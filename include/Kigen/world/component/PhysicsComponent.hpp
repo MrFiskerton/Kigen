@@ -5,18 +5,22 @@
 #ifndef YOSAI_PHYSICSCOMPONENT_HPP
 #define YOSAI_PHYSICSCOMPONENT_HPP
 
+#include <utility>
 #include <Kigen/physics/RigidBody.hpp>
-#include "Component.hpp"
+#include "Kigen/world/component/Component.hpp"
+#include "Kigen/world/Entity.hpp"
 
 namespace kigen {
-    class PhysicsComponent: public Component, public RigidBody {
+    class PhysicsComponent: public Component {
     public:
         using Ptr = std::unique_ptr<PhysicsComponent>;
+
+        explicit PhysicsComponent(RigidBody::Ptr body) : body(std::move(body)){}
 
         Type type() const override { return Component::Type::Physics; }
 
         void entity_update(Entity &entity, float dt) override {
-
+            entity.set_world_position(body->m_lin.position);
         }
 
         void on_start(Entity &entity) override {
@@ -24,8 +28,7 @@ namespace kigen {
         }
 
     public:
-
-    private:
+        RigidBody::Ptr body;
     };
 }
 

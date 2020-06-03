@@ -6,7 +6,7 @@
 #define YOSAI_WORLD_HPP
 
 #include <Kigen/physics/PhysicsScene.hpp>
-#include "PhysicsComponent.hpp"
+#include "Kigen/world/component/PhysicsComponent.hpp"
 #include "Entity.hpp"
 
 namespace kigen {
@@ -17,8 +17,12 @@ namespace kigen {
         };
     public:
         World();
-        void create_entity();
+        void add_entity(Entity::Ptr &entity, Layer layer = L1);
 
+        void update(float dt);
+
+        PhysicsScene& physics();
+        Entity& get_layer(Layer layer);
     private:
         std::vector<Entity::Ptr> m_layers;
         PhysicsScene m_physics;

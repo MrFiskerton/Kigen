@@ -50,6 +50,7 @@ set(FILES_HEADER
     ${INCROOT}/utils/locator/Locator.inl
     ${INCROOT}/utils/locator/NullService.hpp
     ${INCROOT}/utils/Assertion.hpp
+    ${INCROOT}/utils/Destructible.hpp
     ${INCROOT}/utils/Logger.hpp
     ${INCROOT}/utils/NonCopyable.hpp
     ${INCROOT}/utils/NonMovable.hpp
@@ -57,6 +58,12 @@ set(FILES_HEADER
     ${INCROOT}/utils/Type.hpp
     ${INCROOT}/utils/Utils.hpp
     ${INCROOT}/utils/Yield.hpp
+
+    ${INCROOT}/world/component/Component.hpp
+    ${INCROOT}/world/component/PhysicsComponent.hpp
+
+    ${INCROOT}/world/Entity.hpp
+    ${INCROOT}/world/World.hpp
 
     ${INCROOT}/defines.hpp
     )
@@ -89,6 +96,10 @@ set(FILES_SRC
     ${SRCROOT}/utils/locator/NullService.cpp
     ${SRCROOT}/utils/Logger.cpp
     ${SRCROOT}/utils/StopWatch.cpp
+
+    ${SRCROOT}/world/component/Component.cpp
+    ${SRCROOT}/world/Entity.cpp
+    ${SRCROOT}/world/World.cpp
     )
 
 add_library(kigen STATIC ${FILES_HEADER} ${FILES_SRC})

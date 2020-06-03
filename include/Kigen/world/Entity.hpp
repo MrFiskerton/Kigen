@@ -5,39 +5,38 @@
 #ifndef YOSAI_ENTITY_HPP
 #define YOSAI_ENTITY_HPP
 
+#include <SFML/Graphics/Transformable.hpp>
+#include <SFML/Graphics/Drawable.hpp>
+
+#include <Kigen/utils/Utils.hpp>
 
 #include <memory>
-#include <SFML/Graphics/Drawable.hpp>
-#include <SFML/Graphics/Transformable.hpp>
-#include <Kigen/utils/NonCopyable.hpp>
 #include <vector>
 
-#include "Component.hpp"
-#include "World.hpp"
+#include "Kigen/world/component/Component.hpp"
 
 namespace kigen {
+    class World;
+
     class Entity final : public sf::Transformable, public sf::Drawable, private NonCopyable, public Destructible {
     public:
         using Ptr = std::unique_ptr<Entity>;
 
         explicit Entity();
-
         void update(float dt);
-
         void add_child(Ptr &child);
-        void add_component(Component::Ptr &component);
+
+        template <typename T>
+        void add_component(std::unique_ptr<T> &component);
 
         Ptr remove_child(Entity &child);
-
         sf::Vector2f get_world_position() const;
         sf::Transform get_world_transform() const;
         const std::vector<Ptr> &get_children() const;
 
         template<typename T>
         T *get_component(const std::string &name);
-
         sf::Uint64 get_UID() const;
-
         void set_world(World* p_world);
         void set_world_position(sf::Vector2f position);
 
@@ -59,6 +58,26 @@ namespace kigen {
         World* m_world;
     };
 
+    template <typename T>
+    void Entity::add_component(std::unique_ptr<T>& component) {
+        Component::Ptr c(static_cast<Component *>(component.release()));
+
+        switch (c->type()){
+            case Component::Type::Drawable:
+                m_drawables.push_back(dynamic_cast<sf::Drawable *>(c.get()));
+                break;
+            case Component::Type::Physics:
+//                if (m_world)
+//                    m_world->physics().add_body((dynamic_cast<PhysicsComponent*>(c.get()))->body);
+//                else
+//                    Logger::error("Entity::add_component", "Can't add physics component without world");
+                break;
+            case Component::Type::Script:break;
+        }
+        c->set_parent_UID(m_uid);
+        c->on_start(*this);
+        m_pending_components.push_back(std::move(c));
+    }
 
     template<typename T>
     T *Entity::get_component(const std::string &name)  {

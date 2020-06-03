@@ -5,16 +5,17 @@
 #ifndef YOSAI_RIGIDBODY_HPP
 #define YOSAI_RIGIDBODY_HPP
 
-#include <Kigen/world/Destructible.hpp>
+#include <Kigen/utils/Destructible.hpp>
 #include "Shape.hpp"
 
 namespace kigen {
     class RigidBody: public Destructible {
-        friend  class PhysicsScene;
-        friend  class Manifold;
+        friend class PhysicsScene;
+        friend class Manifold;
+        friend class PhysicsComponent;
     public:
-        using Ptr = std::unique_ptr<RigidBody>;
-        RigidBody(Shape::Ptr shape, Material material, sf::Vector2f position);
+        using Ptr = std::shared_ptr<RigidBody>;
+        RigidBody(Shape::Ptr shape, sf::Vector2f position, Material material); //TODO material sharing
         const sf::Vector2f& get_position() { return m_lin.position; }
     protected:
         void apply_force(const sf::Vector2f& force);

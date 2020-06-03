@@ -15,7 +15,7 @@ namespace kigen {
 
     class Shape : public sf::Drawable {
     public:
-        typedef std::shared_ptr<Shape> Ptr;
+        using Ptr = std::shared_ptr<Shape>;
     public:
         virtual MassDependedComponent compute_mass(float density) const = 0;
         virtual Type<Shape> type() const = 0;
@@ -24,6 +24,7 @@ namespace kigen {
 
     class Circle : public Shape {
     public:
+        using Ptr = std::shared_ptr<Circle>;
         explicit Circle(float radius) : radius(radius) {};
 
         MassDependedComponent compute_mass(float density) const override {

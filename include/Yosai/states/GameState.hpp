@@ -5,7 +5,13 @@
 #ifndef YOSAI_GAMESTATE_HPP
 #define YOSAI_GAMESTATE_HPP
 
+#include <SFML/Graphics/CircleShape.hpp>
+
 #include <Kigen/state/State.hpp>
+#include <Kigen/world/World.hpp>
+#include <Yosai/models/Materials.hpp>
+
+using namespace kigen;
 
 class GameState : public State {
 
@@ -16,6 +22,12 @@ public:
     void draw(sf::RenderTarget& target) override;
     bool update(const sf::Time& delta) override;
     bool handleEvent(const sf::Event &event) override;
+
+private:
+    Entity::Ptr create_entity();
+
+private:
+    World m_world;
 
 };
 

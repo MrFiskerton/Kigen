@@ -5,11 +5,11 @@
 #ifndef YOSAI_COMPONENT_HPP
 #define YOSAI_COMPONENT_HPP
 
-
-#include <memory>
 #include <Kigen/utils/NonCopyable.hpp>
+#include "Kigen/utils/Destructible.hpp"
 #include <SFML/Config.hpp>
-#include "Destructible.hpp"
+#include <memory>
+
 
 namespace kigen {
     class Entity;

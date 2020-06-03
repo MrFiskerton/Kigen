@@ -2,7 +2,7 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 03.06.2020.
 //
 
-#include "Kigen/world/Component.hpp"
+#include "Kigen/world/component/Component.hpp"
 
 namespace kigen{
     Component::Component() : m_parent_UID(0u) {}
