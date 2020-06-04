@@ -28,13 +28,6 @@ set(FILES_HEADER
     ${INCROOT}/input/Mouse.hpp
     ${INCROOT}/input/WindowStatus.hpp
 
-    ${INCROOT}/physics/Manifold.hpp
-    ${INCROOT}/physics/Math.hpp
-    ${INCROOT}/physics/Models.hpp
-    ${INCROOT}/physics/PhysicsScene.hpp
-    ${INCROOT}/physics/RigidBody.hpp
-    ${INCROOT}/physics/Shape.hpp
-
     ${INCROOT}/resource/ResourceControl.hpp
     ${INCROOT}/resource/ResourceExceptions.hpp
     ${INCROOT}/resource/ResourceHolder.hpp
@@ -63,6 +56,13 @@ set(FILES_HEADER
     ${INCROOT}/world/component/DrawableCircleComponent.hpp
     ${INCROOT}/world/component/PhysicsComponent.hpp
 
+    ${INCROOT}/world/physics/Manifold.hpp
+    ${INCROOT}/world/physics/Math.hpp
+    ${INCROOT}/world/physics/Models.hpp
+    ${INCROOT}/world/physics/PhysicsScene.hpp
+    ${INCROOT}/world/physics/RigidBody.hpp
+    ${INCROOT}/world/physics/Shape.hpp
+
     ${INCROOT}/world/Entity.hpp
     ${INCROOT}/world/World.hpp
 
@@ -86,10 +86,6 @@ set(FILES_SRC
     ${SRCROOT}/input/Mouse.cpp
     ${SRCROOT}/input/WindowStatus.cpp
 
-    ${SRCROOT}/physics/Manifold.cpp
-    ${SRCROOT}/physics/PhysicsScene.cpp
-    ${SRCROOT}/physics/RigidBody.cpp
-
     ${SRCROOT}/state/State.cpp
     ${SRCROOT}/state/StateControl.cpp
 
@@ -100,6 +96,10 @@ set(FILES_SRC
 
     ${SRCROOT}/world/component/Component.cpp
     ${SRCROOT}/world/component/DrawableCircleComponent.cpp
+    ${SRCROOT}/world/component/PhysicsComponent.cpp
+    ${SRCROOT}/world/physics/Manifold.cpp
+    ${SRCROOT}/world/physics/PhysicsScene.cpp
+    ${SRCROOT}/world/physics/RigidBody.cpp
     ${SRCROOT}/world/Entity.cpp
     ${SRCROOT}/world/World.cpp
     )

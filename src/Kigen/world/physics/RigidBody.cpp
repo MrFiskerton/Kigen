@@ -3,7 +3,7 @@
 //
 
 #include <cassert>
-#include "Kigen/physics/RigidBody.hpp"
+#include <Kigen/world/physics/RigidBody.hpp>
 
 namespace kigen {
     RigidBody::RigidBody(Shape::Ptr shape, sf::Vector2f position, Material material)

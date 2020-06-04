@@ -5,7 +5,7 @@
 #ifndef YOSAI_WORLD_HPP
 #define YOSAI_WORLD_HPP
 
-#include <Kigen/physics/PhysicsScene.hpp>
+#include <Kigen/world/physics/PhysicsScene.hpp>
 #include <Kigen/world/component/PhysicsComponent.hpp>
 #include <Kigen/world/component/DrawableCircleComponent.hpp>
 #include "Entity.hpp"

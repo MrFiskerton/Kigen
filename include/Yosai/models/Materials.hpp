@@ -5,17 +5,17 @@
 #ifndef YOSAI_MATERIALS_HPP
 #define YOSAI_MATERIALS_HPP
 
-#include <Kigen/physics/Models.hpp>
+#include <Kigen/world/physics/Models.hpp>
 
 using kigen::Material;
 
 namespace Data {
-inline const Material iron = {
-        .density = 500.f,
-        .restitution = 0.2,
-        .static_friction = 2.5f,
-        .dynamic_friction = 0.5f
-};
+    inline const Material iron = {
+            .density = 500.f,
+            .restitution = 0.2,
+            .static_friction = 2.5f,
+            .dynamic_friction = 0.5f
+    };
 
     inline const Material super_solid = {
             .density = 0.f,

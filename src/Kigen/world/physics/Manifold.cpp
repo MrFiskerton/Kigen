@@ -3,7 +3,7 @@
 //
 
 #include <Kigen/utils/Logger.hpp>
-#include "Kigen/physics/Manifold.hpp"
+#include <Kigen/world/physics/Manifold.hpp>
 
 namespace kigen {
     bool Manifold::solve() {

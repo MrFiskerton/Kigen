@@ -3,7 +3,7 @@
 //
 
 #include <Kigen/utils/Logger.hpp>
-#include "Kigen/physics/PhysicsScene.hpp"
+#include <Kigen/world/physics/PhysicsScene.hpp>
 
 namespace kigen {
     void PhysicsScene::for_body_pairs(const std::function<void(RigidBody &A, RigidBody &B)>& f) {
