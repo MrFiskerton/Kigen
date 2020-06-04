@@ -18,9 +18,10 @@ namespace sf {
 
 namespace Fonts {
     enum ID : int {
-        font_name = 0,
+        TolkienCyr = 0,
         SIZE
     };
+    const std::string& path(ID id);
 }
 
 namespace Textures {

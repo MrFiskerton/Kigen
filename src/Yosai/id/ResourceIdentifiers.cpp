@@ -49,6 +49,16 @@ namespace {
         return holder;
     }
 
+    NameHolder<Fonts::ID> init(Type<Fonts::ID>) {
+        NameHolder<Fonts::ID> holder(Fonts::ID::SIZE);
+        const std::string root = "../assets/fonts/";
+        const std::string ttf = ".ttf";
+#define INSERT_ID(identifier) holder.insert(Fonts::ID::identifier, make_path(root, #identifier, ttf))
+        INSERT_ID(TolkienCyr);
+#undef INSERT_ID
+        return holder;
+    }
+
     template<typename T>
     NameHolder<T> &instance() {
         static auto instance = init(Type<T>());
@@ -56,6 +66,5 @@ namespace {
     }
 }
 
-namespace Textures {
-    const std::string &path(ID id) { return instance<ID>()[id]; }
-}
+namespace Textures { const std::string &path(ID id) { return instance<ID>()[id]; } }
+namespace Fonts    { const std::string &path(ID id) { return instance<ID>()[id]; } }

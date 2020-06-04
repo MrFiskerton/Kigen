@@ -6,6 +6,7 @@
 
 using namespace kigen;
 using sf::Texture;
+using sf::Font;
 
 Yosai::Yosai() {
     ImGui::SFML::Init(m_window);
@@ -78,10 +79,16 @@ namespace {
             holder.register_resource(id, loadFromFile<Texture>(path(static_cast<ID>(id))));
         }
     }
+
+    void load_fonts(FontHolder& holder) {
+        using namespace Fonts;
+        holder.register_resource(TolkienCyr, loadFromFile<Font>(path(TolkienCyr)));
+    }
 }
 
 void Yosai::init_resources() {
     load_textures(m_resources.texture());
+    load_fonts(m_resources.font());
 }
 
 void Yosai::update_input() {

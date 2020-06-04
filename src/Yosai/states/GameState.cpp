@@ -47,9 +47,9 @@ Entity::Ptr GameState::create_entity(sf::Vector2f position) {
     m_world.physics().add_body(physics_c);
     entity->add_component<PhysicsBody>(physics_c);
 
-//    auto circle_c = std::make_unique<DrawableCircle>(50.f);
-//    circle_c->set_texture(Locator::locate<ResourceControl>().texture()[Textures::blue_star]);
-//    entity->add_component(circle_c);
+    auto circle_c = std::make_unique<DrawableCircle>(50.f);
+    circle_c->set_texture(Locator::locate<ResourceControl>().texture()[Textures::blue_star]);
+    entity->add_component(circle_c);
 
     return entity;
 }

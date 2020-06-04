@@ -47,7 +47,7 @@ namespace kigen {
         void draw_self(sf::RenderTarget &target, sf::RenderStates states) const;
         void remove_destroyed_components();
     private:
-        sf::Uint64 m_uid;
+        const sf::Uint64 m_uid;
 
         std::vector<std::unique_ptr<Component>> m_pending_components;
         std::vector<std::unique_ptr<Component>> m_components;

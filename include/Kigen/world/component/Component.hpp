@@ -5,8 +5,9 @@
 #ifndef YOSAI_COMPONENT_HPP
 #define YOSAI_COMPONENT_HPP
 
+#include <Kigen/utils/locator/Locator.hpp>
 #include <Kigen/utils/NonCopyable.hpp>
-#include "Kigen/utils/Destructible.hpp"
+#include <Kigen/utils/Destructible.hpp>
 #include <SFML/Config.hpp>
 #include <memory>
 
@@ -29,7 +30,7 @@ namespace kigen {
         virtual void on_start(Entity &entity);
         void set_owner_UID(sf::Uint64 uid);
         void set_name(const std::string &name);
-        sf::Uint64 get_parent_UID() const;
+        sf::Uint64 get_owner_UID() const;
         const std::string &get_name() const;
     private:
         sf::Uint64 m_owner_UID;

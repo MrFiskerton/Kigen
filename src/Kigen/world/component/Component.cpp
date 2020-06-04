@@ -13,7 +13,7 @@ namespace kigen{
 
     void Component::set_name(const std::string &name) { m_name = name; }
 
-    sf::Uint64 Component::get_parent_UID() const { return m_owner_UID; }
+    sf::Uint64 Component::get_owner_UID() const { return m_owner_UID; }
 
     const std::string &Component::get_name() const { return m_name; }
 

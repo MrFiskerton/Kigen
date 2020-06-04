@@ -8,6 +8,7 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <Kigen/graphics/Vector.hpp>
+#include <SFML/Graphics/Text.hpp>
 #include "DrawableComponent.hpp"
 #include "PhysicsBody.hpp"
 
@@ -23,8 +24,9 @@ namespace kigen {
 
     private:
         PhysicsBody *m_body;
-        sf::CircleShape m_origin;
+        sf::Text m_text_UID;
         Vector m_velocity;
+        sf::CircleShape m_origin;
     };
 }
 
