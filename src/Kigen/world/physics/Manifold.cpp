@@ -19,7 +19,6 @@ namespace kigen {
         if (A.m_mass.is_infinite() && B.m_mass.is_infinite()) infinite_mass_correction();
 
         for (std::size_t i = 0; i < contact_count; ++i) {
-            // Calculate radii from COM to contact
             sf::Vector2f ra = contacts[i] - A.m_lin.position;
             sf::Vector2f rb = contacts[i] - B.m_lin.position;
 
@@ -82,7 +81,7 @@ namespace kigen {
         float k = (std::max(penetration - slop, 0.0f) / (A.m_mass.inverse_mass + B.m_mass.inverse_mass)) * percent;
         sf::Vector2f correction = normal * k;
         A.m_lin.position -= correction * A.m_mass.inverse_mass;
-        B.m_lin.position -= correction * B.m_mass.inverse_mass;
+        B.m_lin.position += correction * B.m_mass.inverse_mass;
     }
 
     void Manifold::infinite_mass_correction() {

@@ -16,9 +16,7 @@ namespace kigen {
 
     void PhysicsScene::update(float dt) {
         make_contacts();
-
         law_of_gravitation();
-
         // Why is dt/2  ?
         // See https://web.archive.org/web/20120624003417/http://www.niksula.hut.fi/~hkankaan/Homepages/gravity.html
         for(auto& body: m_bodies) intergate_force(*body, dt * 0.5f);
@@ -49,6 +47,7 @@ namespace kigen {
             sf::Vector2f delta = B.m_lin.position - A.m_lin.position;
             float r = length(delta);
             if (r > MIN_DISTANCE) return; // isn't close enough
+            if (AlmostEqual2sComplement(r, 0.f, 16u)) return;
 
             sf::Vector2f force = normalize(delta) * G * A.m_mass.mass * B.m_mass.mass / sqr(r);
             A.apply_force(force);

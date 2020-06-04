@@ -8,7 +8,7 @@
 using namespace kigen;
 
 GameState::GameState(StateControl &stack) : State(stack) {
-    for (int i = 0; i < 1; ++i) {
+    for (int i = 0; i < 10; ++i) {
         auto entity = create_entity({400, 400});
         m_world.add_entity(entity, World::L1);
     }
