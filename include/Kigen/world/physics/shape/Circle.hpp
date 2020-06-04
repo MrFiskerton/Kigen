@@ -18,7 +18,7 @@ namespace kigen{
             circle.setFillColor(sf::Color::Transparent);
             circle.setOrigin(radius * 0.5f, radius * 0.5f);
             circle.setOutlineThickness(1.f);
-            circle.setOutlineColor(sf::Color::Red);
+            circle.setOutlineColor(Palette::Lavender);
         };
 
         void compute_mass(float density, MassDependedComponent &result) const override {

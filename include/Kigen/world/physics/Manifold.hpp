@@ -8,6 +8,7 @@
 #include "RigidBody.hpp"
 #include <cmath>
 #include "Collision.hpp"
+#include "PhysicalConstants.hpp"
 
 namespace kigen {
     class Manifold {

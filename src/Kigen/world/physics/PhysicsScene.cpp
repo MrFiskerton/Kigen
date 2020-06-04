@@ -6,6 +6,8 @@
 #include <Kigen/world/physics/PhysicsScene.hpp>
 
 namespace kigen {
+    using namespace physics;
+
     void PhysicsScene::for_body_pairs(const std::function<void(RigidBody &A, RigidBody &B)>& f) {
         for (auto it_A = m_bodies.begin(); it_A != m_bodies.end(); it_A++) {
             for (auto it_B = std::next(it_A); it_B != m_bodies.end(); it_B++) {
@@ -20,7 +22,8 @@ namespace kigen {
         // Why is dt/2  ?
         // See https://web.archive.org/web/20120624003417/http://www.niksula.hut.fi/~hkankaan/Homepages/gravity.html
         for(auto& body: m_bodies) intergate_force(*body, dt * 0.5f);
-        for(auto& contact: m_contacts) contact.apply_impulse();
+        for(size_t i = 0; i < 10; i++)//TODO Solve collisions
+            for(auto& contact: m_contacts) contact.apply_impulse();
         for(auto& body: m_bodies) {
             integrate_velocity(*body, dt);
             intergate_force(*body, dt * 0.5f);
@@ -39,17 +42,18 @@ namespace kigen {
     }
 
     void PhysicsScene::law_of_gravitation() {
-        const float G = 6.67f; //TODO
-        const float MIN_DISTANCE = 300.f;
         for_body_pairs([&](RigidBody &A, RigidBody &B) {
             if (A.m_mass.is_infinite() && B.m_mass.is_infinite()) return;
 
             sf::Vector2f delta = B.m_lin.position - A.m_lin.position;
             float r = length(delta);
-            if (r > MIN_DISTANCE) return; // isn't close enough
-            if (AlmostEqual2sComplement(r, 0.f, 16u)) return;
+            if (r > GRAVITY_MIN_DISTANCE) return; // isn't close enough
+            if (is_almost_zero(r)) return;
 
-            sf::Vector2f force = normalize(delta) * G * A.m_mass.mass * B.m_mass.mass / sqr(r);
+            delta /= r;
+            sf::Vector2f force = delta * G * A.m_mass.mass * B.m_mass.mass / sqr(r);
+            if(is_almost_zero(force)) return;
+
             A.apply_force(force);
             B.apply_force(-force);
         });

@@ -10,6 +10,9 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
+#include <Kigen/utils/Palette.hpp>
+#include <Kigen/world/physics/Math.hpp>
+#include <Kigen/utils/Logger.hpp>
 
 namespace kigen {
     class Vector : public sf::Drawable, sf::Transformable {

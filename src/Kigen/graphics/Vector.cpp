@@ -2,8 +2,6 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 04.06.2020.
 //
 
-#include <Kigen/world/physics/Math.hpp>
-#include <Kigen/utils/Logger.hpp>
 #include "Kigen/graphics/Vector.hpp"
 
 namespace kigen {
@@ -16,7 +14,7 @@ namespace kigen {
     }
 
     void Vector::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-        if(AlmostEqual2sComplement(length(line[1].position - line[0].position), 0.f, 16u)) return;
+        if(is_almost_zero(line[1].position - line[0].position)) return;
 
         target.draw(line, states);
         target.draw(arrow, states);

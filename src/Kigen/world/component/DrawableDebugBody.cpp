@@ -14,11 +14,11 @@ namespace kigen {
     DrawableDebugBody::DrawableDebugBody(PhysicsBody *body)
     : m_body(body) {
         m_origin.setRadius(2.f);
-        m_origin.setFillColor(sf::Color::Red);
+        m_origin.setFillColor(Palette::Lavender);
         m_origin.setOrigin(m_origin.getRadius() * 0.5f, m_origin.getRadius() * 0.5f);
 
         m_text_UID.setFont(Locator::locate<ResourceControl>().font()[Fonts::ID::TolkienCyr]);
-        m_text_UID.setFillColor(sf::Color(153, 153, 255));
+        m_text_UID.setFillColor(Palette::LemonChiffon);
         m_text_UID.setCharacterSize(12); // in pixels, not points!
         m_text_UID.setPosition(m_origin.getOrigin() + sf::Vector2f{-10.f, 20.f});
         m_text_UID.setString(std::to_string(body->get_owner_UID()));

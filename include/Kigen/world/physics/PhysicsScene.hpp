@@ -11,6 +11,7 @@
 #include <functional>
 #include "Manifold.hpp"
 #include <Kigen/world/component/PhysicsBody.hpp>
+#include "PhysicalConstants.hpp"
 
 namespace kigen {
 

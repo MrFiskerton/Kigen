@@ -17,6 +17,8 @@ float to_degrees(const sf::Vector2f& a);
 int round_degrees(float degrees);
 
 bool AlmostEqual2sComplement(float A, float B, unsigned int maxULPs);
+bool is_almost_zero(float a);
+bool is_almost_zero(const sf::Vector2f& a);
 
 float sqr(float a);
 float squared_length(const sf::Vector2f &a);

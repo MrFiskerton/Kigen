@@ -29,6 +29,14 @@ bool AlmostEqual2sComplement(float A, float B, unsigned int maxULPs) {
     return intDiff <= maxULPs;
 }
 
+bool is_almost_zero(float a) {
+    return AlmostEqual2sComplement(a, 0.f, 16u);//std::abs(a) <= 0.0001f;
+}
+
+bool is_almost_zero(const sf::Vector2f& a) {
+    return is_almost_zero(length(a));
+}
+
 float to_degrees(float radians) {
     return radians * _180_div_PI;
 }
@@ -61,9 +69,11 @@ float distance(const sf::Vector2f &a, const sf::Vector2f &b) {
 
 sf::Vector2f& normalize(sf::Vector2f &a) {
     float l = length(a);
-    if (AlmostEqual2sComplement(l, 0.f, 16)) l = 1.f;
-    float inv_len = 1.0f / l;
-    return a *= inv_len;
+    if (!is_almost_zero(l)) {
+        float inv_len = 1.0f / l;
+        a *= inv_len;
+    }
+    return a; ;
 }
 
 float dot(const sf::Vector2f &a, const sf::Vector2f &b) {

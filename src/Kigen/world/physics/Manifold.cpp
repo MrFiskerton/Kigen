@@ -6,6 +6,8 @@
 #include <Kigen/world/physics/Manifold.hpp>
 
 namespace kigen {
+    using namespace physics;
+    
     bool Manifold::solve() {
         CollisionCircleAndCircle(*this);//(A.m_shape->type(), B.m_shape->type());
 
@@ -59,7 +61,7 @@ namespace kigen {
             jt /= (float) contact_count;
 
             // Don't apply tiny friction impulses
-            if (AlmostEqual2sComplement(jt, 0.f, 16)) return;
+            if (is_almost_zero(jt)) return;
 
             // Coulumb's law
             sf::Vector2f tangent_impulse;
@@ -75,10 +77,7 @@ namespace kigen {
     }
 
     void Manifold::positional_correction() {
-        const float slop = 0.05f;   // Penetration allowance               // обычно от 0.01 до 0.1
-        const float percent = 0.4f; // Penetration percentage to correct   // обычно от 20% до 80%
-
-        float k = (std::max(penetration - slop, 0.0f) / (A.m_mass.inverse_mass + B.m_mass.inverse_mass)) * percent;
+        float k = (std::max(penetration - PENETRATION_ALLOWANCE, 0.0f) / (A.m_mass.inverse_mass + B.m_mass.inverse_mass)) * PENETRATION_CORRECTION_PERCENTAGE;
         sf::Vector2f correction = normal * k;
         A.m_lin.position -= correction * A.m_mass.inverse_mass;
         B.m_lin.position += correction * B.m_mass.inverse_mass;

@@ -9,6 +9,8 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include "Component.hpp"
+#include <Kigen/utils/locator/Locator.hpp>
+#include <Kigen/utils/Palette.hpp>
 
 namespace kigen {
 class DrawableComponent : public Component, public sf::Drawable/*, public sf::Transformable*/ {

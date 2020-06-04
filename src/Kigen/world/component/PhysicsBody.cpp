@@ -15,8 +15,8 @@ namespace  kigen {
 
     void PhysicsBody::entity_update(Entity &entity, float dt) {
         entity.set_world_position(m_lin.position);
-//            Logger::notify() << "[" << get_parent_UID() << "] "
-//            << body->m_lin.position.x << " " << body->m_lin.position.y << Logger::endlf();
+            Logger::notify() << "[" << get_owner_UID() << "] "
+            << m_lin.position.x << " " << m_lin.position.y << Logger::endlf();
     }
 
     void PhysicsBody::on_start(Entity &entity) {

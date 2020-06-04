@@ -27,7 +27,7 @@ namespace kigen {
 
         // У окружностей распознана коллизия, вычисляем многообразие
         m.contact_count = 1;
-        if (!AlmostEqual2sComplement(distance, 0.f, 16u)) {
+        if (!is_almost_zero(distance)) {
             m.penetration = r - distance;
             m.normal = n / distance;
         } else {  // Окружности имеют одинаковое положение

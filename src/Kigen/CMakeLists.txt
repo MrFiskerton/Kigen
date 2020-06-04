@@ -65,6 +65,7 @@ set(FILES_HEADER
     ${INCROOT}/world/physics/Manifold.hpp
     ${INCROOT}/world/physics/Math.hpp
     ${INCROOT}/world/physics/Models.hpp
+    ${INCROOT}/world/physics/PhysicalConstants.hpp
     ${INCROOT}/world/physics/PhysicsScene.hpp
     ${INCROOT}/world/physics/RigidBody.hpp
 
