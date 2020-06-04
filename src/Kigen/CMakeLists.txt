@@ -19,6 +19,7 @@ set(FILES_HEADER
 
     ${INCROOT}/conversion/to_string.hpp
 
+    ${INCROOT}/graphics/Vector.hpp
     ${INCROOT}/graphics/Window.hpp
 
     ${INCROOT}/input/AbstractDevice.hpp
@@ -83,6 +84,7 @@ set(FILES_SRC
 
     ${SRCROOT}/conversion/to_string.cpp
 
+    ${SRCROOT}/graphics/Vector.cpp
     ${SRCROOT}/graphics/Window.cpp
 
     ${SRCROOT}/input/InputControl.cpp

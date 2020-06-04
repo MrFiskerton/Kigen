@@ -33,6 +33,10 @@ float to_degrees(float radians) {
     return radians * _180_div_PI;
 }
 
+float to_degrees(const sf::Vector2f& a) {
+    return to_degrees(atan2f(a.y, a.x));
+}
+
 float sqr(float a) { return  a * a;}
 
 float squared_length(const sf::Vector2f &a) {

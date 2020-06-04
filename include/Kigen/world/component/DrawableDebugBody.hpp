@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
+#include <Kigen/graphics/Vector.hpp>
 #include "DrawableComponent.hpp"
 #include "PhysicsBody.hpp"
 
@@ -23,7 +24,7 @@ namespace kigen {
     private:
         PhysicsBody *m_body;
         sf::CircleShape m_origin;
-        sf::VertexArray m_lines;
+        Vector m_velocity;
     };
 }
 

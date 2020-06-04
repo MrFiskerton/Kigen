@@ -12,7 +12,7 @@ using kigen::Material;
 
 namespace Data {
     inline const auto iron = std::make_shared<Material>(Material{
-            .density = 500.f,
+            .density = 100.f,
             .restitution = 0.2,
             .static_friction = 2.5f,
             .dynamic_friction = 0.5f

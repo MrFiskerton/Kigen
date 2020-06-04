@@ -13,6 +13,7 @@ inline const float PI = 3.141592653589793238463f;
 inline const float _180_div_PI = 180.f / PI;
 
 float to_degrees(float radians);
+float to_degrees(const sf::Vector2f& a);
 
 bool AlmostEqual2sComplement(float A, float B, unsigned int maxULPs);
 
