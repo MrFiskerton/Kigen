@@ -21,6 +21,8 @@ namespace kigen {
     };
 
     struct Material {
+        using Ptr = std::shared_ptr<Material>;
+
         float density;
         float restitution;      // упругость
         float static_friction;

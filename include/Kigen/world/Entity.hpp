@@ -68,13 +68,13 @@ namespace kigen {
                 break;
             case Component::Type::Physics:
 //                if (m_world)
-//                    m_world->physics().add_body((dynamic_cast<PhysicsComponent*>(c.get()))->body);
+//                    m_world->physics().add_body((dynamic_cast<PhysicsBody*>(c.get()))->body);
 //                else
 //                    Logger::error("Entity::add_component", "Can't add physics component without world");
                 break;
             case Component::Type::Script:break;
         }
-        c->set_parent_UID(m_uid);
+        c->set_owner_UID(m_uid);
         c->on_start(*this);
         m_pending_components.push_back(std::move(c));
     }

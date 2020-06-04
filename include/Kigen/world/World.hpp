@@ -6,8 +6,8 @@
 #define YOSAI_WORLD_HPP
 
 #include <Kigen/world/physics/PhysicsScene.hpp>
-#include <Kigen/world/component/PhysicsComponent.hpp>
-#include <Kigen/world/component/DrawableCircleComponent.hpp>
+#include <Kigen/world/component/PhysicsBody.hpp>
+#include <Kigen/world/component/DrawableCircle.hpp>
 #include "Entity.hpp"
 
 namespace kigen {

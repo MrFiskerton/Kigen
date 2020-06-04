@@ -10,14 +10,14 @@
 #include <list>
 #include <functional>
 #include "Manifold.hpp"
-#include "RigidBody.hpp"
+#include <Kigen/world/component/PhysicsBody.hpp>
 
 namespace kigen {
 
     class PhysicsScene final {
     public:
         void update(float dt);
-        void add_body(RigidBody::Ptr& body);
+        void add_body(PhysicsBody::Ptr& body);
     private:
         void make_contacts();
         void law_of_gravitation();
@@ -26,7 +26,7 @@ namespace kigen {
         void for_body_pairs(const std::function<void(RigidBody& A, RigidBody& B)>& f);
         void clear_state();
     private:
-        std::list<RigidBody::Ptr> m_bodies;
+        std::list<PhysicsBody*> m_bodies;
         std::vector<Manifold> m_contacts;
     };
 

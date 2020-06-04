@@ -53,15 +53,19 @@ set(FILES_HEADER
     ${INCROOT}/utils/Yield.hpp
 
     ${INCROOT}/world/component/Component.hpp
-    ${INCROOT}/world/component/DrawableCircleComponent.hpp
-    ${INCROOT}/world/component/PhysicsComponent.hpp
+    ${INCROOT}/world/component/DrawableCircle.hpp
+    ${INCROOT}/world/component/DrawableComponent.hpp
+    ${INCROOT}/world/component/DrawableDebugBody.hpp
+    ${INCROOT}/world/component/PhysicsBody.hpp
 
+    ${INCROOT}/world/physics/shape/Circle.hpp
+    ${INCROOT}/world/physics/shape/Shape.hpp
+    ${INCROOT}/world/physics/Collision.hpp
     ${INCROOT}/world/physics/Manifold.hpp
     ${INCROOT}/world/physics/Math.hpp
     ${INCROOT}/world/physics/Models.hpp
     ${INCROOT}/world/physics/PhysicsScene.hpp
     ${INCROOT}/world/physics/RigidBody.hpp
-    ${INCROOT}/world/physics/Shape.hpp
 
     ${INCROOT}/world/Entity.hpp
     ${INCROOT}/world/World.hpp
@@ -95,9 +99,12 @@ set(FILES_SRC
     ${SRCROOT}/utils/StopWatch.cpp
 
     ${SRCROOT}/world/component/Component.cpp
-    ${SRCROOT}/world/component/DrawableCircleComponent.cpp
-    ${SRCROOT}/world/component/PhysicsComponent.cpp
+    ${SRCROOT}/world/component/DrawableCircle.cpp
+    ${SRCROOT}/world/component/DrawableDebugBody.cpp
+    ${SRCROOT}/world/component/PhysicsBody.cpp
+    ${SRCROOT}/world/physics/Collision.cpp
     ${SRCROOT}/world/physics/Manifold.cpp
+    ${SRCROOT}/world/physics/Math.cpp
     ${SRCROOT}/world/physics/PhysicsScene.cpp
     ${SRCROOT}/world/physics/RigidBody.cpp
     ${SRCROOT}/world/Entity.cpp

@@ -7,6 +7,13 @@
 namespace kigen {
 
 BasicApplication::BasicApplication(): m_window(sf::VideoMode(1280, 720), "TEST") {
+//    // Устанавливаем 8-ой уровень сглаживания
+//    ContextSettings settings;
+//    settings.antialiasingLevel = 8;
+//
+//    RenderWindow window(VideoMode(500, 300), "SFML Works!", Style::Default, settings);
+
+
     m_window.setFramerateLimit(60);
 
     m_rtexture.create(1280, 720);

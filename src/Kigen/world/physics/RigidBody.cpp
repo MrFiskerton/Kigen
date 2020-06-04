@@ -6,11 +6,11 @@
 #include <Kigen/world/physics/RigidBody.hpp>
 
 namespace kigen {
-    RigidBody::RigidBody(Shape::Ptr shape, sf::Vector2f position, Material material)
+    RigidBody::RigidBody(const Shape::Ptr& shape, sf::Vector2f position, const Material::Ptr& material)
     : m_shape(shape), m_material(material) {
         assert(shape.get());
         m_lin.position = position;
-        m_mass = shape->compute_mass(material.density);
+        shape->compute_mass(material->density, m_mass);
     }
 
     void RigidBody::apply_force(const sf::Vector2f &force) { m_force += force; }

@@ -2,22 +2,21 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 03.06.2020.
 //
 
-#ifndef YOSAI_DRAWABLECIRCLECOMPONENT_HPP
-#define YOSAI_DRAWABLECIRCLECOMPONENT_HPP
+#ifndef YOSAI_DRAWABLECIRCLE_HPP
+#define YOSAI_DRAWABLECIRCLE_HPP
 
-#include "Component.hpp"
+#include "DrawableComponent.hpp"
 #include <SFML/Graphics/CircleShape.hpp>
 
 
 namespace kigen {
-    class DrawableCircleComponent : public Component, public sf::Drawable {
+    class DrawableCircle : public DrawableComponent {
     public:
-        using Ptr = std::unique_ptr<DrawableCircleComponent>;
-        explicit DrawableCircleComponent(float radius);
+        using Ptr = std::unique_ptr<DrawableCircle>;
+        explicit DrawableCircle(float radius);
 
         Type type() const override;
         void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
-        void debug_draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
         void set_radius(float radius);
         void set_texture(const sf::Texture& texture);
@@ -26,4 +25,4 @@ namespace kigen {
     };
 }
 
-#endif //YOSAI_DRAWABLECIRCLECOMPONENT_HPP
+#endif //YOSAI_DRAWABLECIRCLE_HPP

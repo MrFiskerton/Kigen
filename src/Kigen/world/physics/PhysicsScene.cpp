@@ -21,14 +21,14 @@ namespace kigen {
 
         // Why is dt/2  ?
         // See https://web.archive.org/web/20120624003417/http://www.niksula.hut.fi/~hkankaan/Homepages/gravity.html
-        //for(auto& body: m_bodies) intergate_force(*body, dt * 0.5f);
+        for(auto& body: m_bodies) intergate_force(*body, dt * 0.5f);
         for(auto& contact: m_contacts) contact.apply_impulse();
         for(auto& body: m_bodies) {
             integrate_velocity(*body, dt);
             intergate_force(*body, dt * 0.5f);
         }
         for(auto& contact: m_contacts) contact.positional_correction();
-        //Logger::info("Contacts") << m_contacts.size() << Logger::endlf();
+        //Logger::info("Contacts") << contacts.size() << Logger::endlf();
         clear_state();
     }
 
@@ -80,8 +80,8 @@ namespace kigen {
         m_contacts.clear();
     }
 
-    void PhysicsScene::add_body(RigidBody::Ptr &body) {
-        m_bodies.push_back(body);
+    void PhysicsScene::add_body(PhysicsBody::Ptr &body) {
+        m_bodies.push_back(body.get());
     }
 }
 

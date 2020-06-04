@@ -9,75 +9,27 @@
 #include <cmath>
 #include <cassert>
 
-inline const float PI = 3.14159265358979f;
+inline const float PI = 3.141592653589793238463f;
+inline const float _180_div_PI = 180.f / PI;
 
-static bool AlmostEqual2sComplement(float A, float B, unsigned int maxULPs) {
-    //ULP (Units in the Last Place)
-    //See  https://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/
-    //     https://habr.com/ru/post/112953/
+float to_degrees(float radians);
 
-    /*
-     * ULP - это максимальное количество чисел с плавающей запятой, которое может лежать между проверяемым и ожидаемым
-     * значением. Другой смысл этой переменной – это количество двоичных разрядов (начиная с младшего) в сравниваемых
-     * числах разрешается упустить. Например, maxUlps=16, означает, что младшие 4 бита  могут не совпадать, а числа все
-     * равно будут считаться равными.
-     * */
+bool AlmostEqual2sComplement(float A, float B, unsigned int maxULPs);
 
-    // maxULPs не должен быть отрицательным и не слишком большим, чтобы NaN не был равен ни одному числу
-    assert(maxULPs > 0 && maxULPs < 4 * 1024 * 1024);
-    int aInt = *(int *) &A;
-    int bInt = *(int *) &B;
+float sqr(float a);
+float squared_length(const sf::Vector2f &a);
+float length(const sf::Vector2f &a);
+float squared_distance(const sf::Vector2f &a, const sf::Vector2f &b);
 
-    // Уберем знак в aInt, если есть, чтобы получить правильно упорядоченную последовательность
-    if (aInt < 0) aInt = 0x80000000 - aInt;
-    if (bInt < 0) bInt = 0x80000000 - bInt;
+float distance(const sf::Vector2f &a, const sf::Vector2f &b);
 
-    unsigned int intDiff = abs(aInt - bInt);
-    return intDiff <= maxULPs;
-}
+sf::Vector2f& normalize(sf::Vector2f &a);
 
-static float sqr(float a) { return  a * a;}
+float dot(const sf::Vector2f &a, const sf::Vector2f &b);
 
-static float squared_length(const sf::Vector2f &a) {
-    return a.x * a.x + a.y * a.y;
-}
+float cross(const sf::Vector2f &a, const sf::Vector2f &b);
+sf::Vector2f cross(const sf::Vector2f &a, float s) ;
+sf::Vector2f cross(float s, const sf::Vector2f &a);
 
-static float length(const sf::Vector2f &a) {
-    return std::sqrt(squared_length(a));
-}
-
-static float squared_distance(const sf::Vector2f &a, const sf::Vector2f &b) {
-    return squared_length(a - b);
-}
-
-static float distance(const sf::Vector2f &a, const sf::Vector2f &b) {
-    return std::sqrt(squared_distance(a, b));
-}
-
-static sf::Vector2f& normalize(sf::Vector2f &a) {
-    float l = length(a);
-    if (AlmostEqual2sComplement(l, 0.f, 16)) l = 1.f;
-    float inv_len = 1.0f / l;
-    return a *= inv_len;
-}
-
-static float dot(const sf::Vector2f &a, const sf::Vector2f &b) {
-    return a.x * b.x + a.y * b.y;
-}
-
-// Векторное произведение двух векторов возвращает скаляр
-static float cross(const sf::Vector2f &a, const sf::Vector2f &b) {
-    return a.x * b.y - a.y * b.x;
-}
-
-// Более экзотичные (но необходимые) виды векторных произведений
-// с вектором a и скаляром s, оба возвращают вектор
-static sf::Vector2f cross(const sf::Vector2f &a, float s) {
-    return {s * a.y, -s * a.x};
-}
-
-static sf::Vector2f cross(float s, const sf::Vector2f &a) {
-    return {-s * a.y, s * a.x};
-}
 
 #endif //YOSAI_MATH_HPP

@@ -7,25 +7,25 @@
 
 #include "RigidBody.hpp"
 #include <cmath>
+#include "Collision.hpp"
 
 namespace kigen {
     class Manifold {
     public:
-        Manifold(RigidBody& a, RigidBody& b) : A(a), B(b), m_contact_count(0u) {}
+        Manifold(RigidBody& a, RigidBody& b) : A(a), B(b), contact_count(0u) {}
         bool solve();
-        void solve(Type<Circle>, Type<Circle>);
         void apply_impulse();
         void positional_correction();
         void infinite_mass_correction();
         void initialize();
-    private:
+    public:
         RigidBody& A;
         RigidBody& B;
 
-        float m_penetration;         // Depth of m_penetration from collision
-        sf::Vector2f m_normal;       // From A to B
-        sf::Vector2f m_contacts[2];  // Points of contact during collision
-        std::size_t m_contact_count; // Number of m_contacts that occured during collision
+        float penetration;           // Depth of penetration from collision
+        sf::Vector2f normal;         // From A to B
+        sf::Vector2f contacts[2];    // Points of contact during collision
+        std::size_t contact_count;   // Number of contacts that occured during collision
         float m_e;                   // Mixed restitution
         float m_df;                  // Mixed dynamic friction
         float m_sf;                  // Mixed static friction

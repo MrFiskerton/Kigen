@@ -2,6 +2,7 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 28.05.2020.
 //
 
+#include <Kigen/world/component/DrawableDebugBody.hpp>
 #include "Yosai/states/GameState.hpp"
 
 using namespace kigen;
@@ -41,17 +42,14 @@ bool GameState::handleEvent(const sf::Event &event) {
 Entity::Ptr GameState::create_entity(sf::Vector2f position) {
     Entity::Ptr entity = std::make_unique<Entity>();
 
-    auto circle = std::make_shared<Circle>(10.f);
-    auto body = std::make_shared<RigidBody>(circle, position, Data::iron);
-    m_world.physics().add_body(body);
+    auto circle = std::make_shared<Circle>(15.f);
+    PhysicsBody::Ptr physics_c= std::make_unique<PhysicsBody>(circle, position, Data::iron);
+    m_world.physics().add_body(physics_c);
+    entity->add_component<PhysicsBody>(physics_c);
 
-    PhysicsComponent::Ptr physics_c= std::make_unique<PhysicsComponent>(body);
-    physics_c->set_name("physics");
-    entity->add_component<PhysicsComponent>(physics_c);
-
-    auto circle_c = std::make_unique<DrawableCircleComponent>(50.f);
-    circle_c->set_texture(Locator::locate<ResourceControl>().texture()[Textures::blue_star]);
-    entity->add_component(circle_c);
+//    auto circle_c = std::make_unique<DrawableCircle>(50.f);
+//    circle_c->set_texture(Locator::locate<ResourceControl>().texture()[Textures::blue_star]);
+//    entity->add_component(circle_c);
 
     return entity;
 }
