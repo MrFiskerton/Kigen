@@ -60,6 +60,7 @@ set(FILES_HEADER
     ${INCROOT}/utils/Yield.hpp
 
     ${INCROOT}/world/component/Component.hpp
+    ${INCROOT}/world/component/DrawableCircleComponent.hpp
     ${INCROOT}/world/component/PhysicsComponent.hpp
 
     ${INCROOT}/world/Entity.hpp
@@ -98,6 +99,7 @@ set(FILES_SRC
     ${SRCROOT}/utils/StopWatch.cpp
 
     ${SRCROOT}/world/component/Component.cpp
+    ${SRCROOT}/world/component/DrawableCircleComponent.cpp
     ${SRCROOT}/world/Entity.cpp
     ${SRCROOT}/world/World.cpp
     )

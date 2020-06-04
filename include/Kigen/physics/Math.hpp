@@ -55,7 +55,10 @@ static float distance(const sf::Vector2f &a, const sf::Vector2f &b) {
 }
 
 static sf::Vector2f& normalize(sf::Vector2f &a) {
-    return a /= length(a);
+    float l = length(a);
+    if (AlmostEqual2sComplement(l, 0.f, 16)) l = 1.f;
+    float inv_len = 1.0f / l;
+    return a *= inv_len;
 }
 
 static float dot(const sf::Vector2f &a, const sf::Vector2f &b) {

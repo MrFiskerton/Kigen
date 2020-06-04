@@ -83,6 +83,7 @@ namespace kigen {
     T *Entity::get_component(const std::string &name)  {
         if (name.empty()) return nullptr;
         auto result = std::find_if(m_components.begin(), m_components.end(), [&name](const Component::Ptr &c) {
+            Logger::notify(c->get_name());
             return (c->get_name() == name);
         });
 

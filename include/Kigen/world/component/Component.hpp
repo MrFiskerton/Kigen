@@ -8,6 +8,7 @@
 #include <Kigen/utils/NonCopyable.hpp>
 #include "Kigen/utils/Destructible.hpp"
 #include <SFML/Config.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
 #include <memory>
 
 
@@ -26,7 +27,7 @@ namespace kigen {
         explicit Component();
         virtual ~Component();
         virtual Type type() const = 0;
-        virtual void entity_update(Entity &entity, float dt) = 0;
+        virtual void entity_update(Entity &entity, float dt);
         virtual void on_start(Entity &entity);
         void set_parent_UID(sf::Uint64 uid);
         void set_name(const std::string &name);

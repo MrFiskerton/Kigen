@@ -11,7 +11,7 @@
 namespace UI {
     namespace status {
         inline bool is_open_helper = true;
-        inline bool is_open_simple_overlay = false;
+        inline bool is_open_simple_overlay = true;
     }
 
     static void helper(bool *p_open) {

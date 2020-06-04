@@ -18,5 +18,7 @@ namespace kigen{
     sf::Uint64 Component::get_parent_UID() const { return m_parent_UID; }
 
     const std::string &Component::get_name() const { return m_name; }
+
+    void Component::entity_update(Entity &entity, float dt) {}
 }
 

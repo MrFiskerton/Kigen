@@ -11,7 +11,7 @@
 namespace kigen {
     class Manifold {
     public:
-        Manifold(RigidBody& a, RigidBody& b) : A(a), B(b) {}
+        Manifold(RigidBody& a, RigidBody& b) : A(a), B(b), m_contact_count(0u) {}
         bool solve();
         void solve(Type<Circle>, Type<Circle>);
         void apply_impulse();

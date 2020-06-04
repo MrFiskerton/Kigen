@@ -30,9 +30,9 @@ namespace kigen {
         MassDependedComponent compute_mass(float density) const override {
             MassDependedComponent result{};
             result.mass = PI * radius * radius * density;
-            result.inverse_mass = ((result.mass == 0.f) ? 1.0f / result.mass : 0.0f);
+            result.inverse_mass = ((result.mass != 0.f) ? 1.0f / result.mass : 0.0f);
             result.inertia = result.mass * radius * radius * 0.5f;
-            result.inverse_inertia = ((result.inertia == 0.f) ? 1.0f / result.inertia : 0.0f);
+            result.inverse_inertia = ((result.inertia != 0.f) ? 1.0f / result.inertia : 0.0f);
             return result;
         }
 

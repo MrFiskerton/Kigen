@@ -24,4 +24,8 @@ namespace kigen {
     PhysicsScene &World::physics() { return m_physics; }
 
     Entity &World::get_layer(World::Layer layer) { return *m_layers[layer]; }
+
+    void World::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+        for (const auto& layer : m_layers) target.draw(*layer, states);
+    }
 }

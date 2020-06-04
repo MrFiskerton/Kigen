@@ -21,6 +21,8 @@ namespace kigen {
 
         void entity_update(Entity &entity, float dt) override {
             entity.set_world_position(body->m_lin.position);
+//            Logger::notify() << "[" << get_parent_UID() << "] "
+//            << body->m_lin.position.x << " " << body->m_lin.position.y << Logger::endlf();
         }
 
         void on_start(Entity &entity) override {

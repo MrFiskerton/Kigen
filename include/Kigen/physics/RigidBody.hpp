@@ -20,7 +20,8 @@ namespace kigen {
     protected:
         void apply_force(const sf::Vector2f& force);
         void apply_impulse(const sf::Vector2f& impulse, const sf::Vector2f& contact_vector);
-    protected:
+    //protected://TODO
+    public:
         Shape::Ptr m_shape;
 
         sf::Vector2f m_force;

@@ -24,7 +24,7 @@ public:
     bool handleEvent(const sf::Event &event) override;
 
 private:
-    Entity::Ptr create_entity();
+    Entity::Ptr create_entity(sf::Vector2f position);
 
 private:
     World m_world;

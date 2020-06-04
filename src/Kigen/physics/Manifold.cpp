@@ -2,6 +2,7 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 02.06.2020.
 //
 
+#include <Kigen/utils/Logger.hpp>
 #include "Kigen/physics/Manifold.hpp"
 
 namespace kigen {
@@ -31,7 +32,7 @@ namespace kigen {
 
         // У окружностей распознана коллизия, вычисляем многообразие
         m_contact_count = 1;
-        if (AlmostEqual2sComplement(distance, 0.f, 16u)) {
+        if (!AlmostEqual2sComplement(distance, 0.f, 16u)) {
             m_penetration = r - distance;
             m_normal = n / distance;
         } else {  // Окружности имеют одинаковое положение

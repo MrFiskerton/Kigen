@@ -28,8 +28,8 @@ namespace kigen {
     };
 
     struct LinearComponent {
-        sf::Vector2f position;
-        sf::Vector2f velocity;
+        sf::Vector2f position{0.f, 0.f};
+        sf::Vector2f velocity{0.f, 0.f};
         float acceleration{0.f};
     };
 
