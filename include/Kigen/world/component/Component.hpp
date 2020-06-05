@@ -27,7 +27,7 @@ namespace kigen {
         explicit Component();
         virtual Type type() const = 0;
         virtual void entity_update(Entity &entity, float dt);
-        virtual void on_start(Entity &entity);
+        virtual void on_attach(Entity &entity);
         void set_owner_UID(sf::Uint64 uid);
         void set_name(const std::string &name);
         sf::Uint64 get_owner_UID() const;

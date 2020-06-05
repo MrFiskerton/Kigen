@@ -7,7 +7,7 @@
 namespace kigen{
     Component::Component() : m_owner_UID(0u) {}
 
-    void Component::on_start(Entity &entity) { }
+    void Component::on_attach(Entity &entity) { }
 
     void Component::set_owner_UID(sf::Uint64 uid) { m_owner_UID = uid; }
 

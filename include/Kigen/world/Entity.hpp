@@ -12,6 +12,7 @@
 
 #include <memory>
 #include <vector>
+#include <Kigen/utils/Next.hpp>
 
 #include "Kigen/world/component/Component.hpp"
 
@@ -27,7 +28,7 @@ namespace kigen {
         void add_child(Ptr &child);
 
         template <typename T>
-        void add_component(std::unique_ptr<T> &component);
+        void add_component(std::unique_ptr<T> &in_component);
 
         Ptr remove_child(Entity &child);
         sf::Vector2f get_world_position() const;
@@ -46,12 +47,14 @@ namespace kigen {
         void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
         void draw_self(sf::RenderTarget &target, sf::RenderStates states) const;
         void remove_destroyed_components();
+        void insert_penting_components();
+        void update_children(float dt);
     private:
         const sf::Uint64 m_uid;
-
-        std::vector<std::unique_ptr<Component>> m_pending_components;
-        std::vector<std::unique_ptr<Component>> m_components;
-        std::vector<sf::Drawable *> m_drawables;
+        std::array<std::vector<Component::Ptr>, 2> m_pending_components;
+        Next m_pending_frame;
+        std::vector<Component::Ptr> m_components;
+        std::vector<sf::Drawable *> m_drawables; // TODO list?
 
         std::vector<Ptr> m_children;
         Entity *m_parent;
@@ -59,24 +62,9 @@ namespace kigen {
     };
 
     template <typename T>
-    void Entity::add_component(std::unique_ptr<T>& component) {
-        Component::Ptr c(static_cast<Component *>(component.release()));
-
-        switch (c->type()){
-            case Component::Type::Drawable:
-                m_drawables.push_back(dynamic_cast<sf::Drawable *>(c.get()));
-                break;
-            case Component::Type::Physics:
-//                if (m_world)
-//                    m_world->physics().add_body((dynamic_cast<PhysicsBody*>(c.get()))->body);
-//                else
-//                    Logger::error("Entity::add_component", "Can't add physics component without world");
-                break;
-            case Component::Type::Script:break;
-        }
-        c->set_owner_UID(m_uid);
-        c->on_start(*this);
-        m_pending_components.push_back(std::move(c));
+    void Entity::add_component(std::unique_ptr<T>& in_component) {
+        Component::Ptr component(static_cast<Component *>(in_component.release()));
+        m_pending_components[m_pending_frame].push_back(std::move(component));
     }
 
     template<typename T>
@@ -88,10 +76,14 @@ namespace kigen {
         });
 
         if (result == m_components.end()) {
-            result = std::find_if(m_pending_components.begin(), m_pending_components.end(),
-                                  [&name](const Component::Ptr &c) { return (c->get_name() == name); }
-            );
-            if (result == m_pending_components.end()) return nullptr;
+            bool is_found = false;
+            for (auto& pending_frame: m_pending_components) {
+                result = std::find_if(pending_frame.begin(), pending_frame.end(),
+                             [&name](const Component::Ptr &c) { return (c->get_name() == name); }
+                );
+                if (result != pending_frame.end()) { is_found = true; break; }
+            }
+            if (!is_found) return nullptr;  //TODO test it
         }
         return dynamic_cast<T *>(result->get());
     }

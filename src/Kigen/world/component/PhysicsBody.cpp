@@ -17,7 +17,7 @@ namespace  kigen {
         entity.set_world_position(m_lin.position);
     }
 
-    void PhysicsBody::on_start(Entity &entity) {
+    void PhysicsBody::on_attach(Entity &entity) {
         auto debug_c = std::make_unique<DrawableDebugBody>(this);
         entity.add_component(debug_c);
     }

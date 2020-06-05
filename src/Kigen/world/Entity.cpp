@@ -15,6 +15,7 @@ namespace {
 
 namespace kigen {
     Entity::Entity() : m_uid(vacant_uid++),
+                       m_pending_frame(0, 1),
                        m_parent(nullptr),
                        m_world(nullptr) {}
 
@@ -75,24 +76,43 @@ namespace kigen {
 
     void Entity::update(float dt) {
         remove_destroyed_components();
-
-        //allow entity / components to update each other
         for (auto &c : m_components) c->entity_update(*this, dt);
-
-        //copy any new components we may have aquired via update
-        for (auto &c : m_pending_components) m_components.push_back(std::move(c));
-        m_pending_components.clear();
-
+        insert_penting_components();
         //mark self as deleted if no components remain
-        if (m_components.empty()) destroy();
+        if (m_components.empty()) { destroy();}
+        update_children(dt);
+    }
 
-        //update all children
+    void Entity::insert_penting_components() {
+        //Copy any new components we may have aquired via update
+        std::size_t current = m_pending_frame;
+        m_pending_frame.next();  // Change add_component context for avoid loops
+        for (auto &component : m_pending_components[current]) {
+            switch (component->type()){
+                case Component::Type::Drawable:
+                    m_drawables.push_back(dynamic_cast<sf::Drawable *>(component.get()));
+                    break;
+                case Component::Type::Physics:
+//                if (m_world)
+//                    m_world->physics().add_body((dynamic_cast<PhysicsBody*>(component.get()))->body);
+//                else
+//                    Logger::error("Entity::add_component", "Can't add physics component without world");
+                    break;
+                case Component::Type::Script:break;
+            }
+            component->set_owner_UID(m_uid);
+            component->on_attach(*this);
+            m_components.push_back(std::move(component));
+        }
+        m_pending_components[current].clear();
+    }
+
+    void Entity::update_children(float dt) {
         std::vector<Entity *> dead_children;
         for (auto &c : m_children) {
             c->update(dt);
             if (c->is_destroyed()) dead_children.push_back(&(*c));
         }
-
         for (const auto &dc : dead_children) remove_child(*dc);
     }
 

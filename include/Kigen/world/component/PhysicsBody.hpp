@@ -15,7 +15,7 @@ namespace kigen {
     public:
         using Ptr = std::unique_ptr<PhysicsBody>;
 
-        void on_start(Entity &entity) override;
+        void on_attach(Entity &entity) override;
 
         explicit PhysicsBody(const Shape::Ptr& shape, sf::Vector2f position, const Material::Ptr& material);
         Type type() const override;

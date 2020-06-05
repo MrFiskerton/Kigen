@@ -46,6 +46,7 @@ set(FILES_HEADER
     ${INCROOT}/utils/Assertion.hpp
     ${INCROOT}/utils/Destructible.hpp
     ${INCROOT}/utils/Logger.hpp
+    ${INCROOT}/utils/Next.hpp
     ${INCROOT}/utils/NonCopyable.hpp
     ${INCROOT}/utils/NonMovable.hpp
     ${INCROOT}/utils/Palette.hpp

@@ -17,8 +17,8 @@ GameState::GameState(StateControl &stack) : State(stack) {
         m_world.add_entity(entity, World::L1);
     }
 
-//    auto A = create_entity({100.f, 300.f}, 2);
-//    m_world.add_entity(A);
+    auto A = create_entity({100.f, 300.f}, 2);
+    m_world.add_entity(A);
 
     auto B = create_entity({900.f, 300.f}, 2);
     m_world.add_entity(B);

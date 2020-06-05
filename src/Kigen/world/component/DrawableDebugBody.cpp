@@ -6,7 +6,7 @@
 #include "Kigen/world/component/DrawableDebugBody.hpp"
 
 namespace kigen {
-//    void DrawableDebugBody::on_start(Entity &entity) {
+//    void DrawableDebugBody::on_attach(Entity &entity) {
 //        m_body = entity.get_component<PhysicsBody>("physics");
 //        assert(m_body);
 //    }
