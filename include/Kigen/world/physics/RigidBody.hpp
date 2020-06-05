@@ -16,7 +16,6 @@ namespace kigen {
         using Ptr = std::shared_ptr<RigidBody>;
         RigidBody(const Shape::Ptr& shape, sf::Vector2f position, const Material::Ptr& material);
         const sf::Vector2f& get_position() { return m_lin.position; }
-    protected:
         void apply_force(const sf::Vector2f& force);
         void apply_impulse(const sf::Vector2f& impulse, const sf::Vector2f& contact_vector);
 

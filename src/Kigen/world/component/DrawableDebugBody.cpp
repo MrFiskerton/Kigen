@@ -26,15 +26,14 @@ namespace kigen {
 
     void DrawableDebugBody::entity_update(Entity &entity, float dt) {
         m_velocity.to(m_body->m_lin.velocity);
-//        if (m_body->get_owner_UID() == 2)
-//        Logger::info() << "[" << m_body->get_owner_UID() << "] " << to_degrees(m_body->m_ang.velocity) << "\n";
     }
 
     void DrawableDebugBody::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         m_body->m_shape->draw(target, states);
-        target.draw(m_velocity, states);
 
+        target.draw(m_velocity, states);
         target.draw(m_text_UID, states);
+
         states.transform *= m_origin.getTransform();
         target.draw(m_origin, states );
     }

@@ -2,26 +2,15 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 01.06.2020.
 //
 
-#include <Kigen/utils/Logger.hpp>
 #include <Kigen/world/physics/PhysicsScene.hpp>
 
 namespace kigen {
     using namespace physics;
 
-    void PhysicsScene::for_body_pairs(const std::function<void(RigidBody &A, RigidBody &B)>& f) {
-        for (auto it_A = m_bodies.begin(); it_A != m_bodies.end(); it_A++) {
-            for (auto it_B = std::next(it_A); it_B != m_bodies.end(); it_B++) {
-                f(*(*it_A), *(*it_B));
-            }
-        }
-    }
-
     void PhysicsScene::update(float dt) {
-        make_contacts();
-        law_of_gravitation();
-
         // Why is dt/2  ?
         // See https://web.archive.org/web/20120624003417/http://www.niksula.hut.fi/~hkankaan/Homepages/gravity.html
+        make_contacts();
         for(auto& body: m_bodies) intergate_force(*body, dt * 0.5f);
         for(auto& contact: m_contacts) contact.apply_impulse();
         for(auto& body: m_bodies) {
@@ -37,23 +26,6 @@ namespace kigen {
             if (A.m_mass.is_infinite() && B.m_mass.is_infinite()) return;
             Manifold m(A, B);
             if (m.solve()) m_contacts.emplace_back(m);
-        });
-    }
-
-    void PhysicsScene::law_of_gravitation() {
-        for_body_pairs([&](RigidBody &A, RigidBody &B) {
-            if (A.m_mass.is_infinite() && B.m_mass.is_infinite()) return;
-
-            sf::Vector2f direction = B.m_lin.position - A.m_lin.position;
-            float distance = length(direction);
-            if (distance > GRAVITY_MIN_DISTANCE) return; // isn't close enough
-            if (is_almost_zero(distance)) return;
-
-            sf::Vector2f force = (direction / distance) * G * A.m_mass.mass * B.m_mass.mass / sqr(distance);
-            if(is_almost_zero(force)) return;
-
-            A.apply_force(force);
-            B.apply_force(-force);
         });
     }
 
@@ -81,8 +53,18 @@ namespace kigen {
         m_contacts.clear();
     }
 
-    void PhysicsScene::add_body(PhysicsBody::Ptr &body) {
-        m_bodies.push_back(body.get());
+    void PhysicsScene::add_body(PhysicsBody::Ptr &body) {  m_bodies.push_back(body.get());  }
+
+    void PhysicsScene::for_body_pairs(const std::function<void(RigidBody &A, RigidBody &B)>& f) {
+        for (auto it_A = m_bodies.begin(); it_A != m_bodies.end(); it_A++) {
+            for (auto it_B = std::next(it_A); it_B != m_bodies.end(); it_B++) {
+                f(*(*it_A), *(*it_B));
+            }
+        }
+    }
+
+    void PhysicsScene::for_body(const std::function<void(RigidBody &A)> &f) {
+        for(auto& body: m_bodies) f(*body);
     }
 }
 

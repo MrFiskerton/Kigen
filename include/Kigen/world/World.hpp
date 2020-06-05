@@ -24,6 +24,9 @@ namespace kigen {
         Entity &get_layer(Layer layer);
         void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
     private:
+        void law_of_gravitation();
+        void energy_loss();
+    private:
         std::vector<Entity::Ptr> m_layers;
         PhysicsScene m_physics;
     };

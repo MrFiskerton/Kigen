@@ -19,10 +19,10 @@ namespace Data {
     });
 
     inline const auto super_solid = std::make_shared<Material>(Material{
-            .density = 0.f,
-            .restitution = 0,
-            .static_friction = 100000.f,
-            .dynamic_friction = 100000.5f
+            .density = 1000.f,
+            .restitution = 0.5,
+            .static_friction = 0.1f,
+            .dynamic_friction = 0.15f
     });
 
 }

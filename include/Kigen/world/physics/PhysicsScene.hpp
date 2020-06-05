@@ -12,6 +12,7 @@
 #include "Manifold.hpp"
 #include <Kigen/world/component/PhysicsBody.hpp>
 #include "PhysicalConstants.hpp"
+#include <Kigen/utils/Logger.hpp>
 
 namespace kigen {
 
@@ -19,12 +20,13 @@ namespace kigen {
     public:
         void update(float dt);
         void add_body(PhysicsBody::Ptr& body);
+        void for_body_pairs(const std::function<void(RigidBody& A, RigidBody& B)>& f);
+        void for_body(const std::function<void(RigidBody& A)>& f);
+        std::list<PhysicsBody*>& bodies();
     private:
         void make_contacts();
-        void law_of_gravitation();
         void intergate_force(RigidBody& body, float dt);
         void integrate_velocity(RigidBody& body, float dt);
-        void for_body_pairs(const std::function<void(RigidBody& A, RigidBody& B)>& f);
         void clear_state();
     private:
         std::list<PhysicsBody*> m_bodies;

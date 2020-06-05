@@ -10,6 +10,8 @@
 #include <Kigen/state/State.hpp>
 #include <Kigen/world/World.hpp>
 #include <Yosai/models/Materials.hpp>
+#include <Kigen/world/component/DrawableDebugBody.hpp>
+#include <Kigen/utils/Random.hpp>
 
 using namespace kigen;
 
@@ -24,7 +26,7 @@ public:
     bool handleEvent(const sf::Event &event) override;
 
 private:
-    Entity::Ptr create_entity(sf::Vector2f position);
+    Entity::Ptr create_entity(sf::Vector2f position, int t);
 
 private:
     World m_world;

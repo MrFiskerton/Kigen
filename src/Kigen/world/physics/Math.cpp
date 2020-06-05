@@ -29,8 +29,8 @@ bool AlmostEqual2sComplement(float A, float B, unsigned int maxULPs) {
     return intDiff <= maxULPs;
 }
 
-bool is_almost_zero(float a) {
-    return AlmostEqual2sComplement(a, 0.f, 16u);//std::abs(a) <= 0.0001f;
+bool is_almost_zero(float a, unsigned int maxULPs) {
+    return AlmostEqual2sComplement(a, 0.f, maxULPs);
 }
 
 bool is_almost_zero(const sf::Vector2f& a) {

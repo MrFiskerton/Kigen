@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.11.4)
+cmake_minimum_required(VERSION 3.12.4)
 message(STATUS "Start running CMake...")
 
 # Project name
@@ -19,8 +19,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_BUILD_TYPE Debug)
 
 # Custom compiler flags
+
+
+
 set(WARNING "-Wall -Wextra -Wshadow -Wnon-virtual-dtor ") # -Werror -Weffc++ -pedantic
-set(FLAGS "-std=c++1y -O0 -g") #-O3 -s
+set(FLAGS "-std=c++17 -O0 -g") #-O3 -s
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNING} ${FLAGS}")
 
 #Set output dirs
