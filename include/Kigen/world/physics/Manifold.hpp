@@ -27,9 +27,9 @@ namespace kigen {
         sf::Vector2f normal;         // From A to B
         sf::Vector2f contacts[2];    // Points of contact during collision
         std::size_t contact_count;   // Number of contacts that occured during collision
-        float m_e;                   // Mixed restitution
-        float m_df;                  // Mixed dynamic friction
-        float m_sf;                  // Mixed static friction
+        float m_elasticity;                   // Mixed restitution
+        float m_friction_D;                  // Mixed dynamic friction
+        float m_friction_S;                  // Mixed static friction
     };
 }
 

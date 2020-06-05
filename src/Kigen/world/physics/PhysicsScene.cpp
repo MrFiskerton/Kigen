@@ -19,17 +19,16 @@ namespace kigen {
     void PhysicsScene::update(float dt) {
         make_contacts();
         law_of_gravitation();
+
         // Why is dt/2  ?
         // See https://web.archive.org/web/20120624003417/http://www.niksula.hut.fi/~hkankaan/Homepages/gravity.html
         for(auto& body: m_bodies) intergate_force(*body, dt * 0.5f);
-        for(size_t i = 0; i < 10; i++)//TODO Solve collisions
-            for(auto& contact: m_contacts) contact.apply_impulse();
+        for(auto& contact: m_contacts) contact.apply_impulse();
         for(auto& body: m_bodies) {
             integrate_velocity(*body, dt);
             intergate_force(*body, dt * 0.5f);
         }
         for(auto& contact: m_contacts) contact.positional_correction();
-        //Logger::info("Contacts") << contacts.size() << Logger::endlf();
         clear_state();
     }
 
@@ -45,13 +44,12 @@ namespace kigen {
         for_body_pairs([&](RigidBody &A, RigidBody &B) {
             if (A.m_mass.is_infinite() && B.m_mass.is_infinite()) return;
 
-            sf::Vector2f delta = B.m_lin.position - A.m_lin.position;
-            float r = length(delta);
-            if (r > GRAVITY_MIN_DISTANCE) return; // isn't close enough
-            if (is_almost_zero(r)) return;
+            sf::Vector2f direction = B.m_lin.position - A.m_lin.position;
+            float distance = length(direction);
+            if (distance > GRAVITY_MIN_DISTANCE) return; // isn't close enough
+            if (is_almost_zero(distance)) return;
 
-            delta /= r;
-            sf::Vector2f force = delta * G * A.m_mass.mass * B.m_mass.mass / sqr(r);
+            sf::Vector2f force = (direction / distance) * G * A.m_mass.mass * B.m_mass.mass / sqr(distance);
             if(is_almost_zero(force)) return;
 
             A.apply_force(force);

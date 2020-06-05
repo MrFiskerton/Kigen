@@ -11,11 +11,11 @@
 using kigen::Material;
 
 namespace Data {
-    inline const auto iron = std::make_shared<Material>(Material{
-            .density = 1000.f,
+    inline const auto steel = std::make_shared<Material>(Material{
+            .density = 50.f,
             .restitution = 0.8f,
-            .static_friction = 0.5f,
-            .dynamic_friction = 0.5f
+            .static_friction = 0.574f,
+            .dynamic_friction = 0.542f
     });
 
     inline const auto super_solid = std::make_shared<Material>(Material{

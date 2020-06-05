@@ -3,8 +3,12 @@
 //
 
 #include <Yosai/Yosai.hpp>
+#include <cfenv>
 
 int main(/*int argc, char *argv[]*/) {
+    // Enable floating point exceptions
+    // You'll get a SIGFPE when your NaN value is produced
+    feenableexcept(FE_INVALID | FE_OVERFLOW);
     try {
         Yosai instance;
         kigen::default_loop(instance);

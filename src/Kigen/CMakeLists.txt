@@ -48,6 +48,8 @@ set(FILES_HEADER
     ${INCROOT}/utils/Logger.hpp
     ${INCROOT}/utils/NonCopyable.hpp
     ${INCROOT}/utils/NonMovable.hpp
+    ${INCROOT}/utils/Palette.hpp
+    ${INCROOT}/utils/Random.hpp
     ${INCROOT}/utils/StopWatch.hpp
     ${INCROOT}/utils/Type.hpp
     ${INCROOT}/utils/Utils.hpp
@@ -99,6 +101,7 @@ set(FILES_SRC
     ${SRCROOT}/utils/locator/Locator.cpp
     ${SRCROOT}/utils/locator/NullService.cpp
     ${SRCROOT}/utils/Logger.cpp
+    ${SRCROOT}/utils/Random.cpp
     ${SRCROOT}/utils/StopWatch.cpp
 
     ${SRCROOT}/world/component/Component.cpp

@@ -8,18 +8,24 @@
 using namespace kigen;
 
 GameState::GameState(StateControl &stack) : State(stack) {
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 50; ++i) {
         auto entity = create_entity({400, 400});
         m_world.add_entity(entity, World::L1);
     }
+
+    for (int i = 0; i < 50; ++i) {
+        auto entity = create_entity({800, 400});
+        m_world.add_entity(entity, World::L1);
+    }
+
     auto A = create_entity({200.f, 300.f});
     m_world.add_entity(A);
 
-    auto B = create_entity({200.f, 600.f});
+    auto B = create_entity({800.f, 300.f});
     m_world.add_entity(B);
 
-    auto C = create_entity({800.f, 270.f});
-    m_world.add_entity(C);
+//    auto C = create_entity({800.f, 270.f});
+//    m_world.add_entity(C);
 
     m_world.get_layer(World::L1).setPosition(0, 0);
 }
@@ -43,7 +49,7 @@ Entity::Ptr GameState::create_entity(sf::Vector2f position) {
     Entity::Ptr entity = std::make_unique<Entity>();
 
     auto circle = std::make_shared<Circle>(15.f);
-    PhysicsBody::Ptr physics_c= std::make_unique<PhysicsBody>(circle, position, Data::iron);
+    PhysicsBody::Ptr physics_c= std::make_unique<PhysicsBody>(circle, position, Data::steel);
     m_world.physics().add_body(physics_c);
     entity->add_component<PhysicsBody>(physics_c);
 

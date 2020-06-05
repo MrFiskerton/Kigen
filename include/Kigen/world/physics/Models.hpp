@@ -10,12 +10,12 @@
 namespace kigen {
 
     struct MassDependedComponent {
-        float mass;          // == 0 is inf mass
-        float inverse_mass;
+        float mass{0.f};          // == 0 is inf mass
+        float inverse_mass{0.f};
 
         // For rotations
-        float inertia;
-        float inverse_inertia;
+        float inertia{0.f};
+        float inverse_inertia{0.f};
 
         bool is_infinite() { return inverse_mass == 0.f; }
     };
@@ -23,10 +23,10 @@ namespace kigen {
     struct Material {
         using Ptr = std::shared_ptr<Material>;
 
-        float density;
-        float restitution;      // упругость
-        float static_friction;
-        float dynamic_friction;
+        float density{0.f};
+        float restitution{0.f};      // упругость
+        float static_friction{0.f};
+        float dynamic_friction{0.f};
     };
 
     struct LinearComponent {
@@ -36,9 +36,9 @@ namespace kigen {
     };
 
     struct AngularComponent { // Угловые компоненты
-        float orientation; // в радианах
-        float velocity;
-        float torque;
+        float orientation{0.f}; // в радианах
+        float velocity{0.f};
+        float torque{0.f};
     };
 
 

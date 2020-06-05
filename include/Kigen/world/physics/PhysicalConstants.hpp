@@ -11,7 +11,7 @@ namespace physics {
     inline const float GRAVITY_MIN_DISTANCE = 500.f;
 
     // Manifold::positional_correction
-    inline const float PENETRATION_ALLOWANCE = 0.05f;            // обычно от 0.01 до 0.1
+    inline const float PENETRATION_ALLOWANCE = 0.03f;            // обычно от 0.01 до 0.1
     inline const float PENETRATION_CORRECTION_PERCENTAGE = 0.4f; // обычно от 20% до 80%
 
 }

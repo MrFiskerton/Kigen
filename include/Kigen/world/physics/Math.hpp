@@ -11,6 +11,7 @@
 
 inline const float PI = 3.141592653589793238463f;
 inline const float _180_div_PI = 180.f / PI;
+inline const float _2_PI = 2 * PI;
 
 float to_degrees(float radians);
 float to_degrees(const sf::Vector2f& a);

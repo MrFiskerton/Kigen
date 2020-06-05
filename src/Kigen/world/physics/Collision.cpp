@@ -4,6 +4,7 @@
 
 #include <Kigen/world/physics/Collision.hpp>
 #include <Kigen/world/physics/Manifold.hpp>
+#include <Kigen/utils/Random.hpp>
 
 namespace kigen {
 
@@ -32,7 +33,7 @@ namespace kigen {
             m.normal = n / distance;
         } else {  // Окружности имеют одинаковое положение
             m.penetration = circle_A->radius;
-            m.normal = {0.f, 1.f}; // Случайно выбрано
+            m.normal = random_direction(); // Случайно выбрано
         }
         m.contacts[0] = m.normal * circle_A->radius + A.m_lin.position;
     }
