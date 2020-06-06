@@ -52,7 +52,7 @@ int round_degrees(float degrees) {
 float sqr(float a) { return  a * a;}
 
 float squared_length(const sf::Vector2f &a) {
-    return a.x * a.x + a.y * a.y;
+    return dot(a, a);
 }
 
 float length(const sf::Vector2f &a) {
@@ -80,13 +80,13 @@ float dot(const sf::Vector2f &a, const sf::Vector2f &b) {
     return a.x * b.x + a.y * b.y;
 }
 
-// Векторное произведение двух векторов возвращает скаляр
+// Векторное произведение двух 2D векторов возвращает скаляр
 float cross(const sf::Vector2f &a, const sf::Vector2f &b) {
     return a.x * b.y - a.y * b.x;
 }
 
 // Более экзотичные (но необходимые) виды векторных произведений
-// с вектором a и скаляром s, оба возвращают вектор
+// С вектором a и скаляром s, оба возвращают вектор
 sf::Vector2f cross(const sf::Vector2f &a, float s) {
     return {s * a.y, -s * a.x};
 }

@@ -6,7 +6,6 @@
 #define YOSAI_CIRCLE_HPP
 
 #include <SFML/Graphics/CircleShape.hpp>
-#include <SFML/Graphics/RenderTarget.hpp>
 #include "Kigen/world/physics/shape/Shape.hpp"
 
 namespace kigen{
@@ -22,10 +21,11 @@ namespace kigen{
         };
 
         void compute_mass(float density, MassDependedComponent &result) const override {
-            result.mass = PI * radius * radius * density;
-            result.inverse_mass = ((result.mass != 0.f) ? 1.0f / result.mass : 0.0f);
-            result.inertia = result.mass * radius * radius * 0.5f;
-            result.inverse_inertia = ((result.inertia != 0.f) ? 1.0f / result.inertia : 0.0f);
+            result.compute_mass(PI * radius * radius, density);
+
+            // Thin, solid disk of radius r and mass m.
+            // See https://en.wikipedia.org/wiki/List_of_moments_of_inertia
+            result.compute_inertia(radius * radius * 0.5f); // Iz
         }
 
         //TODO

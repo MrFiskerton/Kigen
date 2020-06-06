@@ -6,6 +6,7 @@
 #define YOSAI_SHAPE_HPP
 
 #include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
 #include <memory>
 #include "Kigen/world/physics/Models.hpp"
 #include "Kigen/world/physics/Math.hpp"
@@ -17,7 +18,7 @@ namespace kigen {
     public:
         using Ptr = std::shared_ptr<Shape>;
         enum Type {
-            Circle, SIZE
+            Circle, Polygon, SIZE
         };
     public:
         virtual void compute_mass(float density, MassDependedComponent &result) const = 0;

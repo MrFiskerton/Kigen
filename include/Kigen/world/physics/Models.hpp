@@ -6,6 +6,7 @@
 #define YOSAI_MODELS_HPP
 
 #include <SFML/System.hpp>
+#include "Math.hpp"
 
 namespace kigen {
 
@@ -18,6 +19,17 @@ namespace kigen {
         float inverse_inertia{0.f};
 
         bool is_infinite() { return inverse_mass == 0.f; }
+
+        void compute_mass(float area, float density) {
+            assert(area >= 0);
+            mass = area * density;
+            inverse_mass = (is_almost_zero(mass) ? 0.f : 1.f / mass);
+        }
+
+        void compute_inertia(float I_coeficient) {
+            inertia = mass * I_coeficient;
+            inverse_inertia = (is_almost_zero(inertia) ? 0.f : 1.f / inertia);;
+        }
     };
 
     struct Material {

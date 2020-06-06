@@ -5,8 +5,7 @@
 #ifndef YOSAI_GAMESTATE_HPP
 #define YOSAI_GAMESTATE_HPP
 
-#include <SFML/Graphics/CircleShape.hpp>
-
+#include <Kigen/world/physics/shape/Polygon.hpp>
 #include <Kigen/state/State.hpp>
 #include <Kigen/world/World.hpp>
 #include <Yosai/models/Materials.hpp>

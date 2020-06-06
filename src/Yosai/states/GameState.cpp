@@ -33,6 +33,12 @@ GameState::~GameState() {}
 
 void GameState::draw(sf::RenderTarget &target) {
     target.draw(m_world);
+
+//    sf::VertexArray array;
+//    array.append({});
+//    auto polygon = std::make_shared<Polygon>(array);
+//    auto poly_c = std::make_unique<DrawableDebugBody>(PhysicsBody::Ptr());
+//    m_world.get_layer(World::L1).get_children()[0]->add_component(poly_c);
 }
 
 bool GameState::update(const sf::Time &delta) {
@@ -55,9 +61,9 @@ Entity::Ptr GameState::create_entity(sf::Vector2f position, int t) {
             m_world.physics().add_body(physics_c);
             entity->add_component<PhysicsBody>(physics_c);
 
-            auto circle_c = std::make_unique<DrawableCircle>(50.f);
-            circle_c->set_texture(Locator::locate<ResourceControl>().texture()[Textures::blue_star]);
-            entity->add_component(circle_c);
+//            auto circle_c = std::make_unique<DrawableCircle>(50.f);
+//            circle_c->set_texture(Locator::locate<ResourceControl>().texture()[Textures::blue_star]);
+//            entity->add_component(circle_c);
         }
             break;
         case 2: {
@@ -67,9 +73,9 @@ Entity::Ptr GameState::create_entity(sf::Vector2f position, int t) {
             m_world.physics().add_body(physics_c);
             entity->add_component<PhysicsBody>(physics_c);
 
-            auto circle_c = std::make_unique<DrawableCircle>(50.f);
-            circle_c->set_texture(Locator::locate<ResourceControl>().texture()[Textures::circle_earth]);
-            entity->add_component(circle_c);
+//            auto circle_c = std::make_unique<DrawableCircle>(50.f);
+//            circle_c->set_texture(Locator::locate<ResourceControl>().texture()[Textures::circle_earth]);
+//            entity->add_component(circle_c);
         }
     }
     return entity;

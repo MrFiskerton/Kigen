@@ -63,6 +63,7 @@ set(FILES_HEADER
     ${INCROOT}/world/component/PhysicsBody.hpp
 
     ${INCROOT}/world/physics/shape/Circle.hpp
+    ${INCROOT}/world/physics/shape/Polygon.hpp
     ${INCROOT}/world/physics/shape/Shape.hpp
     ${INCROOT}/world/physics/Collision.hpp
     ${INCROOT}/world/physics/Manifold.hpp
