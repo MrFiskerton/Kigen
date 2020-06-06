@@ -11,6 +11,7 @@
 #include "Kigen/world/physics/Models.hpp"
 #include "Kigen/world/physics/Math.hpp"
 #include <Kigen/utils/Palette.hpp>
+#include <Kigen/utils/Logger.hpp>
 
 namespace kigen {
 

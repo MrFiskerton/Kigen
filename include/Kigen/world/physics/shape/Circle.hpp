@@ -13,32 +13,12 @@ namespace kigen{
     public:
         using Ptr = std::shared_ptr<Circle>;
 
-        explicit Circle(float radius) : radius(radius),  circle(radius) {
-            circle.setFillColor(sf::Color::Transparent);
-            circle.setOrigin(radius * 0.5f, radius * 0.5f);
-            circle.setOutlineThickness(1.f);
-            circle.setOutlineColor(Palette::Lavender);
-        };
-
-        void compute_mass(float density, MassDependedComponent &result) const override {
-            result.compute_mass(PI * radius * radius, density);
-
-            // Thin, solid disk of radius r and mass m.
-            // See https://en.wikipedia.org/wiki/List_of_moments_of_inertia
-            result.compute_inertia(radius * radius * 0.5f); // Iz
-        }
-
-        //TODO
-        Type type() const override { return Shape::Type::Circle; }
-
-        void draw(sf::RenderTarget &target, sf::RenderStates states) const override {
-            states.transform *= circle.getTransform();
-            target.draw(circle, states);
-        }
-
-    public:
+        explicit Circle(float radius);
+        void compute_mass(float density, MassDependedComponent &result) const override;
+        Type type() const override;
+        void draw(sf::RenderTarget &target, sf::RenderStates states) const override ;
+    public: //TODO
         float radius;
-
     private:
         sf::CircleShape circle;
     };

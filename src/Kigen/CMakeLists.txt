@@ -110,6 +110,8 @@ set(FILES_SRC
     ${SRCROOT}/world/component/DrawableCircle.cpp
     ${SRCROOT}/world/component/DrawableDebugBody.cpp
     ${SRCROOT}/world/component/PhysicsBody.cpp
+    ${SRCROOT}/world/physics/shape/Circle.cpp
+    ${SRCROOT}/world/physics/shape/Polygon.cpp
     ${SRCROOT}/world/physics/Collision.cpp
     ${SRCROOT}/world/physics/Manifold.cpp
     ${SRCROOT}/world/physics/Math.cpp

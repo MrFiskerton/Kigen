@@ -21,6 +21,8 @@ bool AlmostEqual2sComplement(float A, float B, unsigned int maxULPs);
 bool is_almost_zero(float a, unsigned int maxULPs = 16u);
 bool is_almost_zero(const sf::Vector2f& a);
 
+bool is_even(std::size_t a);
+
 float sqr(float a);
 float squared_length(const sf::Vector2f &a);
 float length(const sf::Vector2f &a);

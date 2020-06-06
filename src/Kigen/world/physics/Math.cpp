@@ -37,6 +37,10 @@ bool is_almost_zero(const sf::Vector2f& a) {
     return is_almost_zero(length(a));
 }
 
+bool is_even(std::size_t a) {
+    return !(a & 1u);
+}
+
 float to_degrees(float radians) {
     return radians * _180_div_PI;
 }

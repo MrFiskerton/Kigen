@@ -7,7 +7,7 @@
 using namespace kigen;
 
 GameState::GameState(StateControl &stack) : State(stack) {
-    for (int i = 0; i < 20; ++i) {
+    for (int i = 0; i < 50; ++i) {
         auto entity = create_entity({400, 400}, 1);
         m_world.add_entity(entity, World::L1);
     }
@@ -26,19 +26,31 @@ GameState::GameState(StateControl &stack) : State(stack) {
 //    auto C = create_entity({800.f, 270.f});
 //    m_world.add_entity(C);
 
-    m_world.get_layer(World::L1).setPosition(0, 0);
+    m_world.get_layer(World::L1).setPosition(500, 500);
+
+    //
+
+    //
+    sf::VertexArray array;
+    int n = random(3, 7);
+    float s = random(20.f, 60.f);
+    for (int i = 0; i < n; i++){
+        array.append( sf::Vector2f{random(-s, s)+ 65, random(-s, s)+65});
+    }
+//    array.append(sf::Vector2f{50, 50});
+//    array.append(sf::Vector2f{200, 50});
+//    array.append(sf::Vector2f{100, 150});
+
+    auto polygon = std::make_shared<Polygon>(array);
+    static PhysicsBody::Ptr physics_c = std::make_unique<PhysicsBody>(polygon, sf::Vector2f{500, 500}, Data::steel);
+    auto poly_c = std::make_unique<DrawableDebugBody>(physics_c.get());
+    m_world.get_layer(World::L1).add_component(poly_c);
 }
 
 GameState::~GameState() {}
 
 void GameState::draw(sf::RenderTarget &target) {
     target.draw(m_world);
-
-//    sf::VertexArray array;
-//    array.append({});
-//    auto polygon = std::make_shared<Polygon>(array);
-//    auto poly_c = std::make_unique<DrawableDebugBody>(PhysicsBody::Ptr());
-//    m_world.get_layer(World::L1).get_children()[0]->add_component(poly_c);
 }
 
 bool GameState::update(const sf::Time &delta) {
@@ -50,13 +62,12 @@ bool GameState::handleEvent(const sf::Event &event) {
     return false;
 }
 
-
 Entity::Ptr GameState::create_entity(sf::Vector2f position, int t) {
     Entity::Ptr entity = std::make_unique<Entity>();
 
     switch (t) {
         case 1: {
-            auto circle = std::make_shared<Circle>(random(10.f, 30.f));
+            auto circle = std::make_shared<Circle>(random(5.f, 15.f));
             PhysicsBody::Ptr physics_c = std::make_unique<PhysicsBody>(circle, position, Data::steel);
             m_world.physics().add_body(physics_c);
             entity->add_component<PhysicsBody>(physics_c);
