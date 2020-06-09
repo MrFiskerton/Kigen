@@ -2,8 +2,8 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 04.06.2020.
 //
 
-#ifndef YOSAI_PHYSICALCONSTANTS_HPP
-#define YOSAI_PHYSICALCONSTANTS_HPP
+#ifndef YOSAI_PHYSICSCONSTANTS_HPP
+#define YOSAI_PHYSICSCONSTANTS_HPP
 
 namespace physics {
     // World::law_of_gravitation
@@ -18,4 +18,4 @@ namespace physics {
     inline const float ENERGY_LOSS_FACTOR = 0.995f;
 }
 
-#endif //YOSAI_PHYSICALCONSTANTS_HPP
+#endif //YOSAI_PHYSICSCONSTANTS_HPP

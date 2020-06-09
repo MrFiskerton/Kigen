@@ -8,6 +8,7 @@
 #include <Kigen/world/physics/PhysicsScene.hpp>
 #include <Kigen/world/component/PhysicsBody.hpp>
 #include <Kigen/world/component/DrawableCircle.hpp>
+#include <Kigen/world/physics/PhysicsLaw.hpp>
 #include "Entity.hpp"
 
 namespace kigen {
@@ -19,6 +20,7 @@ namespace kigen {
     public:
         World();
         void add_entity(Entity::Ptr &entity, Layer layer = L1);
+        void add_physics_law(const PhysicsLaw& law);
         Entity::Ptr create_entity();
         void update(float dt);
         PhysicsScene &physics();
@@ -26,14 +28,12 @@ namespace kigen {
         void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
     private:
         void message_delivery();
-        void law_of_gravitation();
-        void energy_loss();
-
     public:
         MessageBus m_message_bus;
     private:
         std::vector<Entity::Ptr> m_layers;
-        PhysicsScene m_physics;
+        std::vector<PhysicsLaw> m_physics_laws;
+        PhysicsScene m_physics_scene;
     };
 }
 

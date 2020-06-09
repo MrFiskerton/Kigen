@@ -15,11 +15,10 @@ namespace kigen {
     }
 
     void World::update(float dt) {
-        for (auto& layer : m_layers) layer->update(dt); // Must be the first !!! Here apply players input as a force
+        for (auto& layer : m_layers) layer->update(dt);  // Note: Must be before physics scene update !
+        for (auto& law : m_physics_laws) law(m_physics_scene); // Apply the laws of physics
         message_delivery();
-        energy_loss();
-        law_of_gravitation();
-        m_physics.update(dt); // After update clear state ( applied forces and torque )
+        m_physics_scene.update(dt); // After update clears state ( applied forces and torque )
     }
 
     void World::message_delivery() {
@@ -33,38 +32,16 @@ namespace kigen {
         m_layers[layer]->add_child(entity);
     }
 
-    PhysicsScene &World::physics() { return m_physics; }
+    void World::add_physics_law(const PhysicsLaw &law) {
+        m_physics_laws.push_back(law);
+    }
+
+    PhysicsScene &World::physics() { return m_physics_scene; }
 
     Entity &World::get_layer(World::Layer layer) { return *m_layers[layer]; }
 
     void World::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         for (const auto& layer : m_layers) target.draw(*layer, states);
-    }
-
-    void World::law_of_gravitation() {
-        m_physics.for_body_pairs([&](RigidBody &A, RigidBody &B) {
-            if (A.m_mass.is_infinite() && B.m_mass.is_infinite()) return;
-
-            sf::Vector2f direction = B.m_lin.position - A.m_lin.position;
-            float distance = length(direction);
-            if (distance > GRAVITY_MIN_DISTANCE) return; // isn't close enough
-            if (is_almost_zero(distance)) return;
-
-            float F_scalar = G * A.m_mass.mass * B.m_mass.mass / sqr(distance);
-            if(is_almost_zero(F_scalar)) return;
-
-            sf::Vector2f force = (direction / distance) * F_scalar;
-
-            A.apply_force(force);
-            B.apply_force(-force);
-        });
-    }
-
-    void World::energy_loss() {
-        m_physics.for_body([](RigidBody& A) {
-            A.m_lin.velocity *= ENERGY_LOSS_FACTOR;
-            A.m_ang.velocity *= ENERGY_LOSS_FACTOR;
-        });
     }
 
     Entity::Ptr World::create_entity() {

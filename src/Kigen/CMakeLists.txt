@@ -73,7 +73,8 @@ set(FILES_HEADER
     ${INCROOT}/world/physics/Manifold.hpp
     ${INCROOT}/world/physics/Math.hpp
     ${INCROOT}/world/physics/Models.hpp
-    ${INCROOT}/world/physics/PhysicalConstants.hpp
+    ${INCROOT}/world/physics/PhysicsConstants.hpp
+    ${INCROOT}/world/physics/PhysicsLaw.hpp
     ${INCROOT}/world/physics/PhysicsScene.hpp
     ${INCROOT}/world/physics/RigidBody.hpp
 
@@ -118,6 +119,8 @@ set(FILES_SRC
     ${SRCROOT}/world/message/Message.cpp
     ${SRCROOT}/world/message/MessageBus.cpp
 
+    ${SRCROOT}/world/physics/law/EnergyLossLaw.cpp
+    ${SRCROOT}/world/physics/law/GravitationLaw.cpp
     ${SRCROOT}/world/physics/shape/Circle.cpp
     ${SRCROOT}/world/physics/shape/Polygon.cpp
     ${SRCROOT}/world/physics/Collision.cpp

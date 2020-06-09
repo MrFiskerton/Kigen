@@ -11,6 +11,7 @@
 #include <Yosai/models/Materials.hpp>
 #include <Kigen/world/component/DrawableDebugBody.hpp>
 #include <Kigen/utils/Random.hpp>
+#include <Kigen/world/physics/PhysicsLaw.hpp>
 
 using namespace kigen;
 
@@ -25,6 +26,7 @@ public:
     bool handleEvent(const sf::Event &event) override;
 
 private:
+    void init_world_laws();
     Entity::Ptr create_entity(sf::Vector2f position, int t);
 
 private:

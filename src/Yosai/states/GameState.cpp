@@ -7,6 +7,8 @@
 using namespace kigen;
 
 GameState::GameState(StateControl &stack) : State(stack) {
+    init_world_laws();
+
     for (int i = 0; i < 50; ++i) {
         auto entity = create_entity({400, 400}, 1);
         m_world.add_entity(entity, World::L1);
@@ -90,4 +92,9 @@ Entity::Ptr GameState::create_entity(sf::Vector2f position, int t) {
         }
     }
     return entity;
+}
+
+void GameState::init_world_laws() {
+    m_world.add_physics_law(Law::energy_loss);
+    m_world.add_physics_law(Law::gravitation);
 }
