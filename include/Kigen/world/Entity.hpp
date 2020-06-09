@@ -15,21 +15,25 @@
 #include <Kigen/utils/Next.hpp>
 
 #include "Kigen/world/component/Component.hpp"
+#include <Kigen/world/message/Communicable.hpp>
 
 namespace kigen {
     class World;
 
-    class Entity final : public sf::Transformable, public sf::Drawable, private NonCopyable, public Destructible {
+    class Entity final : public sf::Transformable, public sf::Drawable,
+                         private NonCopyable, public Destructible, public Communicable {
     public:
         using Ptr = std::unique_ptr<Entity>;
 
-        explicit Entity();
+        explicit Entity(MessageBus& mbus);
         void update(float dt);
         void add_child(Ptr &child);
 
         template <typename T>
         void add_component(std::unique_ptr<T> &in_component);
+        void receive_message(const Message &message) override;
 
+    public:
         Ptr remove_child(Entity &child);
         sf::Vector2f get_world_position() const;
         sf::Transform get_world_transform() const;

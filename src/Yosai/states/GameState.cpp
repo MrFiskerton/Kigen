@@ -63,7 +63,7 @@ bool GameState::handleEvent(const sf::Event &event) {
 }
 
 Entity::Ptr GameState::create_entity(sf::Vector2f position, int t) {
-    Entity::Ptr entity = std::make_unique<Entity>();
+    Entity::Ptr entity = m_world.create_entity();
 
     switch (t) {
         case 1: {

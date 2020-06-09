@@ -5,7 +5,7 @@
 #include "Kigen/world/component/Component.hpp"
 
 namespace kigen{
-    Component::Component() : m_owner_UID(0u) {}
+    Component::Component(): m_owner_UID(0u) {}
 
     void Component::on_attach(Entity &entity) { }
 
@@ -18,5 +18,7 @@ namespace kigen{
     const std::string &Component::get_name() const { return m_name; }
 
     void Component::entity_update(Entity &entity, float dt) {}
+
+    void Component::receive_message(const Message &message) { }
 }
 

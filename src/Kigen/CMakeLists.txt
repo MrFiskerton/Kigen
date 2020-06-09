@@ -62,6 +62,10 @@ set(FILES_HEADER
     ${INCROOT}/world/component/DrawableDebugBody.hpp
     ${INCROOT}/world/component/PhysicsBody.hpp
 
+    ${INCROOT}/world/message/Communicable.hpp
+    ${INCROOT}/world/message/Message.hpp
+    ${INCROOT}/world/message/MessageBus.hpp
+
     ${INCROOT}/world/physics/shape/Circle.hpp
     ${INCROOT}/world/physics/shape/Polygon.hpp
     ${INCROOT}/world/physics/shape/Shape.hpp
@@ -110,6 +114,10 @@ set(FILES_SRC
     ${SRCROOT}/world/component/DrawableCircle.cpp
     ${SRCROOT}/world/component/DrawableDebugBody.cpp
     ${SRCROOT}/world/component/PhysicsBody.cpp
+
+    ${SRCROOT}/world/message/Message.cpp
+    ${SRCROOT}/world/message/MessageBus.cpp
+
     ${SRCROOT}/world/physics/shape/Circle.cpp
     ${SRCROOT}/world/physics/shape/Polygon.cpp
     ${SRCROOT}/world/physics/Collision.cpp

@@ -19,13 +19,18 @@ namespace kigen {
     public:
         World();
         void add_entity(Entity::Ptr &entity, Layer layer = L1);
+        Entity::Ptr create_entity();
         void update(float dt);
         PhysicsScene &physics();
         Entity &get_layer(Layer layer);
         void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
     private:
+        void message_delivery();
         void law_of_gravitation();
         void energy_loss();
+
+    public:
+        MessageBus m_message_bus;
     private:
         std::vector<Entity::Ptr> m_layers;
         PhysicsScene m_physics;

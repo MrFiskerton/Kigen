@@ -14,7 +14,8 @@ namespace {
 }
 
 namespace kigen {
-    Entity::Entity() : m_uid(vacant_uid++),
+    Entity::Entity(MessageBus& mbus) : Communicable(mbus),
+                       m_uid(vacant_uid++),
                        m_pending_frame(0, 1),
                        m_parent(nullptr),
                        m_world(nullptr) {}
@@ -83,6 +84,11 @@ namespace kigen {
         update_children(dt);
     }
 
+    void Entity::receive_message(const Message &message) {
+        for (auto& component : m_components) component->receive_message(message);
+        for (auto& child: m_children) child->receive_message(message);
+    }
+
     void Entity::insert_penting_components() {
         //Copy any new components we may have aquired via update
         std::size_t current = m_pending_frame;
@@ -138,5 +144,7 @@ namespace kigen {
     void Entity::draw_self(sf::RenderTarget &target, sf::RenderStates states) const {
         for (const auto& d : m_drawables) target.draw(*d, states);
     }
+
+
 }
 
