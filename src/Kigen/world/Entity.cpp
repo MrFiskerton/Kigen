@@ -108,6 +108,7 @@ namespace kigen {
             }
             component->set_owner_UID(m_uid);
             component->on_attach(*this);
+            component->set_message_bus(*m_message_bus);
             m_components.push_back(std::move(component));
         }
         m_pending_components[current].clear();

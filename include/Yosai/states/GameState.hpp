@@ -12,6 +12,7 @@
 #include <Kigen/world/component/DrawableDebugBody.hpp>
 #include <Kigen/utils/Random.hpp>
 #include <Kigen/world/physics/PhysicsLaw.hpp>
+#include <Kigen/world/EntityFactory.hpp>
 
 using namespace kigen;
 
@@ -27,10 +28,12 @@ public:
 
 private:
     void init_world_laws();
+    void init_factory();
     Entity::Ptr create_entity(sf::Vector2f position, int t);
 
 private:
     World m_world;
+    EntityFactory m_factory;
 
 };
 

@@ -5,6 +5,7 @@
 #ifndef YOSAI_COMMUNICABLE_HPP
 #define YOSAI_COMMUNICABLE_HPP
 
+#include <cassert>
 #include "MessageBus.hpp"
 
 namespace kigen {
@@ -14,10 +15,10 @@ namespace kigen {
         explicit Communicable(MessageBus& mbus) : m_message_bus(&mbus) {}
         virtual ~Communicable() = default;
         void set_message_bus(MessageBus& mbus) { m_message_bus = &mbus;}
-        void send_message(const Message& message) { m_message_bus->push(message); };
+        void send_message(const Message& message) { assert(m_message_bus); m_message_bus->push(message); };
         virtual void receive_message(const Message& message) = 0;
     protected:
-        MessageBus* m_message_bus;
+        MessageBus* m_message_bus{};
     };
 }
 

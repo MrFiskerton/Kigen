@@ -79,6 +79,7 @@ set(FILES_HEADER
     ${INCROOT}/world/physics/RigidBody.hpp
 
     ${INCROOT}/world/Entity.hpp
+    ${INCROOT}/world/EntityFactory.hpp
     ${INCROOT}/world/World.hpp
 
     ${INCROOT}/defines.hpp
@@ -129,6 +130,7 @@ set(FILES_SRC
     ${SRCROOT}/world/physics/PhysicsScene.cpp
     ${SRCROOT}/world/physics/RigidBody.cpp
     ${SRCROOT}/world/Entity.cpp
+    ${SRCROOT}/world/EntityFactory.cpp
     ${SRCROOT}/world/World.cpp
     )
 
