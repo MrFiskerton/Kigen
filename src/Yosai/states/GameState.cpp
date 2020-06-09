@@ -21,20 +21,17 @@ GameState::GameState(StateControl &stack) : State(stack) {
     m_world.add_entity(B);
 
     //-------
-    sf::VertexArray array;
-    int n = random(3, 7);
-    float s = random(20.f, 60.f);
-    for (int i = 0; i < n; i++) {
-        array.append(sf::Vector2f{random(-s, s) + 65, random(-s, s) + 65});
-    }
-//    array.append(sf::Vector2f{50, 50});
-//    array.append(sf::Vector2f{200, 50});
-//    array.append(sf::Vector2f{100, 150});
+    std::vector<sf::Vector2f> points ;
+    int n = random(10, 70);
+    float s = random(80.f, 150.f);
+    for (int i = 0; i < n; i++) points.emplace_back(random(-s, s), random(-s, s));
 
-    auto polygon = std::make_shared<Polygon>(array);
+
+    auto polygon = std::make_shared<Polygon>(points);
     static PhysicsBody::Ptr physics_c = std::make_unique<PhysicsBody>(polygon, sf::Vector2f{500, 500}, Data::steel);
     auto poly_c = std::make_unique<DrawableDebugBody>(physics_c.get());
     m_world.get_layer(World::L1).add_component(poly_c);
+    m_world.get_layer(World::L1).add_component(physics_c);
     //----------
 }
 

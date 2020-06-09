@@ -22,9 +22,16 @@ namespace kigen {
             Circle, Polygon, SIZE
         };
     public:
-        virtual void compute_mass(float density, MassDependedComponent &result) const = 0;
+        void compute_mass(float density, MassDependedComponent &result) {
+            result.compute_mass(m_area, density);
+            result.compute_inertia(m_inertia);
+        }
+
         void draw(sf::RenderTarget &target, sf::RenderStates states) const override = 0;
         virtual Type type() const = 0;
+
+    protected:
+        float m_area, m_inertia;
     };
 
 }

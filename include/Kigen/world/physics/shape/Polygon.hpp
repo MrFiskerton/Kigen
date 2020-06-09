@@ -12,23 +12,21 @@
 namespace kigen {
     class Polygon : public Shape {
     public:
-        explicit Polygon(sf::VertexArray vertices);
+        explicit Polygon(std::vector<sf::Vector2f> points);
 
         Type type() const override;
-
-        void initialize();
-
-        void compute_mass(float density, MassDependedComponent &result) const override;
-
         void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
-
     private:
         std::size_t vertex_count() const;
+        void initialize();
+        std::vector<sf::Vector2f>& make_convex_hull(std::vector<sf::Vector2f>& points);
+        sf::Vector2f& top_right(const std::vector<sf::Vector2f>& points);
+        void set_vertices(const std::vector<sf::Vector2f>& convex_hull);
         sf::FloatRect bounds() const;
     protected:
         sf::VertexArray m_vertices;
         sf::Vector2f m_normals;
-        float m_area, m_inertia; //TODO move up
+         //TODO move up
     };
 }
 

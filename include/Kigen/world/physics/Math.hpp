@@ -13,6 +13,9 @@ inline const float PI = 3.141592653589793238463f;
 inline const float _180_div_PI = 180.f / PI;
 inline const float _2_PI = 2 * PI;
 
+int orientation(const sf::Vector2f& edge1, const sf::Vector2f& edge2);
+int orientation(const sf::Vector2f& p1, const sf::Vector2f& p0, const sf::Vector2f& p2);
+
 float to_degrees(float radians);
 float to_degrees(const sf::Vector2f& a);
 int round_degrees(float degrees);

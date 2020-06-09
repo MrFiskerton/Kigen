@@ -41,6 +41,17 @@ bool is_even(std::size_t a) {
     return !(a & 1u);
 }
 
+int orientation(const sf::Vector2f& edge1, const sf::Vector2f& edge2) {
+    float c = cross(edge1, edge2);
+    if (is_almost_zero(c)) return 0;    // colinear
+    if (c < 0.f) return -1;             // anti-clockwise orientation
+    return 1;                           // clockwise orientation
+}
+
+int orientation(const sf::Vector2f& p1, const sf::Vector2f& p0, const sf::Vector2f& p2){
+    return orientation(p1 - p0, p2 - p0);
+}
+
 float to_degrees(float radians) {
     return radians * _180_div_PI;
 }

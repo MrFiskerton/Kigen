@@ -14,7 +14,6 @@ namespace kigen{
         using Ptr = std::shared_ptr<Circle>;
 
         explicit Circle(float radius);
-        void compute_mass(float density, MassDependedComponent &result) const override;
         Type type() const override;
         void draw(sf::RenderTarget &target, sf::RenderStates states) const override ;
     public: //TODO
