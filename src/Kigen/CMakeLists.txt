@@ -67,6 +67,7 @@ set(FILES_HEADER
     ${INCROOT}/world/message/MessageBus.hpp
 
     ${INCROOT}/world/physics/shape/Circle.hpp
+    ${INCROOT}/world/physics/shape/ConvexHull.hpp
     ${INCROOT}/world/physics/shape/Polygon.hpp
     ${INCROOT}/world/physics/shape/Shape.hpp
     ${INCROOT}/world/physics/Collision.hpp
@@ -123,6 +124,7 @@ set(FILES_SRC
     ${SRCROOT}/world/physics/law/EnergyLossLaw.cpp
     ${SRCROOT}/world/physics/law/GravitationLaw.cpp
     ${SRCROOT}/world/physics/shape/Circle.cpp
+    ${SRCROOT}/world/physics/shape/ConvexHull.cpp
     ${SRCROOT}/world/physics/shape/Polygon.cpp
     ${SRCROOT}/world/physics/Collision.cpp
     ${SRCROOT}/world/physics/Manifold.cpp
