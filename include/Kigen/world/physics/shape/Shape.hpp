@@ -8,7 +8,6 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <memory>
-#include "Kigen/world/physics/Models.hpp"
 #include "Kigen/world/physics/Math.hpp"
 #include <Kigen/utils/Palette.hpp>
 #include <Kigen/utils/Logger.hpp>
@@ -22,14 +21,11 @@ namespace kigen {
             Circle, Polygon, SIZE
         };
     public:
-        void compute_mass(float density, MassDependedComponent &result) {
-            result.compute_mass(m_area, density);
-            result.compute_inertia(m_inertia);
-        }
-
         void draw(sf::RenderTarget &target, sf::RenderStates states) const override = 0;
         virtual Type type() const = 0;
 
+        float get_area() const { return m_area; }
+        float get_inertia() const { return m_inertia; }
     protected:
         float m_area, m_inertia;
     };

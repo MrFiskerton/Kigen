@@ -3,20 +3,18 @@
 //
 
 #include <Kigen/world/physics/Collision.hpp>
-#include <Kigen/world/physics/Manifold.hpp>
-#include <Kigen/utils/Random.hpp>
 
 namespace kigen {
 
     void CollisionCircleAndCircle(Manifold& m){
-        auto& A = m.A;
-        auto& B = m.B;
-        auto circle_A = reinterpret_cast<Circle *>(A.m_shape.get());
-        auto circle_B = reinterpret_cast<Circle *>(B.m_shape.get());
+        auto& A = *m.A;
+        auto& B = *m.B;
+        const float radius_A = reinterpret_cast<Circle *>(A.shape().get())->radius;
+        const float radius_B = reinterpret_cast<Circle *>(B.shape().get())->radius;
 
         // Вектор от A к B
-        sf::Vector2f n = B.m_lin.position - A.m_lin.position;
-        float r = circle_A->radius + circle_B->radius;
+        sf::Vector2f n = B.lin().position - A.lin().position;
+        float r = radius_A + radius_B;
 
         float squared_distance = squared_length(n);
         if (squared_distance > r * r) {
@@ -32,9 +30,9 @@ namespace kigen {
             m.penetration = r - distance;
             m.normal = n / distance;
         } else {  // Окружности имеют одинаковое положение
-            m.penetration = circle_A->radius;
+            m.penetration = radius_A;
             m.normal = random_direction(); // Случайно выбрано
         }
-        m.contacts[0] = m.normal * circle_A->radius + A.m_lin.position;
+        m.contacts[0] = m.normal * radius_A + A.lin().position;
     }
 }

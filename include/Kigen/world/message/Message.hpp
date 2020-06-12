@@ -2,13 +2,31 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 07.06.2020.
 //
 
-#ifndef YOSAI_MESSAGE_HPP
-#define YOSAI_MESSAGE_HPP
+#ifndef KIGEN_MESSAGE_HPP
+#define KIGEN_MESSAGE_HPP
 
+//#include <Kigen/world/physics/Manifold.hpp>
+#include <SFML/Config.hpp>
 
-class Message {
+namespace kigen {
+    class Manifold;
+    struct Message {
+        enum class Type {
+            Audio = 1, Drawable, Logic, Physics, Entity, UI, Player
+        } type;
 
-};
+        struct PhysicsEvent {
+            enum { Collision } event;
+            Manifold* manifold;
+            sf::Uint64 entity_ID[2];
 
+            explicit PhysicsEvent(Manifold* m);
+        };
 
-#endif //YOSAI_MESSAGE_HPP
+        union {
+            PhysicsEvent physics;
+        };
+    };
+}
+
+#endif //KIGEN_MESSAGE_HPP

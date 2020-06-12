@@ -9,10 +9,10 @@ namespace kigen {
         // Time complexity O(n log n)
         // See https://habr.com/ru/post/144921/
         assertion(points.size() > 2, "Array of points has less than 2 points, convex hull is not possible");
-        std::swap(top_right(points), points[0]);
+        std::swap(top_right(points), points[0]); //TODO bottom left
         sf::Vector2f &p0 = points[0];
         sort(points, p0);
-        remove_redundant_colinear(points, p0);
+        remove_redundant(points, p0);
         assertion(points.size() > 2, "Array of points has less than 2 points, convex hull is not possible");
         build_hull(points);
     }
@@ -38,12 +38,12 @@ namespace kigen {
         });
     }
 
-    void ConvexHull::remove_redundant_colinear(std::vector<sf::Vector2f> &points, sf::Vector2f &p0) {
+    void ConvexHull::remove_redundant(std::vector<sf::Vector2f> &points, sf::Vector2f &p0) {
         // If two or more points make same angle with p0, Remove all but the one that is farthest from p0
         std::size_t m = 1; // Initialize size of modified array
         for (std::size_t i = 1; i < points.size(); i++) {
             // Keep removing i while angle of i and i+1 is same with respect to p0
-            while (i < points.size() - 1 && orientation(p0, points[i], points[i + 1]) == 0) i++;
+            while (i < points.size() - 1 && is_on_same_line(p0, points[i], points[i + 1])) i++;
             points[m++] = points[i];
         }
         points.resize(m);

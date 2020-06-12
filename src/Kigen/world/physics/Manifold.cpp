@@ -4,12 +4,13 @@
 
 #include <Kigen/utils/Logger.hpp>
 #include <Kigen/world/physics/Manifold.hpp>
+#include <Kigen/world/message/Message.hpp>
 
 namespace kigen {
     using namespace physics;
     
     bool Manifold::solve() {
-        CollisionCircleAndCircle(*this);//(A.m_shape->type(), B.m_shape->type());
+        collision_solver[A->shape()->type()][B->shape()->type()](*this);
 
         bool is_contacted = (contact_count > 0);
         if (is_contacted) initialize();
@@ -17,18 +18,18 @@ namespace kigen {
     }
 
     void Manifold::apply_impulse() {
-        if (A.m_mass.is_infinite() && B.m_mass.is_infinite()) {
+        if (A->is_static() && B->is_static()) {
             infinite_mass_correction();
             return;
         }
 
         for (std::size_t i = 0; i < contact_count; ++i) {
-            sf::Vector2f ra = contacts[i] - A.m_lin.position;
-            sf::Vector2f rb = contacts[i] - B.m_lin.position;
+            sf::Vector2f ra = contacts[i] - A->lin().position;
+            sf::Vector2f rb = contacts[i] - B->lin().position;
 
             // Relative velocity
-            sf::Vector2f rv = (B.m_lin.velocity + cross(B.m_ang.velocity, rb))
-                            - (A.m_lin.velocity + cross(A.m_ang.velocity, ra));
+            const sf::Vector2f rv = (B->lin().velocity + cross(B->ang().velocity, rb))
+                                  - (A->lin().velocity + cross(A->ang().velocity, ra));
 
             // Relative velocity along the normal
             float contact_v = dot(rv, normal);
@@ -37,9 +38,9 @@ namespace kigen {
             if (contact_v > 0) return;
 
             // Calculate impulse scalar j
-            float a_rotation_component = sqr(cross(ra, normal)) * A.m_mass.inverse_inertia;
-            float b_rotation_component = sqr(cross(rb, normal)) * B.m_mass.inverse_inertia;
-            float denominator = A.m_mass.inverse_mass + B.m_mass.inverse_mass
+            float a_rotation_component = sqr(cross(ra, normal)) * A->inverse_inertia();
+            float b_rotation_component = sqr(cross(rb, normal)) * B->inverse_inertia();
+            float denominator = A->inverse_mass() + B->inverse_mass()
                                + a_rotation_component + b_rotation_component;
 
             // Impulse scalar
@@ -51,18 +52,13 @@ namespace kigen {
             if (is_almost_zero(j)) {
                 // Apply impulse
                 sf::Vector2f impulse = j * normal;
-                A.apply_impulse(-impulse, ra);
-                B.apply_impulse(impulse, rb);
+                A->apply_impulse(-impulse, ra);
+                B->apply_impulse(impulse, rb);
             }
 
 // =================== Friction impulse ================================ //
-            rv = (B.m_lin.velocity + cross(B.m_ang.velocity, rb))
-               - (A.m_lin.velocity + cross(A.m_ang.velocity, ra));
-
-
             // Вычисляем касательный вектор
-            sf::Vector2f tangent = rv - (normal * dot(rv, normal));
-            normalize(tangent);
+            sf::Vector2f tangent = normalize(rv - (normal * dot(rv, normal)));
 
             // Вычисляем величину, прилагаемую вдоль вектора трения
             float jt = -dot(rv, tangent);
@@ -73,53 +69,40 @@ namespace kigen {
             if (is_almost_zero(jt)) return;
 
             // Amontons' - Coulomb's Law of dry friction: Fтр <= mu Fn,
-            // Fn aka N; = j * normal,  Fтр == jt
+            // Fn aka N; = j * normal,  Fтр == jt, m_static_friction aka mu
             // See https://en.wikipedia.org/wiki/Friction#Dry_friction
-
-            //                                            m_static_friction aka mu
             sf::Vector2f tangent_impulse = ((std::abs(jt) < m_friction_S * j) ? jt : (-j * m_friction_D)) * tangent;
 
             // Apply friction impulse
-            A.apply_impulse(-tangent_impulse, ra);
-            B.apply_impulse( tangent_impulse, rb);
+            A->apply_impulse(-tangent_impulse, ra);
+            B->apply_impulse( tangent_impulse, rb);
         }
     }
 
     void Manifold::positional_correction() {
-        float k = (std::max(penetration - PENETRATION_ALLOWANCE, 0.0f)
-                / (A.m_mass.inverse_mass + B.m_mass.inverse_mass));
+        float k = std::max(penetration - PENETRATION_ALLOWANCE, 0.0f);
+        k /= (A->inverse_mass() + B->inverse_mass());
         sf::Vector2f correction = normal * k * PENETRATION_CORRECTION_PERCENTAGE;
-        A.m_lin.position -= correction * A.m_mass.inverse_mass;
-        B.m_lin.position += correction * B.m_mass.inverse_mass;
+        A->lin().position += -correction * A->inverse_mass(); // Note: don't forget minus
+        B->lin().position +=  correction * B->inverse_mass();
     }
 
     void Manifold::infinite_mass_correction() {
-        A.m_lin.velocity = {0.f, 0.f};
-        B.m_lin.velocity = {0.f, 0.f};
+        A->stop();
+        B->stop();
     }
 
     void Manifold::initialize() {
         // Calculate average restitution
-        m_elasticity = std::min(A.m_material->restitution, B.m_material->restitution);
+        m_elasticity = std::min(A->material().restitution, B->material().restitution);
 
         // Calculate static and dynamic friction
-        m_friction_S = std::sqrt(A.m_material->static_friction * B.m_material->static_friction);
-        m_friction_D = std::sqrt(A.m_material->dynamic_friction * B.m_material->dynamic_friction);
+        m_friction_S = std::sqrt(A->material().static_friction * B->material().static_friction);
+        m_friction_D = std::sqrt(A->material().dynamic_friction * B->material().dynamic_friction);
 
-        //TODO
-//        for (std::size_t i = 0; i < contact_count; ++i) {
-//            // Calculate radii from COM to contact
-//            sf::Vector2f ra = contacts[i] - A.m_lin.position;
-//            sf::Vector2f rb = contacts[i] - B.m_lin.position;
-//
-//            sf::Vector2f rv = (B.m_lin.velocity + cross(B.m_ang.velocity, rb)) -
-//                              (A.m_lin.velocity + cross(A.m_ang.velocity, ra));
-//
-//            // Determine if we should perform a resting collision or not
-//            // The idea is if the only thing moving this object is gravity,
-//            // then the collision should be performed without any restitution
-//            //if (rv.LenSqr() < (dt * gravity).LenSqr() + EPSILON) m_elasticity = 0.0f;
-//        }
+        Message msg = {.type = Message::Type::Physics,
+                       .physics = Message::PhysicsEvent(this)};
+        A->send_message(msg);
     }
 
 }

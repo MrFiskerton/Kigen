@@ -1,6 +1,6 @@
-[submodule "deps/SFML"]
-	path = deps/SFML
-	url = https://github.com/SFML/SFML
+#[submodule "SFML"]
+#	path = deps/SFML
+#	url = https://github.com/SFML/SFML
 
 [submodule "assets"]
 	path = assets

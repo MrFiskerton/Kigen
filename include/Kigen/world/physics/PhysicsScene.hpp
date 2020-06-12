@@ -20,17 +20,16 @@ namespace kigen {
     public:
         void update(float dt);
         void add_body(PhysicsBody::Ptr& body);
-        void for_body_pairs(const std::function<void(RigidBody& A, RigidBody& B)>& f);
-        void for_body(const std::function<void(RigidBody& A)>& f);
-        std::list<PhysicsBody*>& bodies();
+        void for_body_pairs(const std::function<void(PhysicsBody& A, PhysicsBody& B)>& f);
+        void for_body(const std::function<void(PhysicsBody& A)>& f);
     private:
-        void make_contacts();
-        void intergate_force(RigidBody& body, float dt);
+        void collision_check();
+        void integrate_force(RigidBody& body, float dt);
         void integrate_velocity(RigidBody& body, float dt);
         void clear_state();
     private:
         std::list<PhysicsBody*> m_bodies;
-        std::vector<Manifold> m_contacts;
+        std::vector<Manifold> m_collisions;
     };
 
 }

@@ -23,10 +23,10 @@ namespace kigen {
         Law m_law;
     };
 
-    namespace Law {
-        extern PhysicsLaw energy_loss;
-        extern PhysicsLaw gravitation;
-    }
+
+    extern PhysicsLaw energy_loss;
+    extern PhysicsLaw gravitation;
+
 }
 
 #endif //YOSAI_PHYSICSLAW_HPP

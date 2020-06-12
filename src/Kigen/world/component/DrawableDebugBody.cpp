@@ -25,11 +25,11 @@ namespace kigen {
     }
 
     void DrawableDebugBody::entity_update(Entity &entity, float dt) {
-        m_velocity.to(m_body->m_lin.velocity);
+        m_velocity.to(m_body->lin().velocity);
     }
 
     void DrawableDebugBody::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-        m_body->m_shape->draw(target, states);
+        m_body->shape()->draw(target, states);
 
         target.draw(m_velocity, states);
         target.draw(m_text_UID, states);

@@ -33,7 +33,7 @@ namespace kigen {
 
         // Inertia calculation; Note: using mass in final, not density
         float scale, numerator{0.f}, denominator{0.f}, tmp;
-        for (std::size_t i1 = 0u, i2 = 1u; i1 < m_points.size(); i1++, (i2 = i1 + 1 < m_points.size() ? i1 + 1 : 0)) {
+        for (std::size_t i1 = 0u, i2 = 1u; i1 < m_points.size(); i1++, i2 = next_i(i1)) {
             auto &p1 = m_points[i1];
             auto &p2 = m_points[i2];
             tmp = cross(p1, p2);
@@ -64,7 +64,7 @@ namespace kigen {
     }
 
     void Polygon::init_face_normals() {
-        for (std::size_t i1 = 0u, i2 = 1u; i1 < m_points.size(); i1++, (i2 = i1 + 1 < m_points.size() ? i1 + 1 : 0)) {
+        for (std::size_t i1 = 0u, i2 = 1u; i1 < m_points.size(); i1++, i2 = next_i(i1)) {
             auto face = m_points[i2] - m_points[i1];
             assertion(!is_almost_zero(length(face)), "Zero-length edge!");
             // Calculate normal with 2D cross product between vector and scalar
@@ -73,10 +73,10 @@ namespace kigen {
         }
     }
 
-    sf::Vector2f Polygon::get_support(sf::Vector2f &direction) {
+    sf::Vector2f Polygon::get_support(const sf::Vector2f &direction) {
         // The extreme point along a direction within a polygon
         sf::Vector2f* best_point = &m_points[0];
-        float projection, best_projection = dot(*best_point, direction);
+        float projection, best_projection = std::numeric_limits<float>::min();
         for(auto& point: m_points) {
             projection = dot(point, direction);
             if (projection > best_projection) {
@@ -94,4 +94,8 @@ namespace kigen {
     std::size_t Polygon::vertex_count() const { m_vertices.getVertexCount(); }
 
     sf::FloatRect Polygon::bounds() const { m_vertices.getBounds(); }
+
+    std::size_t Polygon::next_i(std::size_t i) const {
+        return ((i + 1 < m_points.size()) ? i + 1 : 0);
+    }
 }

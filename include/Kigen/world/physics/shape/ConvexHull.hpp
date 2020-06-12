@@ -17,7 +17,7 @@ namespace kigen {
     private:
         static sf::Vector2f& top_right(std::vector<sf::Vector2f>& points);
         static void sort(std::vector<sf::Vector2f>& points, sf::Vector2f& p0);
-        static void remove_redundant_colinear(std::vector<sf::Vector2f>& points, sf::Vector2f& p0);
+        static void remove_redundant(std::vector<sf::Vector2f>& points, sf::Vector2f& p0);
         static void build_hull(std::vector<sf::Vector2f>& points);
     };
 }

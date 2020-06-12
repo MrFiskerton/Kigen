@@ -5,7 +5,7 @@
 #ifndef YOSAI_MANIFOLD_HPP
 #define YOSAI_MANIFOLD_HPP
 
-#include "RigidBody.hpp"
+#include <Kigen/world/component/PhysicsBody.hpp>
 #include <cmath>
 #include "Collision.hpp"
 #include "PhysicsConstants.hpp"
@@ -13,15 +13,15 @@
 namespace kigen {
     class Manifold {
     public:
-        Manifold(RigidBody& a, RigidBody& b) : A(a), B(b), contact_count(0u) {}
+        Manifold(PhysicsBody* a, PhysicsBody* b) : A(a), B(b), contact_count(0u) {}
         bool solve();
         void apply_impulse();
         void positional_correction();
         void infinite_mass_correction();
         void initialize();
     public:
-        RigidBody& A;
-        RigidBody& B;
+        PhysicsBody* A;
+        PhysicsBody* B;
 
         float penetration;           // Depth of penetration from collision
         sf::Vector2f normal;         // From A to B

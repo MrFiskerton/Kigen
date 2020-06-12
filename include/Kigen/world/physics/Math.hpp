@@ -15,6 +15,9 @@ inline const float _2_PI = 2 * PI;
 
 int orientation(const sf::Vector2f& edge1, const sf::Vector2f& edge2);
 int orientation(const sf::Vector2f& p1, const sf::Vector2f& p0, const sf::Vector2f& p2);
+bool is_left_turn(const sf::Vector2f& p1, const sf::Vector2f& p0, const sf::Vector2f& p2);
+bool is_right_turn(const sf::Vector2f& p1, const sf::Vector2f& p0, const sf::Vector2f& p2);
+bool is_on_same_line(const sf::Vector2f& p1, const sf::Vector2f& p0, const sf::Vector2f& p2);
 
 float to_degrees(float radians);
 float to_degrees(const sf::Vector2f& a);
@@ -33,7 +36,8 @@ float squared_distance(const sf::Vector2f &a, const sf::Vector2f &b);
 
 float distance(const sf::Vector2f &a, const sf::Vector2f &b);
 
-sf::Vector2f& normalize(sf::Vector2f &a);
+void normalize(sf::Vector2f &a);
+sf::Vector2f normalize(const sf::Vector2f& a);
 
 float dot(const sf::Vector2f &a, const sf::Vector2f &b);
 

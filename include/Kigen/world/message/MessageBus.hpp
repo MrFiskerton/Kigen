@@ -6,10 +6,10 @@
 #define YOSAI_MESSAGEBUS_HPP
 
 #include <Kigen/utils/NonCopyable.hpp>
+#include "Message.hpp"
 #include <functional>
 #include <vector>
 #include <queue>
-#include "Message.hpp"
 
 namespace kigen {
     class MessageBus: private NonCopyable {

@@ -121,12 +121,17 @@ set(FILES_SRC
     ${SRCROOT}/world/message/Message.cpp
     ${SRCROOT}/world/message/MessageBus.cpp
 
+    ${SRCROOT}/world/physics/collision/Collision.cpp
+    ${SRCROOT}/world/physics/collision/CollisionCircleAndCircle.cpp
+    ${SRCROOT}/world/physics/collision/CollisionCircleAndPolygon.cpp
+    ${SRCROOT}/world/physics/collision/CollisionPolygonAndPolygon.cpp
+
     ${SRCROOT}/world/physics/law/EnergyLossLaw.cpp
     ${SRCROOT}/world/physics/law/GravitationLaw.cpp
     ${SRCROOT}/world/physics/shape/Circle.cpp
     ${SRCROOT}/world/physics/shape/ConvexHull.cpp
     ${SRCROOT}/world/physics/shape/Polygon.cpp
-    ${SRCROOT}/world/physics/Collision.cpp
+
     ${SRCROOT}/world/physics/Manifold.cpp
     ${SRCROOT}/world/physics/Math.cpp
     ${SRCROOT}/world/physics/PhysicsScene.cpp
@@ -138,4 +143,6 @@ set(FILES_SRC
 
 add_library(kigen STATIC ${FILES_HEADER} ${FILES_SRC})
 
+target_link_libraries(kigen
+        PUBLIC sfml-graphics sfml-system sfml-window sfml-audio ImGui-SFML)
 

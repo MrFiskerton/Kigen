@@ -43,13 +43,25 @@ bool is_even(std::size_t a) {
 
 int orientation(const sf::Vector2f& edge1, const sf::Vector2f& edge2) {
     float c = cross(edge1, edge2);
-    if (is_almost_zero(c)) return 0;    // colinear
+    if (is_almost_zero(c)) return 0;    // collinear
     if (c < 0.f) return -1;             // anti-clockwise orientation
     return 1;                           // clockwise orientation
 }
 
 int orientation(const sf::Vector2f& p1, const sf::Vector2f& p0, const sf::Vector2f& p2){
     return orientation(p1 - p0, p2 - p0);
+}
+
+bool is_left_turn(const sf::Vector2f& p1, const sf::Vector2f& p0, const sf::Vector2f& p2) {
+    return  orientation(p1, p0, p2) == -1;
+}
+
+bool is_right_turn(const sf::Vector2f& p1, const sf::Vector2f& p0, const sf::Vector2f& p2) {
+    return  orientation(p1, p0, p2) == 1;
+}
+
+bool is_on_same_line(const sf::Vector2f& p1, const sf::Vector2f& p0, const sf::Vector2f& p2) {
+    return  orientation(p1, p0, p2) == 0;
 }
 
 float to_degrees(float radians) {
@@ -61,7 +73,7 @@ float to_degrees(const sf::Vector2f& a) {
 }
 
 int round_degrees(float degrees) {
-    return int(360.f + roundf(degrees)) % 360;
+    return int(360.f + roundf(degrees)) % 360; //TODO fmod
 }
 
 float sqr(float a) { return  a * a;}
@@ -82,13 +94,18 @@ float distance(const sf::Vector2f &a, const sf::Vector2f &b) {
     return std::sqrt(squared_distance(a, b));
 }
 
-sf::Vector2f& normalize(sf::Vector2f &a) {
+void normalize(sf::Vector2f &a) {
     float l = length(a);
     if (!is_almost_zero(l)) {
         float inv_len = 1.0f / l;
         a *= inv_len;
     }
-    return a; ;
+}
+
+sf::Vector2f normalize(const sf::Vector2f& a) {
+    sf::Vector2f result = a;
+    normalize(result);
+    return result;
 }
 
 float dot(const sf::Vector2f &a, const sf::Vector2f &b) {

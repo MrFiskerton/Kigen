@@ -14,7 +14,7 @@ namespace  kigen {
     Component::Type PhysicsBody::type() const { return Component::Type::Physics; }
 
     void PhysicsBody::entity_update(Entity &entity, float dt) {
-        entity.set_world_position(m_lin.position);
+        entity.set_world_position(m_lin.position);//TODO
     }
 
     void PhysicsBody::on_attach(Entity &entity) {

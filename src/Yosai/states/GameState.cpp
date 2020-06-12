@@ -29,6 +29,7 @@ GameState::GameState(StateControl &stack) : State(stack) {
 
     auto polygon = std::make_shared<Polygon>(points);
     static PhysicsBody::Ptr physics_c = std::make_unique<PhysicsBody>(polygon, sf::Vector2f{500, 500}, Data::steel);
+    m_world.physics().add_body(physics_c);
     auto poly_c = std::make_unique<DrawableDebugBody>(physics_c.get());
     m_world.get_layer(World::L1).add_component(poly_c);
     m_world.get_layer(World::L1).add_component(physics_c);
@@ -51,8 +52,8 @@ bool GameState::handleEvent(const sf::Event &event) {
 }
 
 void GameState::init_world_laws() {
-    m_world.add_physics_law(Law::energy_loss);
-    m_world.add_physics_law(Law::gravitation);
+    m_world.add_physics_law(kigen::energy_loss);
+    m_world.add_physics_law(kigen::gravitation);
 }
 
 void GameState::init_factory() {

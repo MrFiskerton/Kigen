@@ -2,6 +2,7 @@
 // Created by Roman Fiskov (roman.fiskov@gmail.com) [Mr.Fiskerton] on 03.06.2020.
 //
 
+#include <Kigen/world/message/Message.hpp>
 #include "Kigen/world/World.hpp"
 
 namespace kigen {
@@ -22,7 +23,7 @@ namespace kigen {
     }
 
     void World::message_delivery() {
-        Message message;
+        Message message{};
         while(m_message_bus.poll(message)) {
             for(auto& layer: m_layers) layer->receive_message(message);
         }
