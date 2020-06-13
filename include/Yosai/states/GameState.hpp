@@ -29,8 +29,6 @@ public:
 private:
     void init_world_laws();
     void init_factory();
-    Entity::Ptr create_entity(sf::Vector2f position, int t);
-
 private:
     World m_world;
     EntityFactory m_factory;

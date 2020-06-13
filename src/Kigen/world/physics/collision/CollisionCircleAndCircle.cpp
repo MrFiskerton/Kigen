@@ -17,7 +17,7 @@ namespace kigen {
         float r = radius_A + radius_B;
 
         float squared_distance = squared_length(n);
-        if (squared_distance > r * r) {
+        if (squared_distance > sqr(r)) {
             m.contact_count = 0;
             return;
         }

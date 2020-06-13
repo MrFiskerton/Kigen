@@ -25,12 +25,12 @@ namespace kigen {
 
     sf::Vector2f RigidBody::to_model_space(const sf::Vector2f &p) {
         if(is_need_update_transform) update_transform();
-        return m_transform * p;
+        return m_inverse_transform * p;
     }
 
     sf::Vector2f RigidBody::to_world_space(const sf::Vector2f &p) {
         if(is_need_update_transform) update_transform();
-        return m_inverse_transform * p;
+        return m_transform * p;
     }
 
     void RigidBody::clean_applied_force() {

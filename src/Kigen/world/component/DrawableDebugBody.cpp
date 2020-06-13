@@ -4,6 +4,7 @@
 
 #include <Yosai/id/ResourceIdentifiers.hpp>
 #include "Kigen/world/component/DrawableDebugBody.hpp"
+#include <Kigen/world/physics/Manifold.hpp>
 
 namespace kigen {
 //    void DrawableDebugBody::on_attach(Entity &entity) {
@@ -17,7 +18,7 @@ namespace kigen {
         m_origin.setFillColor(Palette::Lavender);
         m_origin.setOrigin(m_origin.getRadius() * 0.5f, m_origin.getRadius() * 0.5f);
 
-        m_text_UID.setFont(Locator::locate<ResourceControl>().font()[Fonts::ID::TolkienCyr]);
+        m_text_UID.setFont(Locator::locate<ResourceControl>().font()[Fonts::ID::DigitalDisplay]);
         m_text_UID.setFillColor(Palette::LemonChiffon);
         m_text_UID.setCharacterSize(12); // in pixels, not points!
         m_text_UID.setPosition(m_origin.getOrigin() + sf::Vector2f{-10.f, 20.f});
@@ -37,6 +38,4 @@ namespace kigen {
         states.transform *= m_origin.getTransform();
         target.draw(m_origin, states );
     }
-
-    Component::Type DrawableDebugBody::type() const { return Component::Type::Drawable; }
 }

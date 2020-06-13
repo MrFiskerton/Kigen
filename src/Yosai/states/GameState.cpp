@@ -10,12 +10,12 @@ GameState::GameState(StateControl &stack) : State(stack) {
     init_world_laws();
     init_factory();
 
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < 10; ++i) {
         auto entity = m_factory.create("small_circle");
         m_world.add_entity(entity, World::L1);
     }
-//    auto A = m_factory.create("huge_circle");
-//    m_world.add_entity(A);
+    auto A = m_factory.create("huge_circle");
+    m_world.add_entity(A);
 
     auto B = m_factory.create("huge_circle");
     m_world.add_entity(B);
@@ -28,10 +28,9 @@ GameState::GameState(StateControl &stack) : State(stack) {
 
 
     auto polygon = std::make_shared<Polygon>(points);
-    static PhysicsBody::Ptr physics_c = std::make_unique<PhysicsBody>(polygon, sf::Vector2f{500, 500}, Data::steel);
+    auto physics_c = std::make_unique<PhysicsBody>(polygon, sf::Vector2f{500, 500}, Data::static_material);
     m_world.physics().add_body(physics_c);
     auto poly_c = std::make_unique<DrawableDebugBody>(physics_c.get());
-    m_world.get_layer(World::L1).add_component(poly_c);
     m_world.get_layer(World::L1).add_component(physics_c);
     //----------
 }
@@ -66,9 +65,9 @@ void GameState::init_factory() {
         m_world.physics().add_body(physics_c);
         entity->add_component<PhysicsBody>(physics_c);
 
-        auto circle_c = std::make_unique<DrawableCircle>(50.f);
-        circle_c->set_texture(Locator::locate<ResourceControl>().texture()[Textures::blue_star]);
-        entity->add_component(circle_c);
+//        auto circle_c = std::make_unique<DrawableCircle>(50.f);
+//        circle_c->set_texture(Locator::locate<ResourceControl>().texture()[Textures::blue_star]);
+//        entity->add_component(circle_c);
         return entity;
     });
 

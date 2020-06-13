@@ -83,6 +83,7 @@ namespace {
     void load_fonts(FontHolder& holder) {
         using namespace Fonts;
         holder.register_resource(TolkienCyr, loadFromFile<Font>(path(TolkienCyr)));
+        holder.register_resource(DigitalDisplay, loadFromFile<Font>(path(DigitalDisplay)));
     }
 }
 

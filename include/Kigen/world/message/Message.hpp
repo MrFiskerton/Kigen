@@ -11,17 +11,18 @@
 namespace kigen {
     class Manifold;
     struct Message {
-        enum class Type {
+        enum Type {
             Audio = 1, Drawable, Logic, Physics, Entity, UI, Player
         } type;
 
         struct PhysicsEvent {
             enum { Collision } event;
-            Manifold* manifold;
             sf::Uint64 entity_ID[2];
 
-            explicit PhysicsEvent(Manifold* m);
+            //explicit PhysicsEvent(Manifold* m);
         };
+
+        bool is(Type t) const { return type == t;}
 
         union {
             PhysicsEvent physics;

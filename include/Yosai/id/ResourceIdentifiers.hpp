@@ -19,6 +19,7 @@ namespace sf {
 namespace Fonts {
     enum ID : int {
         TolkienCyr = 0,
+        DigitalDisplay,
         SIZE
     };
     const std::string& path(ID id);

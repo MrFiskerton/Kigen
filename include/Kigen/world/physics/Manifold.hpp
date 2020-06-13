@@ -9,9 +9,11 @@
 #include <cmath>
 #include "Collision.hpp"
 #include "PhysicsConstants.hpp"
+#include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
 
 namespace kigen {
-    class Manifold {
+class Manifold : public sf::Drawable {
     public:
         Manifold(PhysicsBody* a, PhysicsBody* b) : A(a), B(b), contact_count(0u) {}
         bool solve();
@@ -19,6 +21,10 @@ namespace kigen {
         void positional_correction();
         void infinite_mass_correction();
         void initialize();
+
+    protected:
+        void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+
     public:
         PhysicsBody* A;
         PhysicsBody* B;

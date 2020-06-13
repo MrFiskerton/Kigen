@@ -16,14 +16,16 @@ namespace kigen {
     }
 
     void World::update(float dt) {
-        for (auto& layer : m_layers) layer->update(dt);  // Note: Must be before physics scene update !
+        m_physics_scene.clear_state(); //  Clear applied forces, torque, collisions
+        for (auto& layer : m_layers) layer->update(dt);  
         for (auto& law : m_physics_laws) law(m_physics_scene); // Apply the laws of physics
+
+        m_physics_scene.update(dt); // Apply forces and integrate; Sends collision messages;
         message_delivery();
-        m_physics_scene.update(dt); // After update clears state ( applied forces and torque )
     }
 
     void World::message_delivery() {
-        Message message{};
+        Message message;
         while(m_message_bus.poll(message)) {
             for(auto& layer: m_layers) layer->receive_message(message);
         }
@@ -43,6 +45,7 @@ namespace kigen {
 
     void World::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         for (const auto& layer : m_layers) target.draw(*layer, states);
+        for (const auto& collison : m_physics_scene.get_collisions()) target.draw(collison, states);
     }
 
     Entity::Ptr World::create_entity() {

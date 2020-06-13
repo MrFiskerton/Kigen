@@ -55,6 +55,7 @@ namespace {
         const std::string ttf = ".ttf";
 #define INSERT_ID(identifier) holder.insert(Fonts::ID::identifier, make_path(root, #identifier, ttf))
         INSERT_ID(TolkienCyr);
+        INSERT_ID(DigitalDisplay);
 #undef INSERT_ID
         return holder;
     }

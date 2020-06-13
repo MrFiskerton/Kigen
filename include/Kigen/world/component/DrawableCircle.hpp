@@ -15,7 +15,6 @@ namespace kigen {
         using Ptr = std::unique_ptr<DrawableCircle>;
         explicit DrawableCircle(float radius);
 
-        Type type() const override;
         void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
         void set_radius(float radius);

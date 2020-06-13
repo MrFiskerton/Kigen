@@ -4,7 +4,6 @@
 
 #include <Kigen/utils/Logger.hpp>
 #include <Kigen/world/physics/Manifold.hpp>
-#include <Kigen/world/message/Message.hpp>
 
 namespace kigen {
     using namespace physics;
@@ -18,6 +17,7 @@ namespace kigen {
     }
 
     void Manifold::apply_impulse() {
+        assert(contact_count > 0);
         if (A->is_static() && B->is_static()) {
             infinite_mass_correction();
             return;
@@ -99,10 +99,25 @@ namespace kigen {
         // Calculate static and dynamic friction
         m_friction_S = std::sqrt(A->material().static_friction * B->material().static_friction);
         m_friction_D = std::sqrt(A->material().dynamic_friction * B->material().dynamic_friction);
+    }
 
-        Message msg = {.type = Message::Type::Physics,
-                       .physics = Message::PhysicsEvent(this)};
-        A->send_message(msg);
+    void Manifold::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+        sf::CircleShape red_point(2.f);
+        red_point.setFillColor(sf::Color::Red);
+        red_point.setOrigin(red_point.getRadius() * 0.5f, red_point.getRadius() * 0.5f);
+
+        sf::VertexArray green_normal(sf::Lines, 2);
+        green_normal[0].color = sf::Color::Green;
+        green_normal[1].color = sf::Color::Green;
+
+        for (std::size_t i = 0; i < contact_count; i++) {
+            red_point.setPosition(contacts[i]);
+            green_normal[0].position = contacts[i];
+            green_normal[1].position = contacts[i] + normal * 10.f;
+
+            target.draw(green_normal);
+            target.draw(red_point);
+        }
     }
 
 }

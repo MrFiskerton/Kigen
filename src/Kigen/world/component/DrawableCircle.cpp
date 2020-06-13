@@ -9,10 +9,6 @@ namespace kigen {
         set_radius(radius);
     }
 
-    Component::Type kigen::DrawableCircle::type() const {
-        return Type::Drawable;
-    }
-
     void DrawableCircle::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         states.transform *= m_circle.getTransform();
         states.blendMode = sf::BlendAdd;

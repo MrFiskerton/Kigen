@@ -48,7 +48,7 @@ namespace kigen {
         auto closest_to = [&](const sf::Vector2f &v) {
             if (squared_distance(center_A, v) > sqr(radius_A)) return;
             m.contact_count = 1;
-            m.contacts[0] = B.to_world_space(v) + B.lin().position;
+            m.contacts[0] = B.to_world_space(v);
             m.normal = normalize(B.to_world_space(v - center_A));
         };
         if (dot1 <= 0.0f) { closest_to(face_p1); return; }
@@ -62,6 +62,7 @@ namespace kigen {
     }
 
     void CollisionPolygonAndCircle(Manifold& m) {
+        Logger::notify("C & P");
         std::swap(m.A, m.B);//TODO
         CollisionCircleAndPolygon(m);
         std::swap(m.A, m.B);

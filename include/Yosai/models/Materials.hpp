@@ -11,6 +11,14 @@
 using kigen::Material;
 
 namespace Data {
+    inline const auto static_material = std::make_shared<Material>(Material{
+            .density = 0.f,
+            .restitution = 0.f,
+            .static_friction = 0.f,
+            .dynamic_friction = 0.f
+    });
+
+
     inline const auto steel = std::make_shared<Material>(Material{
             .density = 50.f,
             .restitution = 0.8f,

@@ -18,14 +18,20 @@ namespace kigen {
             integrate_force(*body, dt * 0.5f);
         }
         for(auto& contact: m_collisions) contact.positional_correction();
-        clear_state();
+        //clear_state();
     }
 
     void PhysicsScene::collision_check() {
         for_body_pairs([&](PhysicsBody &A, PhysicsBody &B) {
             if (A.is_static() && B.is_static()) return;
             Manifold m(&A, &B);
-            if (m.solve()) m_collisions.emplace_back(m);
+            if (m.solve()) {
+                m_collisions.emplace_back(m);
+                Message msg = { .type = Message::Type::Physics,
+                                .physics = {.event = Message::PhysicsEvent::Collision,
+                                            .entity_ID = {A.get_owner_UID(), B.get_owner_UID()}}};
+                A.send_message(msg);
+            }
         });
     }
 
@@ -60,6 +66,10 @@ namespace kigen {
 
     void PhysicsScene::for_body(const std::function<void(PhysicsBody &A)> &f) {
         for(auto& body: m_bodies) f(*body);
+    }
+
+    const std::vector<Manifold> &PhysicsScene::get_collisions() const {
+        return m_collisions;
     }
 }
 

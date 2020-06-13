@@ -19,7 +19,6 @@ namespace kigen {
 
         explicit DrawableDebugBody(PhysicsBody *body);
         void entity_update(Entity &entity, float dt) override;
-        Type type() const override;
         void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
     private:

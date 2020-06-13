@@ -16,6 +16,7 @@ namespace kigen {
 class DrawableComponent : public Component, public sf::Drawable/*, public sf::Transformable*/ {
     public:
         using Ptr = std::unique_ptr<DrawableComponent>;
+        Component::Type type() const override { return Type::Drawable; }
     };
 }
 #endif //YOSAI_DRAWABLECOMPONENT_HPP
