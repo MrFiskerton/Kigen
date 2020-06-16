@@ -13,8 +13,8 @@ public:
     MenuState(StateControl &stack);
     virtual ~MenuState();
 
-    void draw(sf::RenderTarget& renderTarget) override;
-    bool update(const sf::Time& deltaTime) override;
+    void draw(sf::RenderTarget& target) override;
+    bool update(const sf::Time& delta) override;
     bool handleEvent(const sf::Event &event) override;
 private:
 

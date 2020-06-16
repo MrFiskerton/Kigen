@@ -6,19 +6,32 @@
 #define YOSAI_YOSAI_HPP
 
 #include <Yosai/states/States.hpp>
+#include <Yosai/models/ConfigurationData.hpp>
 #include <Kigen/application/BasicApplication.hpp>
+
+#include "imgui-SFML.h"
+#include "imgui.h"
+#include <Yosai/ui/Helper_UI.hpp>
 
 class Yosai final: public kigen::BasicApplication {
 public:
     Yosai ();
+    ~Yosai() override;
 private:
     void init_state_control() override;
     void init_actions();
     void init_services();
     void init_resources();
 
+    static void invoke_immediate_GUI();
+
+protected:
+    void update_input() override;
+
 protected:
     void update_logic(const sf::Time &delta) override;
+
+    void update_graphics() override;
 
 private:
     kigen::ActionControl<Actions::ID> m_actions;

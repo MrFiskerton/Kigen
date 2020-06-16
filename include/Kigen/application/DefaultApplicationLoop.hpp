@@ -11,8 +11,6 @@
 
 namespace kigen {
     struct DefaultApplicationLoop {
-        explicit DefaultApplicationLoop() = default;
-
         void operator()(IApplication &app) const {
             static const std::size_t FRAME_PER_SECOND = 60;
             static const sf::Time TIME_PER_FRAME = sf::seconds(1.f / FRAME_PER_SECOND);

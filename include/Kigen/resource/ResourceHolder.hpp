@@ -76,7 +76,6 @@ public:
         }
         return *(it->second);
     }
-
 public:
     const Resource &operator[](const Identifier &id) const { return at(id); }
 private:

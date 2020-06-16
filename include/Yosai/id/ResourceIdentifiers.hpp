@@ -5,6 +5,8 @@
 #ifndef INCLUDED_RESOURCEIDENTIFIERS_HPP
 #define INCLUDED_RESOURCEIDENTIFIERS_HPP
 
+#include <string>
+
 namespace sf {
     class Font;
     class Image;
@@ -16,17 +18,25 @@ namespace sf {
 
 namespace Fonts {
     enum ID : int {
-        font_name = 0,
+        TolkienCyr = 0,
+        DigitalDisplay,
         SIZE
     };
+    const std::string& path(ID id);
 }
 
 namespace Textures {
     enum ID : int {
-        Title_background = 0,
-        Menu_background,
+        blue_star = 0,
+        circle_air,
+        circle_earth,
+        circle_fire,
+        circle_water,
+        water,
         SIZE
     };
+
+    const std::string& path(ID id);
 }
 
 namespace Images {

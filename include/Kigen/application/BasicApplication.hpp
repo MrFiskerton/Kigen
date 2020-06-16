@@ -32,19 +32,17 @@ protected:
 
     void render() override;
 
-    void init_services();
-
 protected:
     virtual void init_state_control() = 0;
 
 protected:
     sf::RenderWindow   m_window;
-    sf::RenderTexture  m_renderTexture;
+    sf::RenderTexture  m_rtexture;
     sf::Sprite         m_canvas;
 
-    StateControl m_state_control;
-    ResourceControl m_resources;
-    InputControl m_input;
+    StateControl       m_state_control;
+    ResourceControl    m_resources;
+    InputControl       m_input;
 };
 
 } //namespace kigen

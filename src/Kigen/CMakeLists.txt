@@ -19,6 +19,7 @@ set(FILES_HEADER
 
     ${INCROOT}/conversion/to_string.hpp
 
+    ${INCROOT}/graphics/Vector.hpp
     ${INCROOT}/graphics/Window.hpp
 
     ${INCROOT}/input/AbstractDevice.hpp
@@ -43,12 +44,44 @@ set(FILES_HEADER
     ${INCROOT}/utils/locator/Locator.inl
     ${INCROOT}/utils/locator/NullService.hpp
     ${INCROOT}/utils/Assertion.hpp
+    ${INCROOT}/utils/Destructible.hpp
     ${INCROOT}/utils/Logger.hpp
+    ${INCROOT}/utils/Next.hpp
     ${INCROOT}/utils/NonCopyable.hpp
     ${INCROOT}/utils/NonMovable.hpp
+    ${INCROOT}/utils/Palette.hpp
+    ${INCROOT}/utils/Random.hpp
     ${INCROOT}/utils/StopWatch.hpp
     ${INCROOT}/utils/Type.hpp
     ${INCROOT}/utils/Utils.hpp
+    ${INCROOT}/utils/Yield.hpp
+
+    ${INCROOT}/world/component/Component.hpp
+    ${INCROOT}/world/component/DrawableCircle.hpp
+    ${INCROOT}/world/component/DrawableComponent.hpp
+    ${INCROOT}/world/component/DrawableDebugBody.hpp
+    ${INCROOT}/world/component/PhysicsBody.hpp
+
+    ${INCROOT}/world/message/Communicable.hpp
+    ${INCROOT}/world/message/Message.hpp
+    ${INCROOT}/world/message/MessageBus.hpp
+
+    ${INCROOT}/world/physics/shape/Circle.hpp
+    ${INCROOT}/world/physics/shape/ConvexHull.hpp
+    ${INCROOT}/world/physics/shape/Polygon.hpp
+    ${INCROOT}/world/physics/shape/Shape.hpp
+    ${INCROOT}/world/physics/Collision.hpp
+    ${INCROOT}/world/physics/Manifold.hpp
+    ${INCROOT}/world/physics/Math.hpp
+    ${INCROOT}/world/physics/Models.hpp
+    ${INCROOT}/world/physics/PhysicsConstants.hpp
+    ${INCROOT}/world/physics/PhysicsLaw.hpp
+    ${INCROOT}/world/physics/PhysicsScene.hpp
+    ${INCROOT}/world/physics/RigidBody.hpp
+
+    ${INCROOT}/world/Entity.hpp
+    ${INCROOT}/world/EntityFactory.hpp
+    ${INCROOT}/world/World.hpp
 
     ${INCROOT}/defines.hpp
     )
@@ -63,6 +96,7 @@ set(FILES_SRC
 
     ${SRCROOT}/conversion/to_string.cpp
 
+    ${SRCROOT}/graphics/Vector.cpp
     ${SRCROOT}/graphics/Window.cpp
 
     ${SRCROOT}/input/InputControl.cpp
@@ -76,9 +110,39 @@ set(FILES_SRC
     ${SRCROOT}/utils/locator/Locator.cpp
     ${SRCROOT}/utils/locator/NullService.cpp
     ${SRCROOT}/utils/Logger.cpp
+    ${SRCROOT}/utils/Random.cpp
     ${SRCROOT}/utils/StopWatch.cpp
+
+    ${SRCROOT}/world/component/Component.cpp
+    ${SRCROOT}/world/component/DrawableCircle.cpp
+    ${SRCROOT}/world/component/DrawableDebugBody.cpp
+    ${SRCROOT}/world/component/PhysicsBody.cpp
+
+    ${SRCROOT}/world/message/Message.cpp
+    ${SRCROOT}/world/message/MessageBus.cpp
+
+    ${SRCROOT}/world/physics/collision/Collision.cpp
+    ${SRCROOT}/world/physics/collision/CollisionCircleAndCircle.cpp
+    ${SRCROOT}/world/physics/collision/CollisionCircleAndPolygon.cpp
+    ${SRCROOT}/world/physics/collision/CollisionPolygonAndPolygon.cpp
+
+    ${SRCROOT}/world/physics/law/EnergyLossLaw.cpp
+    ${SRCROOT}/world/physics/law/GravitationLaw.cpp
+    ${SRCROOT}/world/physics/shape/Circle.cpp
+    ${SRCROOT}/world/physics/shape/ConvexHull.cpp
+    ${SRCROOT}/world/physics/shape/Polygon.cpp
+
+    ${SRCROOT}/world/physics/Manifold.cpp
+    ${SRCROOT}/world/physics/Math.cpp
+    ${SRCROOT}/world/physics/PhysicsScene.cpp
+    ${SRCROOT}/world/physics/RigidBody.cpp
+    ${SRCROOT}/world/Entity.cpp
+    ${SRCROOT}/world/EntityFactory.cpp
+    ${SRCROOT}/world/World.cpp
     )
 
 add_library(kigen STATIC ${FILES_HEADER} ${FILES_SRC})
 
+target_link_libraries(kigen
+        PUBLIC sfml-graphics sfml-system sfml-window sfml-audio ImGui-SFML)
 

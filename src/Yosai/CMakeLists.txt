@@ -1,7 +1,10 @@
-set(INCROOT ${CMAKE_CURRENT_SOURCE_DIR}/../../include/${CMAKE_PROJECT_NAME})
+set(INCROOT ${CMAKE_CURRENT_SOURCE_DIR}/../../include/Yosai)
 set(SRCROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
+set(LIBS sfml-graphics sfml-window sfml-system sfml-audio)
+#set(LIBS SFML::graphics SFML::window SFML::system SFML::audio)
 set(LIBS ${LIBS} kigen)
+set(LIBS ${LIBS} ImGui-SFML)
 
 # Files
 set(FILES_HEADER
@@ -10,16 +13,21 @@ set(FILES_HEADER
         ${INCROOT}/id/StateIdentifiers.hpp
 
         ${INCROOT}/models/ConfigurationData.hpp
+        ${INCROOT}/models/Materials.hpp
 
         ${INCROOT}/states/GameState.hpp
         ${INCROOT}/states/MenuState.hpp
         ${INCROOT}/states/States.hpp
+
+        ${INCROOT}/ui/Helper_UI.hpp
 
         ${INCROOT}/GlobalColours.hpp
         ${INCROOT}/Yosai.hpp
    )
 
 set(FILES_SRC
+        ${SRCROOT}/id/ResourceIdentifiers.cpp
+
         ${SRCROOT}/models/ConfigurationData.cpp
 
         ${SRCROOT}/states/GameState.cpp
@@ -29,6 +37,6 @@ set(FILES_SRC
         ${SRCROOT}/main.cpp
     )
 
-add_executable(${EXECUTABLE_NAME} ${FILES_HEADER} ${FILES_SRC})
-target_link_libraries(${CMAKE_PROJECT_NAME} ${LIBS})
+add_executable(Yosai ${FILES_HEADER} ${FILES_SRC})
+target_link_libraries(Yosai ${LIBS})
 

@@ -12,6 +12,9 @@ namespace Actions {
         left,
         right,
         down,
+        test1,
+        test2,
+        test3,
         SIZE
     };
 }

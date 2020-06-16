@@ -47,5 +47,9 @@ public:
     void reset_to_default();
 };
 
+static inline const std::string& textures_path() {
+    static std::string path = "../assets/textures/";
+    return path;
+}
 
 #endif //INCLUDED_CONFIGURATIONDATA_HPP

@@ -12,14 +12,11 @@ MenuState::~MenuState() {
 }
 
 #include <SFML/Graphics.hpp>
-void MenuState::draw(sf::RenderTarget &renderTarget) {
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+void MenuState::draw(sf::RenderTarget &target) {
 
-    renderTarget.draw(shape);
 }
 
-bool MenuState::update(const sf::Time &deltaTime) {
+bool MenuState::update(const sf::Time &delta) {
     requestStackPush(States::ID::Game);
     return false;
 }

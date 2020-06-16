@@ -9,17 +9,20 @@
 #include "ResourceHolder.hpp"
 #include "SFML_LoaderMakers.hpp"
 #include <Kigen/utils/locator/IService.hpp>
+#include <SFML/Graphics/Font.hpp>
 
 typedef ResourceHolder<sf::Texture, int> TextureHolder;
-//typedef ResourceHolder<sf::Sprite, int> TextureHolder;
+typedef ResourceHolder<sf::Font, int> FontHolder;
 
 namespace kigen {
 
 class ResourceControl : public IService {
 public:
     TextureHolder& texture() { return m_textures; }
+    FontHolder& font() { return m_fonts; }
 private:
     TextureHolder m_textures;
+    FontHolder m_fonts;
 };
 
 } // namespace kigen
