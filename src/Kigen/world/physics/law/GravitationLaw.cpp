@@ -25,5 +25,14 @@ namespace kigen {
             B.apply_force(-force);
         });
     });
+
+    PhysicsLaw const_gravity("Const gravity", [](PhysicsScene &scene) {
+        scene.for_body([&](PhysicsBody &A) {
+            if (A.is_static()) return;
+            float scale = 5.f;
+            A.apply_force(sf::Vector2f{0.f, 9.8f * A.m().mass} * scale);
+        });
+    });
+
 }
 

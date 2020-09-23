@@ -9,26 +9,29 @@ using namespace kigen;
 GameState::GameState(StateControl &stack) : State(stack) {
     init_world_laws();
     init_factory();
-
-    for (int i = 0; i < 10; ++i) {
-        auto entity = m_factory.create("small_circle");
-        m_world.add_entity(entity, World::L1);
-    }
+//
+//    for (int i = 0; i < 100; ++i) {
+//        auto entity = m_factory.create("small_circle");
+//        m_world.add_entity(entity, World::L1);
+//    }
     auto A = m_factory.create("huge_circle");
     m_world.add_entity(A);
 
-    auto B = m_factory.create("huge_circle");
-    m_world.add_entity(B);
+//    auto B = m_factory.create("huge_circle");
+//    m_world.add_entity(B);
 
     //-------
     std::vector<sf::Vector2f> points ;
-    int n = random(10, 70);
-    float s = random(80.f, 150.f);
-    for (int i = 0; i < n; i++) points.emplace_back(random(-s, s), random(-s, s));
-
+//    int n = random(10, 70);
+//    float s = random(80.f, 150.f);
+//    for (int i = 0; i < n; i++) points.emplace_back(random(-s, s), random(-s, s));
+    points.emplace_back(100.f, 100.f);
+    points.emplace_back(200.f, 100.f);
+    points.emplace_back(200.f, 200.f);
+    points.emplace_back(100.f, 200.f);
 
     auto polygon = std::make_shared<Polygon>(points);
-    auto physics_c = std::make_unique<PhysicsBody>(polygon, sf::Vector2f{500, 500}, Data::static_material);
+    auto physics_c = std::make_unique<PhysicsBody>(polygon, sf::Vector2f{550, 550}, Data::static_material);
     m_world.physics().add_body(physics_c);
     auto poly_c = std::make_unique<DrawableDebugBody>(physics_c.get());
     m_world.get_layer(World::L1).add_component(physics_c);
@@ -53,6 +56,7 @@ bool GameState::handleEvent(const sf::Event &event) {
 void GameState::init_world_laws() {
     m_world.add_physics_law(kigen::energy_loss);
     m_world.add_physics_law(kigen::gravitation);
+   // m_world.add_physics_law(kigen::const_gravity);
 }
 
 void GameState::init_factory() {
@@ -74,7 +78,7 @@ void GameState::init_factory() {
     m_factory.register_entity("huge_circle", [&]() {
         auto entity = m_world.create_entity();
         auto circle = std::make_shared<Circle>(80.f);
-        PhysicsBody::Ptr physics_c = std::make_unique<PhysicsBody>(circle, sf::Vector2f{500.f, 300.f},
+        PhysicsBody::Ptr physics_c = std::make_unique<PhysicsBody>(circle, sf::Vector2f{550.f, 400.f},
                                                                    Data::super_solid);
         m_world.physics().add_body(physics_c);
         entity->add_component<PhysicsBody>(physics_c);

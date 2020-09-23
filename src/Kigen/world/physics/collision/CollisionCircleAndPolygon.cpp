@@ -18,7 +18,7 @@ namespace kigen {
         sf::Vector2f center_A = B.to_model_space(A.lin().position);
         //------------------------------------------
         // Find edge with minimum penetration
-        float separation = std::numeric_limits<float>::min();
+        float separation = std::numeric_limits<float>::min(); // расстояния(со знаком) от центра окружности до ближайшего ребра.
         std::size_t face_normal_i = 0;
         for (std::size_t i = 0; i < polygon_B.m_points.size(); i++) {
             float s = dot(polygon_B.m_normals[i], center_A - polygon_B.m_points[i]);
@@ -28,8 +28,8 @@ namespace kigen {
         //------------------------------------------
         // Grab face's vertices
         const sf::Vector2f& face_normal = polygon_B.m_normals[face_normal_i];
-        sf::Vector2f face_p1 = polygon_B.m_points[face_normal_i];
-        sf::Vector2f face_p2 = polygon_B.m_points[polygon_B.next_i(face_normal_i)];
+        sf::Vector2f edge_1 = polygon_B.m_points[face_normal_i];
+        sf::Vector2f edge_2 = polygon_B.m_points[polygon_B.next_i(face_normal_i)];
 
         // Check to see if center_A is within polygon
         if (is_almost_zero(separation)) {
@@ -42,19 +42,19 @@ namespace kigen {
 
         // Determine which voronoi region of the edge center of circle lies within
         m.penetration = radius_A - separation;
-        float dot1 = dot(center_A - face_p1, face_p2 - face_p1);
-        float dot2 = dot(center_A - face_p2, face_p1 - face_p2);
+        float dot1 = dot(center_A - edge_1, edge_2 - edge_1);
+        float dot2 = dot(center_A - edge_2, edge_1 - edge_2);
 
-        auto closest_to = [&](const sf::Vector2f &v) {
-            if (squared_distance(center_A, v) > sqr(radius_A)) return;
+        auto closest_to = [&](const sf::Vector2f &edge) {
+            if (squared_distance(center_A, edge) > sqr(radius_A)) return;
             m.contact_count = 1;
-            m.contacts[0] = B.to_world_space(v);
-            m.normal = normalize(B.to_world_space(v - center_A));
+            m.contacts[0] = B.to_world_space(edge);
+            m.normal = normalize(B.to_world_space(edge - center_A));
         };
-        if (dot1 <= 0.0f) { closest_to(face_p1); return; }
-        if (dot2 <= 0.0f) { closest_to(face_p2); return; }
+        if (dot1 <= 0.0f) { closest_to(edge_1); return; }
+        if (dot2 <= 0.0f) { closest_to(edge_2); return; }
         // Closest to face
-        if (dot(center_A - face_p1, face_normal) > radius_A) return;
+        if (dot(center_A - edge_1, face_normal) > radius_A) return;
 
         m.normal = -B.to_world_space(face_normal);
         m.contact_count = 1;

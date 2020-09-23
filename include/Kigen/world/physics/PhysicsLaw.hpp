@@ -26,6 +26,7 @@ namespace kigen {
 
     extern PhysicsLaw energy_loss;
     extern PhysicsLaw gravitation;
+    extern PhysicsLaw const_gravity;
 
 }
 

@@ -32,7 +32,7 @@ namespace kigen {
     void DrawableDebugBody::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         m_body->shape()->draw(target, states);
 
-        target.draw(m_velocity, states);
+        //target.draw(m_velocity, states);
         target.draw(m_text_UID, states);
 
         states.transform *= m_origin.getTransform();

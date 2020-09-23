@@ -15,6 +15,7 @@ namespace  kigen {
 
     void PhysicsBody::entity_update(Entity &entity, float dt) {
         entity.set_world_position(m_lin.position);//TODO
+        //entity.setRotation(to_degrees(m_ang.orientation);
     }
 
     void PhysicsBody::on_attach(Entity &entity) {

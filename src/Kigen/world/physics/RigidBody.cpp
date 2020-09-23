@@ -30,7 +30,7 @@ namespace kigen {
 
     sf::Vector2f RigidBody::to_world_space(const sf::Vector2f &p) {
         if(is_need_update_transform) update_transform();
-        return m_transform * p;
+        return m_transform * (p - m_lin.position); // TODO normals not transfer
     }
 
     void RigidBody::clean_applied_force() {
